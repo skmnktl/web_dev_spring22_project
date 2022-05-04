@@ -1,0 +1,44 @@
+version: "3.9"
+networks:
+    sharedNetwork:
+     driver: bridge
+     ipam:
+       driver: default
+
+services:
+  database:
+    build: 
+      context: ./
+      dockerfile: Dockerfile_MySQL
+    container_name: database
+    networks:
+      - sharedNetwork
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: db
+      MYSQL_DATABASE: db
+      MYSQL_USER: db
+      MYSQL_PASSWORD: db
+      MYSQL_TCP_PORT: 3320
+  
+  backend:
+    build: 
+      context: ./
+      dockerfile: Dockerfile_Backend
+    container_name: backend
+    networks:
+      - sharedNetwork
+    ports:
+      - 3310:3310
+    links:
+      - database
+    working_dir: /TODO
+    command: "flask run"
+    environment:
+      FLASK_APP : restful_backend.py
+      FLASK_RUN_PORT: 3310
+      FLASK_RUN_HOST: 0.0.0.0
+      FLASK_ENV: development
+      WORKING_DIRECTORY: /TODO
