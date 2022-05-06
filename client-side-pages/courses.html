@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Courses</title>
+
+		<link rel="stylesheet" href="canvasStyle.css">
+</head>
+	
+	<body onload="loadUserID()">
+
+		<div class="header">
+			<h2>Courses</h2>
+			<hr>
+		</div>
+
+		<div class="flex-container">			
+			<div id="courses">			
+
+					<table id="tblCourses" border =solid>
+						<thead>
+							<tr>
+								<th>Course Name</th>
+								<th>Course Description</th>
+								<th>Course Capacity</th>
+								<th>Professor</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td>
+									<a href="announcements.html">Announcements</a><br>
+									<a href="assignments.html">Assignments</a><br>
+									<a href="grades.html">Grades</a><br>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+			</div>
+
+			<div id="accountLinks">
+				<br>
+				<a href="createCourse.html">Create New Course (only visible for Admins)</a><br>
+				<a href="login.html">Log Out</a><br>
+			</div>
+		</div>
+
+		<script>
+
+			function loadUserID() {
+				var userID = sessionStorage.getItem("userID")
+				console.log(userID)
+			}
+
+		</script>
+
+	</body>
+</html>

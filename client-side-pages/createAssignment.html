@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Create Assignment</title>
+
+	<link rel="stylesheet" href="canvasStyle.css">
+
+</head>
+	
+	<body onload="loadUserID()">
+		<div class="header">
+			<h2>Create Assignment</h2>
+			<hr>
+		</div>
+
+
+		<div class="flex-container">
+			<div id="createAssignmentForm">
+				<form action="http://uchicago.edu" method="GET">
+					<label for="assignmentName"><b>Course Name:</b></label>
+					<input type="text" id="assignmentName" name="assignmentName"><br>
+
+					<label for="assignmentDescription"><b>Course Description:</b></label>
+					<input type="text" id="assignmentDescription" name="assignmentDescription"><br>
+
+					<label for="assignmentPoints"><b>Number of Points:</b></label>
+					<input type="text" id="assignmentPoints" name="assignmentPoints"><br>
+
+					<label for="assignmentDate"><b>Due Date:</b></label>
+					<input type="text" id="assignmentDate" name="assignmentDate"><br>
+
+				</form>
+			</div>
+
+				
+			<div id="newAssignmentLink">
+				<br><button onclick="createAssignment()">Create Assignment</button><br><br>
+
+			</div>
+
+			<a href="login.html">Log Out</a><br>
+		</div>
+
+		<script>
+
+			function loadUserID() {
+				var userID = sessionStorage.getItem("userID")
+				console.log(userID)
+			}
+			
+			function createAssignment() {
+				return
+			}
+
+
+		</script>
+
+	</body>
+</html>

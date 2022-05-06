@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Student Grades</title>
+
+	<link rel="stylesheet" href="canvasStyle.css">
+
+</head>
+	
+	<body onload="LoadUserID()">
+	
+		<div class="header">
+			<h2>Student Grades (we may need a separate teacher version)</h2>
+			<hr>
+		</div>
+	
+		<div class="flex-container">		
+			<div id="grades">			
+				<table id="tblGrades" border =solid>
+					<thead>
+						<tr>
+							<th>Assignment Name</th>
+							<th>Number of Points</th>
+							<th>Grade</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>	
+
+			<div id="gradeLinks">
+				<br>
+				<a href="login.html">Log Out</a><br>
+			</div>
+		</div>
+
+		<script>
+
+			function loadUserID() {
+				var userID = sessionStorage.getItem("userID")
+				console.log(userID)
+			}
+			
+		</script>
+
+	</body>
+</html>
