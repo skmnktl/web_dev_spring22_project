@@ -3,11 +3,11 @@ import time
 import pymysql.cursors
 import sys
 
-conn = pymysql.connect(host="itemsdb",
-                       user="items",
-                       password="items",
-                       db="items",
-                       port=3317)
+conn = pymysql.connect(host="database",
+                       user="root",
+                       password="db",
+                       db="db",
+                       port=3310)
 
 
 def update(table, primary_key, key_value, column,
@@ -134,7 +134,7 @@ def delete(from_table, primary_key, key_value):
     cursor.execute(delete)
     conn.commit()
 
-def read(table, primary_key, key_value, columns: list =None):
+def read(table, primary_key, key_value, columns: list=None):
     """
         Inputs: table, primary_key, key_value, columns as list
     """

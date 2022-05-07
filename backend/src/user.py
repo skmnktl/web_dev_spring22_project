@@ -1,3 +1,7 @@
+import crud
+import json
+from random import choice
+
 
 class User:
     
@@ -15,32 +19,53 @@ class User:
         self.coursesAndAssignments = dict(list)
 
 
-    def createUser(self,userType=""):
-        pass
+    def createUser(self,accountType, password, username, securityQuestions, firstname, lastname):
+        self.accountType = accountType
+        self.password = password
+        self.username = username
+        self.firstname = firstname
+        self.lastname = lastname
+        self.securityQuestions = None # TODO 
 
-    def getUserInfo(self):
-        return vars(self)
 
-    def updateSecurityQuestionAnswer(self, question, answer):
-        pass
+    @staticmethod
+    def getUserInfo(username):
+        row = crud.read("user","username",username)
+        print(row)
     
-    def chooseSecurityQuestionForPrompt(self):
-        pass
-
+    @staticmethod
+    def updateSecurityQuestionAnswer(self, username, question, answer):
+        old_questions = json.loads(crud.read("user","username",username,["securityQuestions"]))
+        old_questions[question] = answer
+    
+    @staticmethod
+    def chooseSecurityQuestionForPrompt(username):
+        questions = json.loads(crud.read("user","username",username,["securityQuestions"]))
+        return choice(questions.keys())
+    
+    @staticmethod
+    def checkIfSecurityQuestionResponseIsRight(username, question, answer):
+        questions = json.loads(crud.read("user","username",username,["securityQuestions"]))
+        return questions[question] == answer
+    
     def replaceSecurityQuestion(self, old_question, new_question, answer):
-        pass
-
-    def authentication(self, username: string, password: string) -> Bool:
-        pass
-
-    def isStudent(self):
-        return "S" in self.accountType 
-
-    def isTeacher(self):
-        return "T" in self.accountType 
-
-    def isAdmin(self):
-        return "A" in self.accountType 
-
-    def write_to_db(self):
-        pass
+        questions = json.loads(crud.read("user","username",username,["securityQuestions"]))
+        questions.pop(old_question)
+        questions[new_question] = answer
+        crud.write
+    
+    @staticmethod
+    def authentication(username: str, password: str):
+        return password == crud.read("user","username",username,["password"])
+    
+    @staticmethod
+    def isStudent(username):
+        return "S" in crud.read("user","username",username,["accountType"])
+    
+    @staticmethod
+    def isTeacher(username):
+        return "T" in crud.read("user","username",username,["accountType"])
+    
+    @staticmethod
+    def isAdmin(username):
+        return "A" in crud.read("user","username",username,["accountType"])

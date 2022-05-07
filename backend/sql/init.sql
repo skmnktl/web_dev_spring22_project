@@ -1,34 +1,40 @@
-CREATE TABLE `user` (
-	`id` INT unsigned NOT NULL AUTO_INCREMENT PRIMARY_KEY,
-	`password` TEXT,
-	`email` TEXT DEFAULT '',
-	`accountType` TEXT,
-	`securityQuestions` VARCHAR,
-	`firstname` VARCHAR,
-	`lastname` VARCHAR
+USE db;
+
+CREATE TABLE user (
+	id INT unsigned NOT NULL AUTO_INCREMENT,
+	password TEXT(256),
+	email TEXT(256),
+	accountType TEXT(3),
+	securityQuestions VARCHAR(2000),
+	firstname TEXT(256),
+	lastname TEXT(256),
+    active BOOLEAN,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE `course` (
-	`id` INT unsigned NOT NULL AUTO_INCREMENT PRIMARY_KEY,
-	`coursename` TEXT,
-	`coursedescription` VARCHAR,
-	`coursecapacity` INT,
-	`professor` TEXT,
-	`students` VARCHAR DEFAULT '',
-	`self.announcementInbox` VARCHAR DEFAULT ''
+	id INT unsigned NOT NULL AUTO_INCREMENT,
+	coursename TEXT(256),
+	coursedescription VARCHAR(2000),
+	coursecapacity INT,
+	professor TEXT(256),
+	students VARCHAR(2000),
+	announcementInbox VARCHAR(2000),
+    PRIMARY KEY (id)
+
 );
 
-CREATE TABLE `assignment`{
-    `name` TEXT,
-    `descriptoin` VARCHAR,
-    `points` INT,
-    `duedate` DATE,
-    `courseid` INT unsigned
-};
+CREATE TABLE assignment (
+    name TEXT(256),
+    description VARCHAR(2000),
+    points INT,
+    duedate DATE,
+    courseid INT unsigned
+);
 
-CREATE TABLE `announcements` {
-    `message` VARCHAR,
-    `date` DATE,
-    `course` INT
-}
+CREATE TABLE announcements (
+    message VARCHAR(2000),
+    senddate DATE,
+    course INT
+);
 

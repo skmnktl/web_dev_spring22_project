@@ -11,6 +11,7 @@ services:
       context: ./
       dockerfile: Dockerfile_MySQL
     container_name: database
+    image: image: mysql/mysql-server:8.0.23
     networks:
       - sharedNetwork
     volumes:
