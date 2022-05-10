@@ -11,11 +11,9 @@ class User:
         self.email = None
         self.accountType = None # subset of  "ATS" (s Student, t Teacher, a Admin)
         self.securityQuestions = dict()
-        self.firstname
-        self.lastname
-
-        self.username = None # set equal to emai
-
+        self.firstname = ""
+        self.lastname = ""
+        self.username = None # set equal to email 
         self.coursesAndAssignments = dict(list)
 
 
@@ -23,9 +21,10 @@ class User:
         self.accountType = accountType
         self.password = password
         self.username = username
+        self.email = username
         self.firstname = firstname
         self.lastname = lastname
-        self.securityQuestions = None # TODO 
+        self.securityQuestions = json.dumps(securityQuestions) # TODO 
 
 
     @staticmethod
