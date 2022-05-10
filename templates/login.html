@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+
+	<link rel="stylesheet" href="canvasStyle.css">
+</head>
+	
+	<body>
+		<div class="header">
+			<h1>Canvas Login</h1>
+			<hr>
+		</div>
+
+		<div class="flex-container">
+			<div id="loginForm">
+				<form action="http://uchicago.edu" method="GET">
+					<label for="email"><b>Email:</b></label>
+					<input type="text" id="email" name="email"><br>
+
+					<label for="password"><b>Password:</b></label>
+					<input type="text" id="password" name="password"><br>
+
+				</form>
+			</div>
+
+				
+			<div id="accountLinks">
+				<br><button onclick="submitLogin()">Login</button><br><br>
+				<a href="tempDashboard.html">Temp Login (delete)</a><br>
+				<a href="forgotPassword.html">Forgot Password</a><br>
+				<a href="createAccount.html">Create Account</a><br>
+
+			</div>
+		</div>
+
+		<script>
+			function submitLogin() {
+				setEmailID()
+			}
+
+			function setEmailID() {
+				var emailID = document.getElementById("email").value;
+
+				sessionStorage.setItem("userID", emailID);
+
+			}
+
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Grade Assignments</title>
+
+	<link rel="stylesheet" href="canvasStyle.css">
+
+</head>
+	
+	<body onload="loadUserID()">
+		<div class="header">
+			<h2>Grade Assignment</h2>
+			<hr>
+		</div>
+
+		<div class="flex-container">
+			<div id="gradeAssignments">		
+
+				<h3>Assignment Name:</h3>	
+
+					<table id="tblGradeAssignments" border =solid>
+						<thead>
+							<tr>
+								<th>Student First Name</th>
+								<th>Student Last Name</th>
+								<th>Student Email</th>
+								<th>Submit Grade</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td>			
+									<div id="submitGradeForm">
+										<form action="http://uchicago.edu" method="GET">
+											<label for="grade"><b>Number of Points:</b></label>
+											<input type="text" id="grade" name="grade">
+
+											<br><button onclick="submitGrade()">Submit</button><br>
+
+										</form>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+			</div>
+
+			<div id="assignmentLinks">
+				<br>
+				<a href="login.html">Log Out</a><br>
+			</div>
+		</div>
+
+		<script>
+
+			function loadUserID() {
+				var userID = sessionStorage.getItem("userID")
+				console.log(userID)
+			}
+
+			function submitGrade() {
+
+				// might want to consider making submit grade its own page rather than nesting in each table
+
+				return
+			}
+
+
+		</script>
+
+	</body>
+</html>
