@@ -32,11 +32,13 @@ class User:
     def getUserInfo(username):
         row = crud.read("user","username",username)
         print(row)
+        # TODO reformat
     
     @staticmethod
     def updateSecurityQuestionAnswer(self, username, question, answer):
         old_questions = json.loads(crud.read("user","username",username,["securityQuestions"]))
         old_questions[question] = answer
+        # TODO 
     
     @staticmethod
     def chooseSecurityQuestionForPrompt(username):
