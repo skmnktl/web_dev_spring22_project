@@ -1,17 +1,12 @@
-from flask import Flask
-app = Flask(__name__)
-from flask import render_template
-from datetime import datetime
-import re
-import time
+from libs import * 
+from constants import *
+
 
 # sets autoreload on changes    
 app.run(debug=True)
+app.config['SECRET_KEY'] = SECRET_KEY
 
-@app.route("/")
-def home():
-    return "Hello, Flask!"
-
+# sample :removeit
 @app.route("/hello/<name>")
 def hello_there(name = None):
     return render_template(
@@ -20,22 +15,111 @@ def hello_there(name = None):
         date=datetime.now()
     )
 
-@app.route("/hello2/<name>")
-def hello2_there(name):
-    now = datetime.now()
-    formatted_now = now.strftime("%A, %d %B, %Y at %X")
 
-    # Filter the name argument to letters only using regular expressions. URL arguments
-    # can contain arbitrary text, so we restrict to safe characters only.
-    match_object = re.match("[a-zA-Z]+", name)
+# http://127.0.0.1:5000/
+@app.route(routeUrls["main"])
+def home():
+    return "Hello, Flask!"
 
-    if match_object:
-        clean_name = match_object.group(0)
-    else:
-        clean_name = "Friend"
 
-    content = "Hello2 there, " + clean_name + "! It's " + formatted_now
+@app.route(routeUrls["login"])
+def login():
+	return render_template("login.html")
 
-    time.sleep(2)
-    return content
+
+@app.route(routeUrls["courses"])
+def courses():
+	return render_template("courses.html",headings=headings,data=data)
+
+
+# http://127.0.0.1:5000/grades
+@app.route(routeUrls["grades"])
+def grades():
+	return render_template("grades.html")
+
+
+@app.route(routeUrls["assignments"])
+def assignments():
+	return render_template("assignments.html")
+
+
+# http://127.0.0.1:5000/accouncements
+@app.route(routeUrls["announcements"])
+def announcements():
+	return render_template("announcements.html")
+
+
+@app.route(routeUrls["createAccount"])
+def createAccount():
+	return render_template("createAccount.html")
+
+
+@app.route(routeUrls["createAssign"])
+def createAssign():
+	return render_template("createAssignment.html")
+
+
+@app.route(routeUrls["createAnounce"])
+def createAnounce():
+	return render_template("createAccount.html")
+
+
+@app.route(routeUrls["createCourse"])
+def createCourse():
+	return render_template("createCourse.html")
+
+@app.route(routeUrls["adminDash"])
+def adminDash():
+	return render_template("adminDashboard.html")
+
+@app.route(routeUrls["teacherDash"])
+def teacherDash():
+	return render_template("createCourse.html")
+
+@app.route(routeUrls["studentDash"])
+def studentDash():
+	return render_template("teacherDashboard.html")
+
+@app.route(routeUrls["tempDash"])
+def tempDash():
+	return render_template("tempDashboard.html")
+
+@app.route(routeUrls["editProfile"])
+def editProfile():
+	return render_template("editProfile.html")
+
+@app.route(routeUrls["forgotPassword"])
+def forgotPassword():
+	return render_template("forgotPassword.html")
+
+@app.route(routeUrls["submitAssign"])
+def submitAssign():
+	return render_template("submitAssignment.html")
+
+@app.route(routeUrls["gradeAssign"])
+def gradeAssign():
+	return render_template("gradeAssignment.html")
+
+# @app.route(routeUrls["createCourse"])
+# def createCourse():
+# 	return render_template("createCourse.html")
+
+# # http://127.0.0.1:5000/createAnnouncement.html
+# @app.route("/createAnnouncement.html",methods=["GET","POST"])
+# def createAnnouncement():
+# 	announcement = None
+# 	form = AnnouncementForm()
+
+# 	#Validate form
+# 	if form.validate_on_submit():
+# 		announcement = form.announcement.data
+# 		form.announcement.data = ""
+
+	
+# 	return render_template("createAnnouncement.html", announcement=announcement, form=form)
+
+# Internal Server Error
+@app.errorhandler(500)
+def page_not_found(e):
+	return render_template("500.html"), 
 

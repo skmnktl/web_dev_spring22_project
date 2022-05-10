@@ -3,7 +3,8 @@
 <head>
 	<title>Create Course</title>
 
-	<link rel="stylesheet" href="canvasStyle.css">
+	<link rel="stylesheet" type="text/css"
+        href="{{ url_for('static', filename='canvasStyle.css')}}" />
 
 </head>
 	
@@ -37,7 +38,7 @@
 				<br><button onclick="createCourse()">Create Course (only visible for admins)</button><br><br>
 			</div>
 
-				<a href="login.html">Log Out</a><br>
+				<a href="{{ url_for('login') }}"Log Out</a><br>
 		</div>
 
 		<script>
