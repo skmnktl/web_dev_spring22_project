@@ -15,6 +15,32 @@ def hello_there(name = None):
         date=datetime.now()
     )
 
+class AnnouncementForm(FlaskForm):
+	announcement = StringField("Announcement", widget=TextArea(), validators=[DataRequired()])
+	submit = SubmitField("Create Announcement")
+
+class AssignmentForm(FlaskForm):
+	assignmentName = StringField("Assignment Name", validators=[DataRequired()])
+	assignmentDescription = StringField("Assignment Description", validators=[DataRequired()])
+	numberOfPoints =  IntegerField("Number of Points", validators=[DataRequired()])
+	dueDate = StringField("Due Date", validators=[DataRequired()])
+	submit = SubmitField("Create Assignment")
+
+class AccountForm(FlaskForm):
+	firstName = StringField("First Name:", validators=[DataRequired()])
+	lastName = StringField("Last Name:", validators=[DataRequired()])
+	email = StringField("Email:", validators=[DataRequired()])
+	accountID = IntegerField("Account ID:", validators=[DataRequired()])
+	password = StringField("Password:", validators=[DataRequired()])
+
+	accountType = RadioField("Account Type", choices=[("student","Student"),("teacher","Teacher")])
+
+	securityAnswer1 = StringField("Your Answer:", validators=[DataRequired()])
+	securityAnswer2 = StringField("Your Answer:", validators=[DataRequired()])
+	securityAnswer3 = StringField("Your Answer:", validators=[DataRequired()])
+
+	submit = SubmitField("Create Account")
+
 
 # http://127.0.0.1:5000/
 @app.route(routeUrls["main"])
@@ -47,7 +73,19 @@ def announcements():
 
 @app.route(routeUrls["createAccount"])
 def createAccount():
-	return render_template("createAccount.html")
+	firstName = None
+	lastName = None
+	email = None
+	accountID = None
+	password = None
+	accountType = None
+
+	securityAnswer1 = None
+	securityAnswer2 = None
+	securityAnswer3 = None
+	form = AccountForm()
+
+	return render_template("createAccount.html",form=form,firstName=firstName,lastName=lastName,email=email,accountID=accountID,password=password,accountType=accountType,securityAnswer1=securityAnswer1,securityAnswer2=securityAnswer2,securityAnswer3=securityAnswer3)
 
 
 @app.route(routeUrls["createAssign"])
@@ -55,10 +93,16 @@ def createAssign():
 	return render_template("createAssignment.html")
 
 
-@app.route(routeUrls["createAnnounce"])
+@app.route(routeUrls["createAnnounce"],methods=["GET","POST"])
 def createAnnounce():
-	return render_template("createAnnouncement.html")
+	announcement = None
+	form = AnnouncementForm()
 
+	if form.validate_on_submit():
+		announcement = form.announcement.data
+		form.announcement.data = ""
+	
+	return render_template("createAnnouncement.html",announcement=announcement,form=form)
 
 @app.route(routeUrls["createCourse"])
 def createCourse():
@@ -99,24 +143,6 @@ def gradeAssign():
 @app.route(routeUrls["addToCourse"])
 def addToCourse():
 	return render_template("addToCourse.html")
-
-# @app.route(routeUrls["createCourse"])
-# def createCourse():
-# 	return render_template("createCourse.html")
-
-# # http://127.0.0.1:5000/createAnnouncement.html
-# @app.route("/createAnnouncement.html",methods=["GET","POST"])
-# def createAnnouncement():
-# 	announcement = None
-# 	form = AnnouncementForm()
-
-# 	#Validate form
-# 	if form.validate_on_submit():
-# 		announcement = form.announcement.data
-# 		form.announcement.data = ""
-
-	
-# 	return render_template("createAnnouncement.html", announcement=announcement, form=form)
 
 # Internal Server Error
 @app.errorhandler(500)
