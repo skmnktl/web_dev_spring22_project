@@ -28,9 +28,9 @@
 				
 			<div id="accountLinks">
 				<br><button onclick="submitLogin()">Login</button><br><br>
-				<a href="tempDashboard.html">Temp Login (delete)</a><br>
-				<a href="forgotPassword.html">Forgot Password</a><br>
-				<a href="createAccount.html">Create Account</a><br>
+				<a href="{{ url_for('tempDash') }}">Temp Login (delete)</a><br>
+				<a href="{{ url_for('forgotPassword') }}">Forgot Password</a><br>
+				<a href="{{ url_for('createAccount') }}">Create Account</a><br>
 
 			</div>
 		</div>

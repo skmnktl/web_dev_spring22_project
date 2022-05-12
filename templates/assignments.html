@@ -15,7 +15,7 @@
 		</div>
 			
 		<div class="flex-container">
-			<div id="assignments">			
+			<div>			
 
 					<table id="tblAssignments" border =solid>
 						<thead>
@@ -34,18 +34,18 @@
 								<td></td>
 								<td></td>
 								<td>			
-									<a href="submitAssignment.html">Submit Assignment (only visible for Students)</a><br>
-									<a href="gradeAssignment.html">Grade Assignment (only visible for Teachers)</a><br>
+									<a href="{{ url_for('submitAssign') }}">Submit Assignment (only visible for Students)</a><br>
+									<a href="{{ url_for('gradeAssign') }}">Grade Assignment (only visible for Teachers)</a><br>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 			</div>
 
-			<div id="assignmentLinks">
+			<div>
 				<br>
-				<a href="createAssignment.html">Create New Assignment (only visible for Teachers)</a><br>
-				<a href="{{ url_for('login') }}"Log Out</a><br>
+				<a href="{{ url_for('createAssign') }}">Create New Assignment (only visible for Teachers)</a><br>
+				<a href="{{ url_for('login') }}">Log Out</a><br>
 			</div>
 		</div>
 

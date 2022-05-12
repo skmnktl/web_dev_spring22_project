@@ -21,11 +21,9 @@ def hello_there(name = None):
 def home():
     return "Hello, Flask!"
 
-
 @app.route(routeUrls["login"])
 def login():
 	return render_template("login.html")
-
 
 @app.route(routeUrls["courses"])
 def courses():
@@ -43,7 +41,6 @@ def assignments():
 	return render_template("assignments.html")
 
 
-# http://127.0.0.1:5000/accouncements
 @app.route(routeUrls["announcements"])
 def announcements():
 	return render_template("announcements.html")
@@ -59,9 +56,9 @@ def createAssign():
 	return render_template("createAssignment.html")
 
 
-@app.route(routeUrls["createAnounce"])
-def createAnounce():
-	return render_template("createAccount.html")
+@app.route(routeUrls["createAnnounce"])
+def createAnnounce():
+	return render_template("createAnnouncement.html")
 
 
 @app.route(routeUrls["createCourse"])
@@ -74,11 +71,11 @@ def adminDash():
 
 @app.route(routeUrls["teacherDash"])
 def teacherDash():
-	return render_template("createCourse.html")
+	return render_template("teacherDashboard.html")
 
 @app.route(routeUrls["studentDash"])
 def studentDash():
-	return render_template("teacherDashboard.html")
+	return render_template("studentDashboard.html")
 
 @app.route(routeUrls["tempDash"])
 def tempDash():
@@ -99,6 +96,10 @@ def submitAssign():
 @app.route(routeUrls["gradeAssign"])
 def gradeAssign():
 	return render_template("gradeAssignment.html")
+
+@app.route(routeUrls["addToCourse"])
+def addToCourse():
+	return render_template("addToCourse.html")
 
 # @app.route(routeUrls["createCourse"])
 # def createCourse():

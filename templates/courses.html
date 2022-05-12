@@ -34,9 +34,9 @@
 								<td></td>
 								<td></td>
 								<td>
-									<a href="announcements.html">Announcements</a><br>
-									<a href="assignments.html">Assignments</a><br>
-									<a href="grades.html">Grades</a><br>
+									<a href="{{ url_for('announcements') }}">Announcements</a><br>
+									<a href="{{ url_for('assignments') }}">Assignments</a><br>
+									<a href="{{ url_for('grades') }}">Grades</a><br>
 								</td>
 							</tr>
 						</tbody>
@@ -46,7 +46,7 @@
 			<div id="accountLinks">
 				<br>
 				<a href="{{ url_for('createCourse') }}">Create New Course (only visible for Admins)</a><br>
-				<a href="{{ url_for('login') }}"Log Out</a><br>
+				<a href="{{ url_for('login') }}">Log Out</a><br>
 			</div>
 		</div>
 
