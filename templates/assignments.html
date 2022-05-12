@@ -20,24 +20,23 @@
 					<table id="tblAssignments" border =solid>
 						<thead>
 							<tr>
-								<th>Assignment Name</th>
-								<th>Assignment Description</th>
-								<th>Number of Points</th>
-								<th>Due Date</th>
-								<th>Actions</th>
+								{% for header in headings %}
+								<th>{{ header }}</th>
+								{% endfor %}
 							</tr>
 						</thead>
 						<tbody>
+							{% for row in data %}
 							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
+								{% for cell in row %}
+								<td>{{ cell }}</td>
+								{% endfor %}
 								<td>			
 									<a href="{{ url_for('submitAssign') }}">Submit Assignment (only visible for Students)</a><br>
 									<a href="{{ url_for('gradeAssign') }}">Grade Assignment (only visible for Teachers)</a><br>
 								</td>
 							</tr>
+							{% endfor %}
 						</tbody>
 					</table>
 			</div>

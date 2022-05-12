@@ -20,22 +20,22 @@
 
 				<p>Assignments to Grade</p>
 
-					<table id="tblPastDue" border =solid>
+					<table id="tblToGrade" border =solid>
 						<thead>
 							<tr>
-								<th>Assignment Name</th>
-								<th>Class Name</th>
-								<th>Number of Points</th>
-								<th>Due Date</th>
+								{% for header in headings %}
+								<th>{{ header }}</th>
+								{% endfor %}
 							</tr>
 						</thead>
 						<tbody>
+							{% for row in dataToGrade %}
 							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>		
+								{% for cell in row %}
+								<td>{{ cell }}</td>
+								{% endfor %}
 							</tr>
+							{% endfor %}
 						</tbody>
 					</table>
 			</div>

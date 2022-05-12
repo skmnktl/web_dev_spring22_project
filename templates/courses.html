@@ -20,25 +20,24 @@
 					<table id="tblCourses" border =solid>
 						<thead>
 							<tr>
-								<th>Course Name</th>
-								<th>Course Description</th>
-								<th>Course Capacity</th>
-								<th>Professor</th>
-								<th>Actions</th>
+								{% for header in headings %}
+								<th>{{ header }}</th>
+								{% endfor %}
 							</tr>
 						</thead>
 						<tbody>
+							{% for row in data %}
 							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
+								{% for cell in row %}
+								<td>{{ cell }}</td>
+								{% endfor %}
 								<td>
 									<a href="{{ url_for('announcements') }}">Announcements</a><br>
 									<a href="{{ url_for('assignments') }}">Assignments</a><br>
 									<a href="{{ url_for('grades') }}">Grades</a><br>
 								</td>
 							</tr>
+							{% endfor %}
 						</tbody>
 					</table>
 			</div>
