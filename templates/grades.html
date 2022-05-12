@@ -8,7 +8,7 @@
 
 </head>
 	
-	<body onload="LoadUserID()">
+	<body onload="loadUserID()">
 	
 		<div class="header">
 			<h2>Student Grades (we may need a separate teacher version)</h2>
@@ -20,17 +20,19 @@
 				<table id="tblGrades" border =solid>
 					<thead>
 						<tr>
-							<th>Assignment Name</th>
-							<th>Number of Points</th>
-							<th>Grade</th>
+							{% for header in headings %}
+							<th>{{ header }}</th>
+							{% endfor %}
 						</tr>
 					</thead>
 					<tbody>
+						{% for row in data %}
 						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
+							{% for cell in row %}
+							<td>{{ cell }}</td>
+							{% endfor %}
 						</tr>
+						{% endfor %}
 					</tbody>
 				</table>
 			</div>	

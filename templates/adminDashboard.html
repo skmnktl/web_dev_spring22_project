@@ -21,25 +21,19 @@
 					<table id="tblAssignments" border =solid>
 						<thead>
 							<tr>
-								<th>Number of Active Students</th>
-								<th>Number of Active Teachers</th>
-								<th>Number of Courses</th>
-
+								{% for header in headingsUserSummary %}
+								<th>{{ header }}</th>
+								{% endfor %}
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
+								{% for cell in dataUserSummary %}
+								<td>{{ cell }}</td>
+								{% endfor %}
+							</tr>
 						</tbody>
 					</table>
-			</div>
-
-			<div id="adminLinks">
-				<br>
-				<a href="{{ url_for('createCourse') }}">Create Course</a><br>
-				<a href="{{ url_for('login') }}">Log Out</a><br>
 			</div>
 
 			<div id="allUsers">
@@ -49,26 +43,23 @@
 					<table id="tblAssignments" border =solid>
 						<thead>
 							<tr>
-								<th>First Name</th>
-								<th>Last Name</th>
-								<th>Email</th>
-								<th>Account Type</th>
-								<th>Active Status</th>
-								<th>Actions</th>
+								{% for header in headingsUsers %}
+								<th>{{ header }}</th>
+								{% endfor %}
 							</tr>
 						</thead>
 						<tbody>
+							{% for row in dataUsers %}
 							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
+								{% for cell in row %}
+								<td>{{ cell }}</td>
+								{% endfor %}
 								<td>			
 									<button onclick="activateUser()">Activate/Deactivate User</button><br>
 									<a href="{{ url_for('addToCourse') }}">Add to Course</a><br>
 								</td>
 							</tr>
+							{% endfor %}
 						</tbody>
 					</table>
 			</div>
@@ -76,7 +67,7 @@
 			<div id="adminLinks">
 				<br>
 				<a href="{{ url_for('createCourse') }}">Create Course</a><br>
-				<a href="{{ url_for('login') }}"Log Out</a><br>
+				<a href="{{ url_for('login') }}">Log Out</a><br>
 			</div>
 		</div>
 

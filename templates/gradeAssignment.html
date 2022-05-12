@@ -22,18 +22,17 @@
 					<table id="tblGradeAssignments" border =solid>
 						<thead>
 							<tr>
-								<th>Student First Name</th>
-								<th>Student Last Name</th>
-								<th>Student Email</th>
-								<th>Submit Grade</th>
-
+								{% for header in headings %}
+								<th>{{ header }}</th>
+								{% endfor %}
 							</tr>
 						</thead>
 						<tbody>
+							{% for row in data %}
 							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
+								{% for cell in row %}
+								<td>{{ cell }}</td>
+								{% endfor %}
 								<td>			
 									<div id="submitGradeForm">
 										<form action="http://uchicago.edu" method="GET">
@@ -41,11 +40,11 @@
 											<input type="text" id="grade" name="grade">
 
 											<br><button onclick="submitGrade()">Submit</button><br>
-
 										</form>
 									</div>
 								</td>
 							</tr>
+							{% endfor %}
 						</tbody>
 					</table>
 			</div>

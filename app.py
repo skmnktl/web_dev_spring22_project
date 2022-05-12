@@ -61,7 +61,7 @@ def courses():
 # http://127.0.0.1:5000/grades
 @app.route(routeUrls["grades"])
 def grades():
-	return render_template("grades.html")
+	return render_template("grades.html",headings=headingsGrades,data=dataGrades)
 
 
 @app.route(routeUrls["assignments"])
@@ -137,7 +137,7 @@ def createCourse():
 
 @app.route(routeUrls["adminDash"])
 def adminDash():
-	return render_template("adminDashboard.html")
+	return render_template("adminDashboard.html",headingsUserSummary=headingsUserSummary,headingsUsers=headingsUsers,dataUserSummary=dataUserSummary,dataUsers=dataUsers)
 
 @app.route(routeUrls["teacherDash"])
 def teacherDash():
@@ -165,7 +165,7 @@ def submitAssign():
 
 @app.route(routeUrls["gradeAssign"])
 def gradeAssign():
-	return render_template("gradeAssignment.html")
+	return render_template("gradeAssignment.html",headings=headingsGradeAssignment,data=dataGradeAssignment)
 
 @app.route(routeUrls["addToCourse"])
 def addToCourse():

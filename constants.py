@@ -71,4 +71,26 @@ dataDashTeacherToGrade = (
     ("Final project","Build a website","100","5//2021")
 )
 
-account_type = {'samrodman@mac.com':'admin','samrodman@mac.com':'student','srodman1@chicagobooth.edu':'teacher'}
+headingsGrades = ("Assignment Name","Number of Points","Grade")
+dataGrades = (
+    ("Midterm project","100","97"),
+    ("Midterm project","100","97"),
+    ("Midterm project","100","97")
+)
+
+headingsUserSummary = ("Number of Active Students","Number of Active Teachers","Number of Courses")
+dataUserSummary = ("67","3","5")
+
+headingsUsers = ("First Name","Last Name","Email","Account Type","Active Status","Actions")
+dataUsers = (
+    ("Jeff","Smith","jsmith@aol.com","Student","Active"),
+    ("Jeff","Jones","jjones@aol.com","Student","Inactive"),
+    ("Jeff","Johnson","jjohns@aol.com","Teacher","Active"),
+)
+
+headingsGradeAssignment = ("Student First Name","Student Last Name","Student Email", "Submit Grade")
+dataGradeAssignment = (
+    ("Jeff","Smith","jsmith@aol.com"),
+    ("Jeff","Smith","jsmith@aol.com"),
+    ("Jeff","Smith","jsmith@aol.com")
+)
