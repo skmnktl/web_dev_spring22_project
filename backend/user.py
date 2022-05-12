@@ -3,6 +3,8 @@ import json
 from random import choice
 
 
+USER_FIELDS = ['password','email','accountType','securityQuestions','firstname','lastname','username','active']
+
 class User:
     
     def __init__(self):
@@ -14,7 +16,7 @@ class User:
         self.firstname = ""
         self.lastname = ""
         self.username = None # set equal to email 
-        self.coursesAndAssignments = dict(list)
+        self.coursesAndAssignments = dict()
 
 
     def createUser(self,accountType, password, username, securityQuestions, firstname, lastname):
@@ -24,8 +26,13 @@ class User:
         self.email = username
         self.firstname = firstname
         self.lastname = lastname
-        self.securityQuestions = json.dumps(securityQuestions) # TODO 
+        self.securityQuestions = json.dumps(securityQuestions)
+        self.active = True
+        
 
+    @staticmethod
+    def isUsernameUnique(username) -> bool:
+        raise NotImplementedError
 
     @staticmethod
     def getUserInfo(username):
@@ -34,11 +41,15 @@ class User:
         # TODO reformat
     
     @staticmethod
-    def updateSecurityQuestionAnswer(self, username, question, answer):
-        old_questions = json.loads(crud.read("user","username",username,["securityQuestions"]))
-        old_questions[question] = answer
-        # TODO 
-    
+    def changeUserData(username, field, newValue):
+        if field == "securityQuestions":
+            raise Exception("Use updateSecurityQuestionAnswer method.")
+        else:
+            crud.update("user",'username',username, field, newValue)
+
+    @staticmethod
+    def updateSecurityQuestionAnswer(username, question, answer):
+        User.replaceSecurityQuestion(username,question,question,answer)
     @staticmethod
     def chooseSecurityQuestionForPrompt(username):
         questions = json.loads(crud.read("user","username",username,["securityQuestions"]))
@@ -49,11 +60,13 @@ class User:
         questions = json.loads(crud.read("user","username",username,["securityQuestions"]))
         return questions[question] == answer
     
-    def replaceSecurityQuestion(self, old_question, new_question, answer):
+    @staticmethod
+    def replaceSecurityQuestion(username, old_question, new_question, answer):
         questions = json.loads(crud.read("user","username",username,["securityQuestions"]))
         questions.pop(old_question)
         questions[new_question] = answer
-        crud.write
+        questions = json.dumps(questions)
+        crud.update('user','username',username,'securityQuestions',questions)
     
     @staticmethod
     def authentication(username: str, password: str):
