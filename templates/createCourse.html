@@ -17,25 +17,22 @@
 
 		<div class="flex-container">
 			<div id="createAccountForm">
-				<form action="http://uchicago.edu" method="GET">
-					<label for="courseName"><b>Course Name:</b></label>
-					<input type="text" id="courseName" name="courseName"><br>
+				<form method="POST">
+					{{ form.courseName.label }}
+					{{ form.courseName }}<br>
 
-					<label for="courseDescription"><b>Course Description:</b></label>
-					<input type="text" id="courseDescription" name="courseDescription"><br>
+					{{ form.courseDescription.label }}
+					{{ form.courseDescription }}<br>
 
-					<label for="courseCapacity"><b>Course Capacity:</b></label>
-					<input type="text" id="courseCapacity" name="courseCapacity"><br>
+					{{ form.courseCapacity.label }}
+					{{ form.courseCapacity }}<br>
 
-					<label for="courseProfessor"><b>Course Professor (change to dropdown):</b></label>
-					<input type="text" id="courseProfessor" name="courseProfessor"><br>
+					{{ form.courseProfessor.label }}
+					{{ form.courseProfessor }}<br>
+
+					{{ form.submit() }}
 
 				</form>
-			</div>
-
-				
-			<div id="newCourseLink">
-				<br><button onclick="createCourse()">Create Course (only visible for admins)</button><br><br>
 			</div>
 
 			<a href="{{ url_for('login') }}">Log Out</a><br>
@@ -46,12 +43,7 @@
 			function loadUserID() {
 				var userID = sessionStorage.getItem("userID")
 				console.log(userID)
-			}
 			
-			function createCourse() {
-				return
-			}
-
 
 		</script>
 
