@@ -50,6 +50,7 @@ class CourseForm(FlaskForm):
 def home():
     return "Hello, Flask!"
 
+# http://127.0.0.1:5000/login
 @app.route(routeUrls["login"])
 def login():
 	return render_template("login.html")
@@ -58,7 +59,6 @@ def login():
 def courses():
 	return render_template("courses.html",headings=headingsCourses,data=dataCourses)
 
-# http://127.0.0.1:5000/grades
 @app.route(routeUrls["grades"])
 def grades():
 	return render_template("grades.html",headings=headingsGrades,data=dataGrades)
