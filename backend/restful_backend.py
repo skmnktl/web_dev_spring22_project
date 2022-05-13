@@ -180,7 +180,7 @@ class Announcements(Resource):
         crud.create("announcements",{"message":message,"courseid":courseid,"senddate":date.today()})
 
 
-api.add_resource(User, '/user/<string:accountType>/<string:password>/<string:username>/<string:securityQuestions>/<string:firstname>/<string:lastname>')
+api.add_resource(CreateUser, '/createuser/<string:accountType>/<string:password>/<string:username>/<string:securityQuestions>/<string:firstname>/<string:lastname>')
 
 
 
