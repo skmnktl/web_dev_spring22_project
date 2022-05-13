@@ -24,7 +24,7 @@ class User:
     @staticmethod
     def createUser(accountType, password, username, securityQuestions, firstname, lastname):
         
-        securityQuestions = json.dumps(securityQuestions)
+        #securityQuestions = json.dumps(securityQuestions)
         values = [password, username, accountType, securityQuestions, firstname, lastname, username, True]
         
         inputs = dict()
