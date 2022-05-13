@@ -13,7 +13,7 @@ USER_FIELDS = ['password','email','accountType','securityQuestions','firstname',
 
 class CreateUser(Resource):
 
-    def __init__(self,accountType, password, username, securityQuestions, firstname, lastname):
+    def get(self,accountType, password, username, securityQuestions, firstname, lastname):
         User.createUser(accountType, password, username, securityQuestions, firstname, lastname)
         return "success"
 
