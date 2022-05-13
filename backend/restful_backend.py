@@ -15,9 +15,24 @@ USER_FIELDS = ['password','email','accountType','securityQuestions','firstname',
 class CreateUser(Resource):
 
     def get(self, accountType, password, username, securityQuestions, firstname, lastname):
-        User.createUser(accountType, password, username, securityQuestions, firstname, lastname)
+        User.createUser(accountType, password, username, "", firstname, lastname)
+        securityObj = UpdateSecurityQuestion()
+        securityObj.post(username,securityObj)
         return "success"
 
+class UpdateSecurityQuestion(Resource):
+    
+    def post(self, username, securityQuestions):
+        raw_questions = securityQuestions.split("<|>")
+        if raw_questions=="":
+            questions = dict()
+        else:
+            questions = dict([i.split("<*>") for i in raw_questions])
+        
+        for q in  questions.keys():
+            a = questions[q]
+            User.replaceSecurityQuestion(username, q, q, a)
+        
 
 class User:
 
@@ -58,31 +73,31 @@ class User:
                 return "failure"
 
     @staticmethod
-    def updateSecurityQuestionAnswer(username, question, answer):
-        
-        try:
-            User.replaceSecurityQuestion(username,question,question,answer)
-            return "success"
-        except:
-            return "failure"
+    def parseQuestions(username):
+        raw_questions = crud.read("user","username",username,["securityQuestions"]).split("<|>")
+        questions = dict([i.split("<*>") for i in raw_questions])
+        return questions
 
     @staticmethod
     def chooseSecurityQuestionForPrompt(username):
-        questions = json.loads(crud.read("user","username",username,["securityQuestions"]))
+        questions = User.parseQuestions(username)
         return choice(questions.keys())
     
     @staticmethod
     def checkIfSecurityQuestionResponseIsRight(username, question, answer):
-        questions = json.loads(crud.read("user","username",username,["securityQuestions"]))
+        questions = User.parseQuestions(username)
         return questions[question] == answer
     
     @staticmethod
     def replaceSecurityQuestion(username, old_question, new_question, answer):
-        questions = json.loads(crud.read("user","username",username,["securityQuestions"]))
-        questions.pop(old_question)
+        questions = User.parseQuestions(username)
+        if questions.get(old_question,None):
+            questions.pop(old_question)
         questions[new_question] = answer
-        questions = json.dumps(questions)
-        crud.update('user','username',username,'securityQuestions',questions)
+        new_questions = ""
+        for key in questions.keys():
+            new_questions+= f"{key}<*>{questions[key]}<|>"
+        crud.update('user','username',username,'securityQuestions',new_questions)
     
     @staticmethod
     def authentication(username: str, password: str):
