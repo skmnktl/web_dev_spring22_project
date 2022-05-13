@@ -17,21 +17,18 @@
 		<div class="flex-container">
 			<div id="submitAssignmentForm">
 
-				<h3>Assignment Name:</h3>
+				<h3>Assignment Name: {{ name }}</h3>
 
-				<p>Assignment Description:</h3>
+				<p>Assignment Description: {{ description }}</h3>
 
-				<form action="http://uchicago.edu" method="GET">
-					<label for="submission"><b>Submission:</b></label><br>
-					<textarea rows = "4" cols = "40" name = "submission">Input detail here</textarea><br>
+				<form method="POST">
+					{{ form.assignmentSubmission.label }}
+					<br>
+					{{ form.assignmentSubmission(cols=30, rows=5) }}
+					<br>
+					{{ form.submit() }}
 
 				</form>
-			</div>
-
-				
-			<div id="newAnnouncementtLink">
-				<br><button onclick="createAnnouncement()">Create Announcement</button><br><br>
-
 			</div>
 
 			<a href="{{ url_for('login') }}">Log Out</a><br>

@@ -54,8 +54,12 @@
 								{% for cell in row %}
 								<td>{{ cell }}</td>
 								{% endfor %}
-								<td>			
-									<button onclick="activateUser()">Activate/Deactivate User</button><br>
+								<td>
+									<div id="activateUserForm">
+										<form method="POST">
+											{{ form.submit }}
+										</form>
+									</div>			
 									<a href="{{ url_for('addToCourse') }}">Add to Course</a><br>
 								</td>
 							</tr>
@@ -76,10 +80,6 @@
 			function loadUserID() {
 				var userID = sessionStorage.getItem("userID")
 				console.log(userID)
-			}
-
-			function activateUser() {
-				return
 			}
 
 			// need to add search and filter functions

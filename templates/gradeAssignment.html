@@ -17,7 +17,7 @@
 		<div class="flex-container">
 			<div id="gradeAssignments">		
 
-				<h3>Assignment Name:</h3>	
+				<h3>Assignment Name: {{ name }} </h3>	
 
 					<table id="tblGradeAssignments" border =solid>
 						<thead>
@@ -35,11 +35,10 @@
 								{% endfor %}
 								<td>			
 									<div id="submitGradeForm">
-										<form action="http://uchicago.edu" method="GET">
-											<label for="grade"><b>Number of Points:</b></label>
-											<input type="text" id="grade" name="grade">
-
-											<br><button onclick="submitGrade()">Submit</button><br>
+										<form method="POST">
+											{{ form.assignmentGradeSubmission.label }}<br>
+											{{ form.assignmentGradeSubmission }}<br>
+											{{ form.submit }}
 										</form>
 									</div>
 								</td>

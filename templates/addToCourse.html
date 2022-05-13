@@ -15,30 +15,37 @@
 		<div class="flex-container">
 			<div id="courses">	
 
-					<p>First Name:<p>
-					<p>Last Name:<p>
-					<p>Email:<p>		
+				<h3>Student info:</h3>
+
+					<p>First Name: {{ firstName }}<p>
+					<p>Last Name: {{ lastName }}<p>
+					<p>Email: {{ email }}<p>
+						
+					<h3>Courses available to add student to:</h3>
 
 					<table id="tblCourses" border =solid>
 						<thead>
 							<tr>
-								<th>Course Name</th>
-								<th>Course Description</th>
-								<th>Course Capacity</th>
-								<th>Professor</th>
-								<th>Actions</th>
+								{% for header in headings %}
+								<th>{{ header }}</th>
+								{% endfor %}
 							</tr>
 						</thead>
 						<tbody>
+							{% for row in data %}
 							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
+								{% for cell in row %}
+								<td>{{ cell }}</td>
+								{% endfor %}
 								<td>
-									<button onclick="addToCourse()">Add/Remove From Course</button><br>
+									<div id="addToCourseForm">
+										<form method="POST">
+											{{ form.submit }}
+										</form>
+									</div>	
 								</td>
 							</tr>
+							{% endfor %}
 						</tbody>
 					</table>
 			</div>

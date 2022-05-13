@@ -5,7 +5,7 @@ from constants import *
 class AccountForm(FlaskForm):
 	firstName      = StringField("First Name: ",  validators=[DataRequired()])
 	lastName       = StringField("Last Name: ",   validators=[DataRequired()])
-	email          = StringField("Email: ",       validators=[DataRequired(), Email()])
+	email          = StringField("Email: ",       validators=[DataRequired()])
 	accountID      = IntegerField("Account ID: ", validators=[DataRequired()])
 	password       = StringField("Password: ",    validators=[DataRequired()])
 	accountType    = RadioField("Account Type",   choices=[("student","Student"),("teacher","Teacher")])
@@ -59,3 +59,17 @@ class CourseForm(FlaskForm):
 	courseCapacity = IntegerField("Course Capacity: ", validators=[DataRequired()])
 	courseProfessor = StringField("Course Professor", validators=[DataRequired()])
 	submit = SubmitField("Create Course")
+
+class SubmitAssignmentForm(FlaskForm):
+	assignmentSubmission = StringField("Submission: ", widget=TextArea(), validators=[DataRequired()])
+	submit = SubmitField("Submit Assignment")
+
+class GradeAssignmentForm(FlaskForm):
+	assignmentGradeSubmission = IntegerField("Number of Points: ", validators=[DataRequired()])
+	submit = SubmitField("Submit Grade")
+
+class ActivateUserForm(FlaskForm):
+	submit = SubmitField("Activate/Deactivate User")
+
+class AddToCourseForm(FlaskForm):
+	submit = SubmitField("Add to Course")

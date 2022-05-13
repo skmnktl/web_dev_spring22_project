@@ -15,8 +15,6 @@ def hello_there(name = None):
         date=datetime.now()
     )
 
-
-
 # http://127.0.0.1:5000/
 @app.route(routeUrls["main"])
 def home():
@@ -111,9 +109,15 @@ def createCourse():
 
 	return render_template("createCourse.html",form=form,courseName=courseName,courseDescription=courseDescription,courseCapacity=courseCapacity,courseProfessor=courseProfessor)
 
-@app.route(routeUrls["adminDash"])
+@app.route(routeUrls["adminDash"],methods=["GET","POST"])
 def adminDash():
-	return render_template("adminDashboard.html",headingsUserSummary=headingsUserSummary,headingsUsers=headingsUsers,dataUserSummary=dataUserSummary,dataUsers=dataUsers)
+	form = ActivateUserForm()
+
+	if form.validate_on_submit():
+		userID = "55" # passed in from table
+		# edit db
+
+	return render_template("adminDashboard.html",headingsUserSummary=headingsUserSummary,headingsUsers=headingsUsers,dataUserSummary=dataUserSummary,dataUsers=dataUsers,form=form)
 
 @app.route(routeUrls["teacherDash"])
 def teacherDash():
@@ -135,17 +139,36 @@ def editProfile():
 def forgotPassword():
 	return render_template("forgotPassword.html")
 
-@app.route(routeUrls["submitAssign"])
+@app.route(routeUrls["submitAssign"],methods=["GET","POST"])
 def submitAssign():
-	return render_template("submitAssignment.html")
+	assignmentSubmission = None
+	form = SubmitAssignmentForm()
 
-@app.route(routeUrls["gradeAssign"])
+	if form.validate_on_submit():
+		# write to db
+		pass
+	return render_template("submitAssignment.html",form=form,assignmentSubmission=assignmentSubmission,name=assignmentName,description=assignmentDescription)
+
+@app.route(routeUrls["gradeAssign"],methods=["GET","POST"])
 def gradeAssign():
-	return render_template("gradeAssignment.html",headings=headingsGradeAssignment,data=dataGradeAssignment)
+	assignmentGradeSubmission = None
+	form = GradeAssignmentForm()
 
-@app.route(routeUrls["addToCourse"])
+	if form.validate_on_submit():
+		studentID = "55" # passed from table
+		assignmentID = "55" # passed from url
+		# edit db
+	return render_template("gradeAssignment.html",headings=headingsGradeAssignment,data=dataGradeAssignment,assignmentGradeSubmission=assignmentGradeSubmission,form=form,name=assignmentGradeName)
+
+@app.route(routeUrls["addToCourse"],methods=["GET","POST"])
 def addToCourse():
-	return render_template("addToCourse.html")
+	form = AddToCourseForm()
+
+	if form.validate_on_submit():
+		userID = "55" # passed in from url
+		assignmentID = "55" # passed in from table
+		# edit db
+	return render_template("addToCourse.html",headings=headingsAddToCourse, data=dataAddToCourse, firstName=firstNameAddToCourse, lastName=lastNameAddToCourse, email=emailAddToCourse,form=form)
 
 # Internal Server Error
 @app.errorhandler(500)

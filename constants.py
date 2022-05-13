@@ -81,16 +81,31 @@ dataGrades = (
 headingsUserSummary = ("Number of Active Students","Number of Active Teachers","Number of Courses")
 dataUserSummary = ("67","3","5")
 
-headingsUsers = ("First Name","Last Name","Email","Account Type","Active Status","Actions")
+headingsUsers = ("ID","First Name","Last Name","Email","Account Type","Active Status","Actions")
 dataUsers = (
-    ("Jeff","Smith","jsmith@aol.com","Student","Active"),
-    ("Jeff","Jones","jjones@aol.com","Student","Inactive"),
-    ("Jeff","Johnson","jjohns@aol.com","Teacher","Active"),
+    ("22","Jeff","Smith","jsmith@aol.com","Student","Active"),
+    ("18","Jeff","Jones","jjones@aol.com","Student","Inactive"),
+    ("16","Jeff","Johnson","jjohns@aol.com","Teacher","Active"),
 )
 
-headingsGradeAssignment = ("Student First Name","Student Last Name","Student Email", "Submit Grade")
+headingsGradeAssignment = ("ID","Student First Name","Student Last Name","Student Email", "Submit Grade")
 dataGradeAssignment = (
-    ("Jeff","Smith","jsmith@aol.com"),
-    ("Jeff","Smith","jsmith@aol.com"),
-    ("Jeff","Smith","jsmith@aol.com")
+    ("14","Jeff","Smith","jsmith@aol.com"),
+    ("15","Jeff","Smith","jsmith@aol.com"),
+    ("16","Jeff","Smith","jsmith@aol.com")
 )
+
+assignmentName = ("Final project")
+assignmentDescription = ("Build a website")
+
+firstNameAddToCourse = ("Jeff")
+lastNameAddToCourse = ("Smith")
+emailAddToCourse = ("jsmith@gmail.com")
+headingsAddToCourse = ("ID","Course Name","Course Description","Course Capacity","Professor","Actions")
+dataAddToCourse = (
+    ("145","Intro to Web Dev","An introductory web course","50","Prof. Jones"),
+	("146","Intro to Web Dev","An introductory web course","50","Prof. Jones"),
+	("147","Intro to Web Dev","An introductory web course","50","Prof. Jones")
+)
+
+assignmentGradeName = ("Midterm project")
