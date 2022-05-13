@@ -185,7 +185,7 @@ class Announcements(Resource):
 api.add_resource(CreateUser, '/createuser/<string:accountType>/<string:password>/<string:username>/<string:securityQuestions>/<string:firstname>/<string:lastname>')
 
 # Announcements Endpoints
-api.add_resource(Announcements, "/announce/<string:courseid>/<string:message>")
+api.add_resource(Announcements, "/announce/<int:courseid>/<string:message>")
 
 class HelloWorld(Resource):
     def get(self):
