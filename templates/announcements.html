@@ -19,23 +19,28 @@
 					<table id="tblAnnouncements" border =solid>
 						<thead>
 							<tr>
-								<th>Announcement</th>
-								<th>Date</th>
+								{% for header in headings %}
+								<th>{{ header }}</th>
+								{% endfor %}
 							</tr>
 						</thead>
 						<tbody>
+							{% for row in data %}
 							<tr>
-								<td></td>
-								<td></td>
+								{% for cell in row %}
+								<td>{{ cell }}</td>
+								{% endfor %}
 							</tr>
+							{% endfor %}
 						</tbody>
 					</table>
 			</div>
 
 			<div id="annoucementLinks">
 				<br>
-				<a href="createAnnouncement.html">Create New Announcement (only visible for Teachers)</a><br>
-				<a href="{{ url_for('login') }}"Log Out</a><br>
+				<a href="{{ url_for('createAnnounce') }}">Create New Announcement (only visible for Teachers)</a><br>
+				<a href="{{ url_for('login') }}">Log Out</a>
+				<br>
 			</div>
 		</div>
 

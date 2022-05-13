@@ -15,31 +15,27 @@
 
 		<div class="flex-container">
 			<div id="createAnnouncementForm">
-				<form action="http://uchicago.edu" method="GET">
-					<label for="announcement"><b>Annoucement:</b></label><br>
-					<textarea rows = "4" cols = "40" name = "announcement">Input detail here</textarea><br>
-
-				</form>
+				<form method="POST">
+					{{ form.announcement.label }}
+					<br>
+					{{ form.announcement(cols=30, rows=5) }}
+					<br>
+					<br>
+					<div style="display: block" id="submit button">
+					{{ form.submit() }}
+					</div>
 			</div>
 
-				
-			<div id="newAnnouncementtLink">
-				<br><button onclick="createAnnouncement()">Create Announcement</button><br><br>
-
-			</div>
-
-			<a href="{{ url_for('login') }}"Log Out</a><br>
+			<a href="{{ url_for('login') }}">Log Out</a><br>
 		</div>
 
 		<script>
 
 			function loadUserID() {
 				var userID = sessionStorage.getItem("userID")
+				
 				console.log(userID)
-			}
-			
-			function createAnnouncement() {
-				return
+				
 			}
 
 

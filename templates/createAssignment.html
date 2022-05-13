@@ -17,29 +17,25 @@
 
 		<div class="flex-container">
 			<div id="createAssignmentForm">
-				<form action="http://uchicago.edu" method="GET">
-					<label for="assignmentName"><b>Course Name:</b></label>
-					<input type="text" id="assignmentName" name="assignmentName"><br>
+				<form method="POST">
+					{{ form.assignmentName.label }}
+					{{ form.assignmentName }}<br>
 
-					<label for="assignmentDescription"><b>Course Description:</b></label>
-					<input type="text" id="assignmentDescription" name="assignmentDescription"><br>
+					{{ form.assignmentDescription.label }}
+					{{ form.assignmentDescription }}<br>
 
-					<label for="assignmentPoints"><b>Number of Points:</b></label>
-					<input type="text" id="assignmentPoints" name="assignmentPoints"><br>
+					{{ form.numberOfPoints.label }}
+					{{ form.numberOfPoints }}<br>
 
-					<label for="assignmentDate"><b>Due Date:</b></label>
-					<input type="text" id="assignmentDate" name="assignmentDate"><br>
+					{{ form.dueDate.label }}
+					{{ form.dueDate }}<br>
+
+					{{ form.submit() }}
 
 				</form>
 			</div>
 
-				
-			<div id="newAssignmentLink">
-				<br><button onclick="createAssignment()">Create Assignment</button><br><br>
-
-			</div>
-
-			<a href="{{ url_for('login') }}"Log Out</a><br>
+			<a href="{{ url_for('login') }}">Log Out</a><br>
 		</div>
 
 		<script>

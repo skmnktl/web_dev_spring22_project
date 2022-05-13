@@ -15,70 +15,137 @@ def hello_there(name = None):
         date=datetime.now()
     )
 
+class AccountForm(FlaskForm):
+	firstName = StringField("First Name: ", validators=[DataRequired()])
+	lastName = StringField("Last Name: ", validators=[DataRequired()])
+	email = StringField("Email: ", validators=[DataRequired()])
+	accountID = IntegerField("Account ID: ", validators=[DataRequired()])
+	password = StringField("Password: ", validators=[DataRequired()])
+	accountType = RadioField("Account Type", choices=[("student","Student"),("teacher","Teacher")])
+	securityAnswer1 = StringField("Your Answer: ", validators=[DataRequired()])
+	securityAnswer2 = StringField("Your Answer: ", validators=[DataRequired()])
+	securityAnswer3 = StringField("Your Answer: ", validators=[DataRequired()])
+	submit = SubmitField("Create Account")
+
+class AnnouncementForm(FlaskForm):
+	announcement = StringField("Announcement: ", widget=TextArea(), validators=[DataRequired()])
+	submit = SubmitField("Create Announcement")
+
+class AssignmentForm(FlaskForm):
+	assignmentName = StringField("Assignment Name: ", validators=[DataRequired()])
+	assignmentDescription = StringField("Assignment Description: ", validators=[DataRequired()])
+	numberOfPoints =  IntegerField("Number of Points: ", validators=[DataRequired()])
+	dueDate = DateField("Due Date: ", validators=[DataRequired()])
+	submit = SubmitField("Create Assignment")
+
+class CourseForm(FlaskForm):
+	courseName = StringField("Course Name: ", validators=[DataRequired()])
+	courseDescription = StringField("Course Description: ", validators=[DataRequired()])
+	courseCapacity = IntegerField("Course Capacity: ", validators=[DataRequired()])
+	courseProfessor = StringField("Course Professor", validators=[DataRequired()])
+	submit = SubmitField("Create Course")
 
 # http://127.0.0.1:5000/
 @app.route(routeUrls["main"])
 def home():
     return "Hello, Flask!"
 
-
+# http://127.0.0.1:5000/login
 @app.route(routeUrls["login"])
 def login():
 	return render_template("login.html")
 
-
 @app.route(routeUrls["courses"])
 def courses():
-	return render_template("courses.html",headings=headings,data=data)
+	return render_template("courses.html",headings=headingsCourses,data=dataCourses)
 
-
-# http://127.0.0.1:5000/grades
 @app.route(routeUrls["grades"])
 def grades():
-	return render_template("grades.html")
+	return render_template("grades.html",headings=headingsGrades,data=dataGrades)
 
 
 @app.route(routeUrls["assignments"])
 def assignments():
-	return render_template("assignments.html")
+	return render_template("assignments.html",headings=headingsAssignments,data=dataAssignments)
 
 
-# http://127.0.0.1:5000/accouncements
 @app.route(routeUrls["announcements"])
 def announcements():
-	return render_template("announcements.html")
+	return render_template("announcements.html",headings=headingsAnnouncements,data=dataAnnouncements)
 
 
-@app.route(routeUrls["createAccount"])
+@app.route(routeUrls["createAccount"],methods=["GET","POST"])
 def createAccount():
-	return render_template("createAccount.html")
+	firstName = None
+	lastName = None
+	email = None
+	accountID = None
+	password = None
+	accountType = None
+	securityAnswer1 = None
+	securityAnswer2 = None
+	securityAnswer3 = None
+	form = AccountForm()
+
+	if form.validate_on_submit():
+		# write to db
+		# https://www.youtube.com/watch?v=GbJPqu0ff9A&t=867s
+		pass
+
+	return render_template("createAccount.html",form=form,firstName=firstName,lastName=lastName,email=email,accountID=accountID,password=password,accountType=accountType,securityAnswer1=securityAnswer1,securityAnswer2=securityAnswer2,securityAnswer3=securityAnswer3)
 
 
-@app.route(routeUrls["createAssign"])
+@app.route(routeUrls["createAssign"],methods=["GET","POST"])
 def createAssign():
-	return render_template("createAssignment.html")
+	assignmentName = None
+	assignmentDescription = None
+	numberOfPoints =  None
+	dueDate = None
+	form = AssignmentForm()
+
+	if form.validate_on_submit():
+		# write to db
+		pass
+
+	return render_template("createAssignment.html",form=form,assignmentName=assignmentName,assignmentDescription=assignmentDescription,numberOfPoints=numberOfPoints,dueDate=dueDate)
 
 
-@app.route(routeUrls["createAnounce"])
-def createAnounce():
-	return render_template("createAccount.html")
+@app.route(routeUrls["createAnnounce"],methods=["GET","POST"])
+def createAnnounce():
+	announcement = None
+	form = AnnouncementForm()
 
+	if form.validate_on_submit():
+		# write to db
+		pass
+	
+	return render_template("createAnnouncement.html",announcement=announcement,form=form)
 
-@app.route(routeUrls["createCourse"])
+@app.route(routeUrls["createCourse"],methods=["GET","POST"])
 def createCourse():
-	return render_template("createCourse.html")
+	courseName = None
+	courseDescription = None
+	courseCapacity = None
+	courseProfessor = None
+	form = CourseForm()
+
+	if form.validate_on_submit():
+		# write to db
+		pass
+
+	return render_template("createCourse.html",form=form,courseName=courseName,courseDescription=courseDescription,courseCapacity=courseCapacity,courseProfessor=courseProfessor)
 
 @app.route(routeUrls["adminDash"])
 def adminDash():
-	return render_template("adminDashboard.html")
+	return render_template("adminDashboard.html",headingsUserSummary=headingsUserSummary,headingsUsers=headingsUsers,dataUserSummary=dataUserSummary,dataUsers=dataUsers)
 
 @app.route(routeUrls["teacherDash"])
 def teacherDash():
-	return render_template("createCourse.html")
+	return render_template("teacherDashboard.html",headings=headingsDash,dataToGrade=dataDashTeacherToGrade)
 
 @app.route(routeUrls["studentDash"])
 def studentDash():
-	return render_template("teacherDashboard.html")
+	return render_template("studentDashboard.html",headings=headingsDash,dataToDo=dataDashStudentToDo,dataUpcoming=dataDashStudentUpcoming,dataPastDue=dataDashStudentPastDue)
 
 @app.route(routeUrls["tempDash"])
 def tempDash():
@@ -98,25 +165,11 @@ def submitAssign():
 
 @app.route(routeUrls["gradeAssign"])
 def gradeAssign():
-	return render_template("gradeAssignment.html")
+	return render_template("gradeAssignment.html",headings=headingsGradeAssignment,data=dataGradeAssignment)
 
-# @app.route(routeUrls["createCourse"])
-# def createCourse():
-# 	return render_template("createCourse.html")
-
-# # http://127.0.0.1:5000/createAnnouncement.html
-# @app.route("/createAnnouncement.html",methods=["GET","POST"])
-# def createAnnouncement():
-# 	announcement = None
-# 	form = AnnouncementForm()
-
-# 	#Validate form
-# 	if form.validate_on_submit():
-# 		announcement = form.announcement.data
-# 		form.announcement.data = ""
-
-	
-# 	return render_template("createAnnouncement.html", announcement=announcement, form=form)
+@app.route(routeUrls["addToCourse"])
+def addToCourse():
+	return render_template("addToCourse.html")
 
 # Internal Server Error
 @app.errorhandler(500)
