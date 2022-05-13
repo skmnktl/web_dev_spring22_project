@@ -20,6 +20,9 @@ class CreateUser(Resource):
         securityObj.post(username,securityObj)
         return "success"
 
+
+api.add_resource(CreateUser, '/createuser/<string:accountType>/<string:password>/<string:username>/<string:securityQuestions>/<string:firstname>/<string:lastname>')
+
 class UpdateSecurityQuestion(Resource):
     
     def post(self, username, securityQuestions):
@@ -33,6 +36,22 @@ class UpdateSecurityQuestion(Resource):
             a = questions[q]
             User.replaceSecurityQuestion(username, q, q, a)
         
+api.add_resource(UpdateSecurityQuestion,"/updatesecurityquestion/<string:username>/<string:securityQuestions>")
+
+class UpdateUserData:
+
+    def post(self, username, field, newValue):
+        if field=="securityQuestions":
+            return "failure"
+        else:
+            if field == "active":
+                if newValue == "true":
+                    newValue = True
+                else:
+                    newValue = False
+            User.changeUserData(username,field, newValue)
+
+api.add_resource(UpdateUserData, "/updateuserdata/<string:username>/<string:field>/<string:newValue>")
 
 class User:
 
@@ -181,14 +200,13 @@ class GradeAssignment(Resource):
 
 class PostAnnouncement(Resource):
 
-    def post(self, message, courseid: int):
+    def post(self, courseid: int, message):
         try:
             crud.create("announcements",{"message":message,"course":courseid,"senddate":str(date.today())})
             return "success"
         except:
             return "failure"
 
-api.add_resource(CreateUser, '/createuser/<string:accountType>/<string:password>/<string:username>/<string:securityQuestions>/<string:firstname>/<string:lastname>')
 
 # Announcements Endpoints
 api.add_resource(PostAnnouncement, "/announce/<int:courseid>/<string:message>")
