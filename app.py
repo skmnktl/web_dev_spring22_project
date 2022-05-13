@@ -1,6 +1,6 @@
 from libs import * 
 from constants import *
-
+from forms import *
 
 # sets autoreload on changes    
 app.run(debug=True)
@@ -15,49 +15,24 @@ def hello_there(name = None):
         date=datetime.now()
     )
 
-class AccountForm(FlaskForm):
-	firstName = StringField("First Name: ", validators=[DataRequired()])
-	lastName = StringField("Last Name: ", validators=[DataRequired()])
-	email = StringField("Email: ", validators=[DataRequired()])
-	accountID = IntegerField("Account ID: ", validators=[DataRequired()])
-	password = StringField("Password: ", validators=[DataRequired()])
-	accountType = RadioField("Account Type", choices=[("student","Student"),("teacher","Teacher")])
-	securityAnswer1 = StringField("Your Answer: ", validators=[DataRequired()])
-	securityAnswer2 = StringField("Your Answer: ", validators=[DataRequired()])
-	securityAnswer3 = StringField("Your Answer: ", validators=[DataRequired()])
-	submit = SubmitField("Create Account")
 
-class AnnouncementForm(FlaskForm):
-	announcement = StringField("Announcement: ", widget=TextArea(), validators=[DataRequired()])
-	submit = SubmitField("Create Announcement")
-
-class AssignmentForm(FlaskForm):
-	assignmentName = StringField("Assignment Name: ", validators=[DataRequired()])
-	assignmentDescription = StringField("Assignment Description: ", validators=[DataRequired()])
-	numberOfPoints =  IntegerField("Number of Points: ", validators=[DataRequired()])
-	dueDate = DateField("Due Date: ", validators=[DataRequired()])
-	submit = SubmitField("Create Assignment")
-
-class CourseForm(FlaskForm):
-	courseName = StringField("Course Name: ", validators=[DataRequired()])
-	courseDescription = StringField("Course Description: ", validators=[DataRequired()])
-	courseCapacity = IntegerField("Course Capacity: ", validators=[DataRequired()])
-	courseProfessor = StringField("Course Professor", validators=[DataRequired()])
-	submit = SubmitField("Create Course")
 
 # http://127.0.0.1:5000/
 @app.route(routeUrls["main"])
 def home():
     return "Hello, Flask!"
 
+
 # http://127.0.0.1:5000/login
 @app.route(routeUrls["login"])
 def login():
 	return render_template("login.html")
 
+
 @app.route(routeUrls["courses"])
 def courses():
 	return render_template("courses.html",headings=headingsCourses,data=dataCourses)
+
 
 @app.route(routeUrls["grades"])
 def grades():
@@ -120,6 +95,7 @@ def createAnnounce():
 		pass
 	
 	return render_template("createAnnouncement.html",announcement=announcement,form=form)
+
 
 @app.route(routeUrls["createCourse"],methods=["GET","POST"])
 def createCourse():
