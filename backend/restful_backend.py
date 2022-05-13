@@ -10,7 +10,15 @@ api = Api(app)
 
 USER_FIELDS = ['password','email','accountType','securityQuestions','firstname','lastname','username','active']
 
-class User(Resource):
+
+class CreateUser(Resource):
+
+    def __init__(self,accountType, password, username, securityQuestions, firstname, lastname):
+        User.createUser(accountType, password, username, securityQuestions, firstname, lastname)
+        return "success"
+
+
+class User():
 
     @staticmethod
     def createUser(accountType, password, username, securityQuestions, firstname, lastname):
@@ -131,7 +139,7 @@ class CreateAssignment(Resource):
 class GetAssignment(Resource):
 
     def get(self,props=[],values=[]):
-        return crud.search("announcements", props, values, None)
+        return crud.search("announcements", props, values, )
 
 class EditAssignment:
     def put(self, courseid,assignmentid, field, name):
