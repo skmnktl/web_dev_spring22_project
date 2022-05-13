@@ -26,8 +26,12 @@ class User:
         
         securityQuestions = json.dumps(securityQuestions)
         values = [password, username, accountType, securityQuestions, firstname, lastname, username, True]
+        
+        inputs = dict()
+        for k,v in zip(USER_FIELDS,values):
+            inputs[k] = v
         try:
-            crud.batch_update("user", "username",username,USER_FIELDS,values)
+            crud.create("user", inputs)
             return "success"
         except:
             return "failure"
@@ -133,7 +137,7 @@ class CreateAssignment(Resource):
 class GetAssignment(Resource):
 
     def get(self,props=[],values=[]):
-        return crud.search("announcements", props, values, )
+        return crud.search("announcements", props, values,None)
 
 class EditAssignment:
     def put(self, courseid,assignmentid, field, name):
