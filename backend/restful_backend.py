@@ -177,7 +177,7 @@ class Announcements(Resource):
 
     def post(self, message, courseid: int):
         try:
-            crud.create("announcements",{"message":message,"course":courseid,"senddate":date.today()})
+            crud.create("announcements",{"message":message,"course":courseid,"senddate":str(date.today())})
             return "success"
         except:
             return "failure"
