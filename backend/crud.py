@@ -7,7 +7,7 @@ conn = pymysql.connect(host="database",
                        user="root",
                        password="db",
                        db="db",
-                       port=3310)
+                       port=3320)
 
 
 def update(table, primary_key, key_value, column,
@@ -156,11 +156,11 @@ def read(table, primary_key, key_value, columns: list=None):
     cursor.execute(get)
     return cursor.fetchall()
 
-def search(table, properties, search_values):
+def search(table, properties, search_values, get):
     searches = [ i[0] + "=" + i[1] for i in zip(properties,search_values)]
     search = \
     f"""
-    SELECT *
+    SELECT {", ".join(get)}
     FROM {table}
     WHERE {" AND ".join(searches)};
     """

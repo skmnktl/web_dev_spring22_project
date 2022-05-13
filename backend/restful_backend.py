@@ -117,14 +117,31 @@ class Course(Resource):
         crud.create("course", inputs)
         
 
-class Assignment:
+class CreateAssignment(Resource):
+
+    def put(self, name, description, points, duedate, courseid, student):
+        Assignment.create_assignment(
+                name,
+                description,
+                points,
+                duedate,
+                courseid,
+                student)
+
+class GetAssignment(Resource):
 
     def get(self,props=[],values=[]):
         return crud.search("announcements", props, values)
 
-    def put(self, name, description, points, duedate, courseid, student):
-        Assignment.create_assignment(**args)
-    
+class EditAssignment:
+    def put(self, courseid,assignmentid, field, name)
+        # GET ALL ASSIGNMENT IDS FOR COURSE
+            students = crud.search('assignments',["courseid","assignmentid"],[courseid,assignmentid],["student"])
+            return students
+        # EDIT EACH
+        # TODO 
+class Assignment:
+
     @staticmethod
     def create_assignment(name, description, points, duedate, courseid, student):
         inputs = dict()
