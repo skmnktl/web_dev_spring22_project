@@ -4,6 +4,7 @@ from random import choice
 from datetime import date
 from flask import Flask
 from flask_restful import Resource, Api
+from flask_restful import reqparse
 
 app = Flask(__name__)
 api = Api(app)
@@ -13,25 +14,18 @@ USER_FIELDS = ['password','email','accountType','securityQuestions','firstname',
 
 class CreateUser(Resource):
 
-    def get(self,accountType, password, username, securityQuestions, firstname, lastname):
+    def get(self, accountType, password, username, securityQuestions, firstname, lastname):
         User.createUser(accountType, password, username, securityQuestions, firstname, lastname)
         return "success"
 
 
-class User():
+class User:
 
     @staticmethod
     def createUser(accountType, password, username, securityQuestions, firstname, lastname):
-        self.accountType = accountType
-        self.password = password
-        self.username = username
-        self.email = username
-        self.firstname = firstname
-        self.lastname = lastname
-        self.securityQuestions = json.dumps(securityQuestions)
-        self.active = True
         
-        values = [self.password, self.email, self.accountType, self.securityQuestions, self.firstname, self.lastname, self.username, self.active]
+        securityQuestions = json.dumps(securityQuestions)
+        values = [password, email, accountType, securityQuestions, firstname, lastname, username, True]
         try:
             crud.batch_update("user", "username",username,USER_FIELDS,values)
             return "success"
