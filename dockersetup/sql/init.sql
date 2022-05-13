@@ -5,7 +5,7 @@ CREATE TABLE user (
 	password TEXT(256),
 	email TEXT(256),
 	accountType TEXT(3),
-	securityQuestions VARCHAR(2000),
+    securityQuestions VARCHAR(2000),
 	firstname TEXT(256),
 	lastname TEXT(256),
     active BOOLEAN,
@@ -19,7 +19,7 @@ CREATE TABLE `course` (
 	coursedescription VARCHAR(2000),
 	coursecapacity INT,
 	professor TEXT(256),
-	student VARCHAR(2000),
+	student INT unsigned,
 	announcementInbox VARCHAR(2000),
     PRIMARY KEY (courseid,student)
 
