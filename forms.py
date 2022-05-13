@@ -14,6 +14,7 @@ class AccountForm(FlaskForm):
 	securityAnswer3 = StringField("Your Answer: ", validators=[DataRequired()])
 	submit = SubmitField("Create Account")
 
+
 # edit user information
 class EditUserForm(FlaskForm):
 	firstName      = StringField("First Name: ",  validators=[DataRequired()])
@@ -21,12 +22,25 @@ class EditUserForm(FlaskForm):
 	accountID      = IntegerField("Account ID: ", validators=[DataRequired()])
 	submit = SubmitField("Edit User")
 
+
 # change password information
 class ChangePasswordForm(FlaskForm):
     currPassword    = StringField("Current Password: ", validators=[DataRequired()])
     newPassword     = StringField("New Password: ",     validators=[DataRequired()])
     confNewPassword = StringField("Confirm Password: ", validators=[DataRequired()])
     submit = SubmitField("Change Password")
+
+
+# edit questions
+class EditQuestionsForm(FlaskForm):
+    currPassword    = StringField("Current Password: ", validators=[DataRequired()])
+    securityQuest1  = StringField("New Question 1: ", validators=[DataRequired()])
+    securityAnswer1 = StringField("Your Answer: ", validators=[DataRequired()])
+    securityQuest2  = StringField("New Question 2: ", validators=[DataRequired()])
+    securityAnswer2 = StringField("Your Answer: ", validators=[DataRequired()])
+    securityQuest2  = StringField("New Question 3: ", validators=[DataRequired()])
+    securityAnswer3 = StringField("Your Answer: ", validators=[DataRequired()])
+    submit = SubmitField("Change Questions")
 
 class AnnouncementForm(FlaskForm):
 	announcement = StringField("Announcement: ", widget=TextArea(), validators=[DataRequired()])
