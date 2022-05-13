@@ -35,11 +35,5 @@ services:
       - 3310:3310
     links:
       - database
-    working_dir: /TODO
-    command: "flask run"
-    environment:
-      FLASK_APP : restful_backend.py
-      FLASK_RUN_PORT: 3310
-      FLASK_RUN_HOST: 0.0.0.0
-      FLASK_ENV: development
-      WORKING_DIRECTORY: /TODO
+    working_dir: /web_dev_spring22_project/backend
+    

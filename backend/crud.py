@@ -156,16 +156,14 @@ def read(table, primary_key, key_value, columns: list=None):
     cursor.execute(get)
     return cursor.fetchall()
 
-def search(table, primary_key, properties, search_values):
-    # TODO
-    search_keys = None
+def search(table, properties, search_values):
+    searches = [ i[0] + "=" + i[1] for i in zip(properties,search_values)]
     search = \
     f"""
-    SELECT {primary_key}
+    SELECT *
     FROM {table}
-    WHERE {" AND ".join(search_keys)} AND sold = 0;
+    WHERE {" AND ".join(searches)};
     """
-    print(search)
     cursor = conn.cursor()
     cursor.execute(search)
     return cursor.fetchall()
