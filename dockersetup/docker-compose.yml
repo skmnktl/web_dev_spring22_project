@@ -35,7 +35,7 @@ services:
       - 3310:3310
     links:
       - database   
-    command: "tail -f /dev/null"
+    command: "flask run" #"tail -f /dev/null"
     environment:
       FLASK_APP : restful_backend.py
       FLASK_RUN_PORT: 3310
