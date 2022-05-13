@@ -103,7 +103,7 @@ def create(table, inputs):
     INSERT INTO {table} ({",".join(inputs.keys())})
     VALUES ({values});
     """
-    print(f"[INSERT] \n {insert})
+    print(f"[INSERT] \n {insert}")
 
     cursor = conn.cursor()
     cursor.execute(insert)
