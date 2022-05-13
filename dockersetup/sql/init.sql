@@ -25,11 +25,14 @@ CREATE TABLE `course` (
 );
 
 CREATE TABLE assignment (
+	id INT unsigned NOT NULL,
     name TEXT(256),
     description VARCHAR(2000),
     points INT,
     duedate DATE,
-    courseid INT unsigned
+    courseid INT unsigned,
+    student INT unsigned,
+    PRIMARY KEY (courseid, id, student)
 );
 
 CREATE TABLE announcements (
