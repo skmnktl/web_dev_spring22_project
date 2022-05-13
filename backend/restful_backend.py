@@ -131,10 +131,10 @@ class CreateAssignment(Resource):
 class GetAssignment(Resource):
 
     def get(self,props=[],values=[]):
-        return crud.search("announcements", props, values)
+        return crud.search("announcements", props, values, None)
 
 class EditAssignment:
-    def put(self, courseid,assignmentid, field, name)
+    def put(self, courseid,assignmentid, field, name):
         # GET ALL ASSIGNMENT IDS FOR COURSE
             students = crud.search('assignments',["courseid","assignmentid"],[courseid,assignmentid],["student"])
             return students

@@ -157,10 +157,15 @@ def read(table, primary_key, key_value, columns: list=None):
     return cursor.fetchall()
 
 def search(table, properties, search_values, get):
-    searches = [ i[0] + "=" + i[1] for i in zip(properties,search_values)]
+    searches = [ i[0] + "=" + i[1] for i in zip(properties,search_values)
+    if get is None:
+        get = "*"
+    else: 
+        get = ", ".join(get)
+
     search = \
     f"""
-    SELECT {", ".join(get)}
+    SELECT {get}
     FROM {table}
     WHERE {" AND ".join(searches)};
     """
