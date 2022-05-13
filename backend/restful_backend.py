@@ -25,7 +25,7 @@ class User:
     def createUser(accountType, password, username, securityQuestions, firstname, lastname):
         
         securityQuestions = json.dumps(securityQuestions)
-        values = [password, email, accountType, securityQuestions, firstname, lastname, username, True]
+        values = [password, username, accountType, securityQuestions, firstname, lastname, username, True]
         try:
             crud.batch_update("user", "username",username,USER_FIELDS,values)
             return "success"
