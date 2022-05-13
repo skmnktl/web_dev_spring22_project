@@ -182,10 +182,15 @@ class Announcements(Resource):
 
 api.add_resource(CreateUser, '/createuser/<string:accountType>/<string:password>/<string:username>/<string:securityQuestions>/<string:firstname>/<string:lastname>')
 
-
-
 # Announcements Endpoints
 api.add_resource(Announcements, "/announce/<string:courseid>/<string:message>")
+
+class HelloWorld(Resource):
+    def get(self):
+        return "Hello World!"
+
+# Hello World
+api.add_resource(HelloWorld, "/")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3310)
