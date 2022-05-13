@@ -100,7 +100,7 @@ class User:
     def isAdmin(username):
         return "A" in crud.read("user","username",username,["accountType"])
 
-class Course(Resource):
+class Course():
     
     def __init__(self):
         self.id = "" # created by sql itself. 
@@ -146,6 +146,7 @@ class EditAssignment:
             return students
         # EDIT EACH
         # TODO 
+
 class Assignment:
 
     @staticmethod
@@ -174,7 +175,7 @@ class Assignment:
 
 class Announcements(Resource):
 
-    def put(self, message, courseid):
+    def post(self, message, courseid):
         crud.create("announcements",{"message":message,"courseid":courseid,"senddate":date.today()})
 
 
