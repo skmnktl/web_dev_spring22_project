@@ -9,6 +9,7 @@ CREATE TABLE user (
 	firstname TEXT(256),
 	lastname TEXT(256),
     active BOOLEAN,
+    username TEXT(256),
     PRIMARY KEY (id)
 );
 

@@ -11,4 +11,3 @@ RUN apt-get install -y curl
 RUN pip3 install flask pika pymysql uuid requests Flask-JSGlue flask_cors pydantic bson pymongo flask_restful ipython cryptography
 RUN git clone https://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@github.com/skmnktl/web_dev_spring22_project.git
 EXPOSE 3310
-EXPOSE 3310
