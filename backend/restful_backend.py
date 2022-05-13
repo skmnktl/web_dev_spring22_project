@@ -96,7 +96,7 @@ class User:
         raw_questions = crud.read("user","username",username,["securityQuestions"]).split("<|>")
         questions = dict([i.split("<*>") for i in raw_questions])
         return questions
-
+    # question1<*>answer1<|>question2<*>answer2
     @staticmethod
     def chooseSecurityQuestionForPrompt(username):
         questions = User.parseQuestions(username)
@@ -155,7 +155,12 @@ class Course():
         inputs['students'] = students
         inputs['announcementInbox'] = ""
         crud.create("course", inputs)
-        
+       
+class Assignment:
+
+    @staticmethod
+    def edit_assignment(courseid, field, value):
+        crud.update("assignment", "courseid", courseid, field, value)
 
 class CreateAssignment(Resource):
 
@@ -170,8 +175,17 @@ class CreateAssignment(Resource):
 
 class GetAssignment(Resource):
 
-    def get(self,props=[],values=[]):
+    def get(self,props,values):
+        props = props.split("<|>")
+        values = values.split("<|>")
+        if len(props) != len(values): return "Incorrect number of property names and values"
+        for ind,val in enumerate(props):
+            if val=="points":
+                values[ind]=int(values[ind])
         return crud.search("announcements", props, values,None)
+
+api.add_resource(GetAssignment, "/getassignment/<string:props>/<string:values>")
+
 
 class EditAssignment(Resource):
     def put(self, courseid,assignmentid, field, value):
@@ -180,14 +194,8 @@ class EditAssignment(Resource):
         # GET ALL ASSIGNMENT IDS FOR COURSE
             students = crud.search('assignments',["courseid","assignmentid"],[courseid,assignmentid],["student"])
             return students
-        # EDIT EACH
-        # TODO 
 
-class Assignment:
-
-    @staticmethod
-    def edit_assignment(courseid, field, value):
-        crud.update("assignment", "courseid", courseid, field, value)
+api.add_resource(EditAssignment,"/editassign/<int:courseid>/<int:id>/<string:field>/<string:value>")
 
 class GradeAssignment(Resource):
 
@@ -208,10 +216,8 @@ class PostAnnouncement(Resource):
             return "failure"
 
 
-# Announcements Endpoints
 api.add_resource(PostAnnouncement, "/announce/<int:courseid>/<string:message>")
 
-api.add_resource(EditAssignment,"/editassign/<int:courseid>/<int:id>/<string:field>/<string:value>")
 
 class HelloWorld(Resource):
     def get(self):
