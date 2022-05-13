@@ -139,8 +139,10 @@ class GetAssignment(Resource):
     def get(self,props=[],values=[]):
         return crud.search("announcements", props, values,None)
 
-class EditAssignment:
-    def put(self, courseid,assignmentid, field, name):
+class EditAssignment(Resource):
+    def put(self, courseid,assignmentid, field, value):
+        if field=="points":
+            value = int(value)
         # GET ALL ASSIGNMENT IDS FOR COURSE
             students = crud.search('assignments',["courseid","assignmentid"],[courseid,assignmentid],["student"])
             return students
@@ -150,30 +152,19 @@ class EditAssignment:
 class Assignment:
 
     @staticmethod
-    def create_assignment(name, description, points, duedate, courseid, student):
-        inputs = dict()
-        #inputs['id'] = None 
-        inputs['name'] = name
-        inputs['description'] = description
-        inputs['points'] = points
-        inputs['duedate'] = duedate
-        inputs['courseid'] = courseid
-        # inputs['student'] = student
-        crud.create('assignment', inputs)
-    
-    @staticmethod
     def edit_assignment(courseid, field, value):
         crud.update("assignment", "courseid", courseid, field, value)
 
-    @staticmethod
-    def grade_assignment():
+class GradeAssignment(Resource):
+
+    def grade_assignment(self):
         pass
     
     @staticmethod
     def submit_assignment():
         pass
 
-class Announcements(Resource):
+class PostAnnouncement(Resource):
 
     def post(self, message, courseid: int):
         try:
@@ -185,7 +176,9 @@ class Announcements(Resource):
 api.add_resource(CreateUser, '/createuser/<string:accountType>/<string:password>/<string:username>/<string:securityQuestions>/<string:firstname>/<string:lastname>')
 
 # Announcements Endpoints
-api.add_resource(Announcements, "/announce/<int:courseid>/<string:message>")
+api.add_resource(PostAnnouncement, "/announce/<int:courseid>/<string:message>")
+
+api.add_resource(EditAssignment,"/editassign/<int:courseid>/<int:id>/<string:field>/<string:value>")
 
 class HelloWorld(Resource):
     def get(self):
