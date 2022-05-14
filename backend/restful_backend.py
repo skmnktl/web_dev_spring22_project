@@ -25,20 +25,27 @@ create_user_schema =  CreateUserSchema()
 class CreateUser(Resource):
 
     def get(self):
-        print(request.args)
-        """
-        User.createUser(accountType, password, username, "", firstname, lastname)
+        props = request.args
+        User.createUser(props['accountType'], props['password'], props['username'], props['securityQuestions'], props['firstname'], props['lastname'])
         securityObj = UpdateSecurityQuestion()
-        securityObj.post(username,securityObj)
+        securityObj.post(props) # inefficient more data is passed than necessary...
         return "success"
-        """
-
 
 api.add_resource(CreateUser, '/createuser')
 
+class UpdateSecurityQuestionSchema(Schema):
+    username = fields.Str(required = True)
+    securityQuestions = fields.Str(required = True)
+
+update_security_question = UpdateSecurityQuestionSchema() 
+
 class UpdateSecurityQuestion(Resource):
-    
-    def post(self, username, securityQuestions):
+
+    def post(self, props=None):
+        if props is None:
+            props = request.args
+        securityQuestions = props['securityQuestions']
+        username = props['username']
         raw_questions = securityQuestions.split("<|>")
         if raw_questions=="":
             questions = dict()
@@ -49,21 +56,30 @@ class UpdateSecurityQuestion(Resource):
             a = questions[q]
             User.replaceSecurityQuestion(username, q, q, a)
         
-api.add_resource(UpdateSecurityQuestion,"/updatesecurityquestion/<string:username>/<string:securityQuestions>")
+api.add_resource(UpdateSecurityQuestion,"/updatesecurityquestion")
+
+class UpdateUserDataSchema:
+    username = fields.Str(required = True)
+    property = fields.Str(required = True)
+    value = fields.Str(required = True)
 
 class UpdateUserData(Resource):
-    def post(self, username, field, newValue):
-        if field=="securityQuestions":
+    def post(self):
+        username = request.args['username']
+        property = request.args['property']
+        newValue = request.args['value']
+
+        if property=="securityQuestions":
             return "failure"
         else:
-            if field == "active":
+            if property == "active":
                 if newValue == "true":
                     newValue = True
                 else:
                     newValue = False
-            User.changeUserData(username,field, newValue)
+            User.changeUserData(username,property, newValue)
 
-api.add_resource(UpdateUserData, "/updateuserdata/<string:username>/<string:field>/<string:newValue>")
+api.add_resource(UpdateUserData, "/updateuserdata")
 
 class User:
 
