@@ -2,23 +2,36 @@ import crud
 import json
 from random import choice
 from datetime import date
-from flask import Flask
+from flask import Flask, request, abort
 from flask_restful import Resource, Api
 from flask_restful import reqparse
+from marshmallow import Schema, fields
 
 app = Flask(__name__)
 api = Api(app)
 
 USER_FIELDS = ['password','email','accountType','securityQuestions','firstname','lastname','username','active']
 
+class CreateUserSchema(Schema):
+        accountType = fields.Str(required=True)
+        password = fields.Str(required=True)
+        username = fields.Str(required=True)
+        securityQuestions = fields.Str(required=True)
+        firstname = fields.Str(required=True)
+        lastname = fields.Str(required=True)
+
+create_user_schema =  CreateUserSchema()
 
 class CreateUser(Resource):
 
-    def get(self, accountType, password, username, securityQuestions, firstname, lastname):
+    def get(self):
+        print(request.args)
+        """
         User.createUser(accountType, password, username, "", firstname, lastname)
         securityObj = UpdateSecurityQuestion()
         securityObj.post(username,securityObj)
         return "success"
+        """
 
 
 api.add_resource(CreateUser, '/createuser/<string:accountType>/<string:password>/<string:username>/<string:securityQuestions>/<string:firstname>/<string:lastname>')
