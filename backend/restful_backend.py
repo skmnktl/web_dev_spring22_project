@@ -34,7 +34,7 @@ class CreateUser(Resource):
         """
 
 
-api.add_resource(CreateUser, '/createuser/<string:accountType>/<string:password>/<string:username>/<string:securityQuestions>/<string:firstname>/<string:lastname>')
+api.add_resource(CreateUser, '/createuser')
 
 class UpdateSecurityQuestion(Resource):
     
