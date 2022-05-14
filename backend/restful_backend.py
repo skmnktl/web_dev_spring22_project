@@ -38,8 +38,7 @@ class UpdateSecurityQuestion(Resource):
         
 api.add_resource(UpdateSecurityQuestion,"/updatesecurityquestion/<string:username>/<string:securityQuestions>")
 
-class UpdateUserData:
-
+class UpdateUserData(Resource):
     def post(self, username, field, newValue):
         if field=="securityQuestions":
             return "failure"
@@ -156,22 +155,19 @@ class Course():
         inputs['announcementInbox'] = ""
         crud.create("course", inputs)
        
-class Assignment:
 
-    @staticmethod
-    def edit_assignment(courseid, field, value):
+def edit_assignment(courseid, field, value):
         crud.update("assignment", "courseid", courseid, field, value)
-
+    
+    @staticmethod
+    def create_assignment(name, description)
 class CreateAssignment(Resource):
 
     def put(self, name, description, points, duedate, courseid, student):
-        Assignment.create_assignment(
-                name,
-                description,
-                points,
-                duedate,
-                courseid,
-                student)
+                inputs = [""]
+                crud.create("assignments", 
+
+api.add_resource(CreateAssignment,"/createassignment/<string:name>/<string:description>/<int:points>/<string:duedate>/<int:courseid>/<int:student>")
 
 class GetAssignment(Resource):
 
@@ -198,13 +194,7 @@ class EditAssignment(Resource):
 api.add_resource(EditAssignment,"/editassign/<int:courseid>/<int:id>/<string:field>/<string:value>")
 
 class GradeAssignment(Resource):
-
-    def grade_assignment(self):
-        pass
-    
-    @staticmethod
-    def submit_assignment():
-        pass
+    pass
 
 class PostAnnouncement(Resource):
 
