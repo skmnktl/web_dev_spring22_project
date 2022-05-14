@@ -50,7 +50,7 @@ class UpdateSecurityQuestion(Resource):
         if raw_questions=="":
             questions = dict()
         else:
-            questions = dict([i.split("<*>") for i in raw_questions])
+            questions = dict([i.split("<?>") for i in raw_questions])
         
         for q in  questions.keys():
             a = questions[q]
@@ -122,7 +122,7 @@ class User:
     @staticmethod
     def parseQuestions(username):
         raw_questions = crud.read("user","username",username,["securityQuestions"]).split("<|>")
-        questions = dict([i.split("<*>") for i in raw_questions])
+        questions = dict([i.split("<?>") for i in raw_questions])
         return questions
     # question1<*>answer1<|>question2<*>answer2
     @staticmethod
