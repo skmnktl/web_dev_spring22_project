@@ -158,14 +158,13 @@ class Course():
 
 def edit_assignment(courseid, field, value):
         crud.update("assignment", "courseid", courseid, field, value)
-    
-    @staticmethod
-    def create_assignment(name, description)
+
 class CreateAssignment(Resource):
 
     def put(self, name, description, points, duedate, courseid, student):
-                inputs = [""]
-                crud.create("assignments", 
+        inputs = ["name","description","points","duedate","courseid","student"]
+        values = [name, description, int(points), duedate, courseid, student]
+        crud.create("assignments", inputs, values)
 
 api.add_resource(CreateAssignment,"/createassignment/<string:name>/<string:description>/<int:points>/<string:duedate>/<int:courseid>/<int:student>")
 
