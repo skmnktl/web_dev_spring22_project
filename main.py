@@ -15,6 +15,6 @@ def home():
 def hello_there(name = None):
     return render_template(
         "hello_there.html",
-        name=name,
+        name=current_user.name,
         date=datetime.now()
     )

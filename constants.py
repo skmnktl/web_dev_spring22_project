@@ -112,7 +112,8 @@ dataAddToCourse = (
 
 assignmentGradeName = ("Midterm project")
 
-
+test_email = "hardikajmani@gmail.com"
+test_pass  = "thisIsPass123$"
 
 
 ## create app

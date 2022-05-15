@@ -15,12 +15,33 @@
 
 		<div class="flex-container">
 			<div id="loginForm">
-				<form action="http://uchicago.edu" method="GET">
-					<label for="email"><b>Email:</b></label>
+				{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					<div class="notification is-danger">
+						{{ messages[0] }}
+					</div>
+				{% endif %}
+				{% endwith %}
+
+				<form method="POST">
+					<!-- <label for="email"><b>Email:</b></label>
 					<input type="text" id="email" name="email"><br>
 
 					<label for="password"><b>Password:</b></label>
-					<input type="text" id="password" name="password"><br>
+					<input type="text" id="password" name="password"><br> -->
+					{{ form.email.label }}
+					<br>
+					{{ form.email }}
+					<br>
+					<br>
+					{{ form.password.label }}
+					<br>
+					{{ form.password }}
+					<br>
+					<br>
+					<div style="display: block" id="submit button">
+					{{ form.submit() }}
+					</div>
 
 				</form>
 			</div>
