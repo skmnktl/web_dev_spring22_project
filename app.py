@@ -5,12 +5,6 @@ from forms import *
 app = create_app()
 
 
-# http://127.0.0.1:5000/login
-@app.route(routeUrls["login"])
-def login():
-	return render_template("login.html")
-
-
 @app.route(routeUrls["courses"])
 def courses():
 	return render_template("courses.html",headings=headingsCourses,data=dataCourses)
@@ -49,7 +43,17 @@ def createAccount():
 		# https://www.youtube.com/watch?v=GbJPqu0ff9A&t=867s
 		pass
 
-	return render_template("createAccount.html",form=form,firstName=firstName,lastName=lastName,email=email,accountID=accountID,password=password,accountType=accountType,securityAnswer1=securityAnswer1,securityAnswer2=securityAnswer2,securityAnswer3=securityAnswer3)
+	return render_template("createAccount.html",
+							form=form,
+							firstName=firstName,
+							lastName=lastName,
+							email=email,
+							accountID=accountID,
+							password=password,
+							accountType=accountType,
+							securityAnswer1=securityAnswer1,
+							securityAnswer2=securityAnswer2,
+							securityAnswer3=securityAnswer3)
 
 
 @app.route(routeUrls["createAssign"],methods=["GET","POST"])
