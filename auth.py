@@ -22,19 +22,22 @@ def login_post():
     email    = request.form.get('email')
     password = request.form.get('password')
 
-    if generate_password_hash(password, method='sha256') == generate_password_hash(test_pass, method='sha256'):
-        flash('Login Successful')
+    print("password : {}".format(password))
+    print("hasehd password : {}".format(generate_password_hash(password, method='sha256')))
+    print("hasehd test : {}".format(generate_password_hash(test_pass, method='sha256')))
+    if check_password_hash(generate_password_hash(test_pass, method='sha256'), password):
         time.sleep(2)
-        user = User(test_email, generate_password_hash(test_pass, method='sha256'), "hardik")
+        user = User(1, test_email, generate_password_hash(test_pass, method='sha256'), "hardik")
         login_user(user)
         return redirect(url_for('main.hello'))
 
     flash('Please check your login details and try again.')
     return redirect(url_for('auth.login'))
 
-@auth.route('/logout')
+@auth.route(routeUrls['logout'])
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('main.home'))
+    flash('Logout Success!!')
+    return redirect(url_for('auth.login'))
 

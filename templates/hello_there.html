@@ -7,10 +7,20 @@
         href="{{ url_for('static', filename='site.css')}}" />
     </head>
     <body>
+        <div class="messages">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="notification is-danger">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+            {% endwith %}
+        </div>
         {%if name %}
             <strong>Hello there, {{ name }}!</strong> It's {{ date.strftime("%A, %d %B, %Y at %X") }}.
         {% else %}
             What's your name? Provide it after /hello/ in the URL.
         {% endif %}
+        <a href="{{ url_for('auth.logout') }}">Log Out</a><br>
     </body>
 </html>

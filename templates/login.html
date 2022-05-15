@@ -15,14 +15,15 @@
 
 		<div class="flex-container">
 			<div id="loginForm">
-				{% with messages = get_flashed_messages() %}
-				{% if messages %}
-					<div class="notification is-danger">
-						{{ messages[0] }}
-					</div>
-				{% endif %}
-				{% endwith %}
-
+				<div class="messages">
+					{% with messages = get_flashed_messages() %}
+					{% if messages %}
+						<div class="notification is-danger">
+							{{ messages[0] }}
+						</div>
+					{% endif %}
+					{% endwith %}
+				</div>
 				<form method="POST">
 					<!-- <label for="email"><b>Email:</b></label>
 					<input type="text" id="email" name="email"><br>

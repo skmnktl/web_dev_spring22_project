@@ -2,6 +2,7 @@
     This file holds all the constants to be used
 """
 from libs import *
+from models import *
 
 # routing urls
 routeUrls = {
@@ -114,7 +115,7 @@ assignmentGradeName = ("Midterm project")
 
 test_email = "hardikajmani@gmail.com"
 test_pass  = "thisIsPass123$"
-
+user = User(1, test_email, generate_password_hash(test_pass, method='sha256'), "hardik")
 
 ## create app
 def create_app():
@@ -123,11 +124,16 @@ def create_app():
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
+    
 
     @login_manager.user_loader
     def load_user(user_id):
-        # since the user_id is just the primary key of our user table, use it in the query for the user
-        return 12
+        print(user_id)
+        print(user.id)
+        if int(user_id) == int(user.id):
+            # since the user_id is just the primary key of our user table, use it in the query for the user
+            return user
+        return None
     
     # db.init_app(app)
     # sets autoreload on changes    
