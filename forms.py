@@ -73,3 +73,9 @@ class ActivateUserForm(FlaskForm):
 
 class AddToCourseForm(FlaskForm):
 	submit = SubmitField("Add to Course")
+
+
+class Login(FlaskForm):
+	email     = StringField("Email: ",   validators=[DataRequired()])
+	password  = StringField("Password: ",validators=[DataRequired()])
+	submit	  = SubmitField("Login")

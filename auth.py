@@ -4,7 +4,7 @@ from forms import *
 
 auth = Blueprint('auth', __name__)
 
-# http://127.0.0.1:5000/login
+
 @auth.route(routeUrls["login"])
 def login():
 	return render_template("login.html")
@@ -12,5 +12,11 @@ def login():
 @auth.route(routeUrls["login"], methods=['POST'])
 def login_post():
     # login code goes here
-    return redirect(url_for('main.profile'))
+    return redirect(url_for('main.hello'))
+
+@auth.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('main.home'))
 

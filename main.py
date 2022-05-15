@@ -10,7 +10,8 @@ def home():
     return "Hello, Flask!"
 
 # sample :removeit
-@main.route("/hello/<name>")
+@main.route("/hello")
+@login_required
 def hello_there(name = None):
     return render_template(
         "hello_there.html",

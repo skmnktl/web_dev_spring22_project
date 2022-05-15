@@ -7,6 +7,7 @@ from libs import *
 routeUrls = {
     "main"   : "/", 
     "login"  : "/login",
+    "logout" : "/logout",
     "courses": "/courses",
     "grades" : "/grades",
     "addToCourse"   : "/addtocourse",
