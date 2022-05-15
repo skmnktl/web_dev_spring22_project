@@ -3,12 +3,13 @@
 """
 
 from flask import Flask
-app = Flask(__name__)
+from flask import Blueprint
 from flask import render_template
 from datetime import datetime
 import re
 import time
 
+from flask import Blueprint
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, RadioField, IntegerField, DateField
 from wtforms.widgets import TextArea

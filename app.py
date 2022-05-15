@@ -2,23 +2,7 @@ from libs import *
 from constants import *
 from forms import *
 
-# sets autoreload on changes    
-app.run(debug=True)
-app.config['SECRET_KEY'] = SECRET_KEY
-
-# sample :removeit
-@app.route("/hello/<name>")
-def hello_there(name = None):
-    return render_template(
-        "hello_there.html",
-        name=name,
-        date=datetime.now()
-    )
-
-# http://127.0.0.1:5000/
-@app.route(routeUrls["main"])
-def home():
-    return "Hello, Flask!"
+app = create_app()
 
 
 # http://127.0.0.1:5000/login

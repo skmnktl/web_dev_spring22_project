@@ -1,6 +1,7 @@
 """
     This file holds all the constants to be used
 """
+from libs import *
 
 # routing urls
 routeUrls = {
@@ -109,3 +110,25 @@ dataAddToCourse = (
 )
 
 assignmentGradeName = ("Midterm project")
+
+
+
+
+## create app
+def create_app():
+    app = Flask(__name__)
+
+    # db.init_app(app)
+    # sets autoreload on changes    
+    app.run(debug=True)
+    app.config['SECRET_KEY'] = SECRET_KEY
+
+    # blueprint for auth routes in our app
+    # from .auth import auth as auth_blueprint
+    # app.register_blueprint(auth_blueprint)
+
+    # blueprint for non-auth parts of app
+    from main import main as main_blueprint
+    app.register_blueprint(main_blueprint)
+
+    return app
