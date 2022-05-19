@@ -29,7 +29,7 @@ def login_post():
         time.sleep(2)
         user = User(1, test_email, generate_password_hash(test_pass, method='sha256'), "hardik")
         login_user(user)
-        return redirect(url_for('main.hello'))
+        return redirect(url_for('tempDash'))
 
     flash('Please check your login details and try again.')
     return redirect(url_for('auth.login'))
