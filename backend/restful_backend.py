@@ -228,8 +228,8 @@ class CreateAssignment(Resource):
 
     def put(self):
         inputs = ["name","description","points","duedate","courseid","student"]
-        values = [request.args[i] for i in inputs]#[name, description,
-        # int(points), duedate, courseid, student]
+        values = [request.args[i] for i in inputs]
+        print(f" INPUTS {inputs} -> VALUES {values}")
         crud.create("assignments", inputs, values)
 
 api.add_resource(CreateAssignment,"/createassignment")
