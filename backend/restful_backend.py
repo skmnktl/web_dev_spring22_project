@@ -263,7 +263,9 @@ api.add_resource(EditAssignment,"/editassign")
 
 
 def getStudentsInCourse(courseid):
-    students = crud.search('assignments',["courseid","assignmentid"],[courseid,assignmentid],["student"])
+    raise NotImplementedError
+    #students = crud.search('assignments',["courseid","assignmentid"],
+    # [courseid,assignmentid],["student"])
 
 def getStudentsInCourseAssignments(courseid, assignmentid):
     students = crud.search('assignments',["courseid","assignmentid"],[courseid,assignmentid],["student"])
