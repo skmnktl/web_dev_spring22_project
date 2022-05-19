@@ -227,7 +227,8 @@ api.add_resource(GetCourse,"/getcourse")
 class CreateAssignment(Resource):
 
     def put(self):
-        inputs = ["name","description","points","duedate","courseid","student"]
+        inputs = ["name","description","points","duedate","courseid",
+                  "student","assignmentid"]
         values = dict([(i,request.args[i]) for i in inputs])
         print(f" INPUTS {inputs} -> VALUES {values}")
         crud.create("assignment", values)
