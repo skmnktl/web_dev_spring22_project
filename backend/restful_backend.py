@@ -222,7 +222,7 @@ class GetCourse(Resource):
         courseid = request.args['courseid']
         return crud.read("course","courseid",courseid,None)
 
-api.add_resource(GetCourse,"getcourse")
+api.add_resource(GetCourse,"/getcourse")
 
 class CreateAssignment(Resource):
 
