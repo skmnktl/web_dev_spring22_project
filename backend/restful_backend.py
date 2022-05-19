@@ -278,7 +278,7 @@ class GradeAssignment(Resource):
                 crud.update("assignment", "courseid", courseid, field, value)
             return students
 
-api.add_resource(EditAssignment,"/gradeassignment")
+api.add_resource(GradeAssignment,"/gradeassignment")
 
 class PostAnnouncement(Resource):
 
