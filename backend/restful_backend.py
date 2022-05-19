@@ -230,7 +230,7 @@ class CreateAssignment(Resource):
         inputs = ["name","description","points","duedate","courseid","student"]
         values = dict([(i,request.args[i]) for i in inputs])
         print(f" INPUTS {inputs} -> VALUES {values}")
-        crud.create("assignments", values)
+        crud.create("assignment", values)
 
 api.add_resource(CreateAssignment,"/createassignment")
 
@@ -243,7 +243,7 @@ class GetAssignment(Resource):
         for ind,val in enumerate(props):
             if val=="points":
                 values[ind]=int(values[ind])
-        return crud.search("announcements", props, values,None)
+        return crud.search("assignment", props, values,None)
 
 api.add_resource(GetAssignment, "/getassignment")
 
@@ -252,7 +252,7 @@ class EditAssignment(Resource):
         if field=="points":
             value = int(value)
         # GET ALL ASSIGNMENT IDS FOR COURSE
-            students = crud.search('assignments',["courseid","assignmentid"],[courseid,assignmentid],["student"])
+            students = crud.search('assignment',["courseid","assignmentid"],[courseid,assignmentid],["student"])
 
 
             for s in students:
