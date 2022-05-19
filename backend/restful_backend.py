@@ -4,7 +4,6 @@ from random import choice
 from datetime import date
 from flask import Flask, request, abort
 from flask_restful import Resource, Api
-from flask_restful import reqparse
 from marshmallow import Schema, fields
 
 app = Flask(__name__)
@@ -81,6 +80,25 @@ class UpdateUserData(Resource):
 
 api.add_resource(UpdateUserData, "/updateuserdata")
 
+
+class AuthenticateUser(Resource):
+    def get(self):
+        username = request.args['username']
+        password = request.args['password']
+        return User.authentication(username,password)
+
+api.add_resource(AuthenticateUser,"/userauth")
+
+class AccountType(Resource):
+    def get(self):
+        username = request.args['username']
+        permissions = request.args['permissions']
+        if permissions=="student":
+            return User.isStudent(username)
+        if permissions=="teacher":
+            return User.isTeacher(username)
+        if permissions=="admin":
+            return User.isAdmin(username)
 class User:
 
     @staticmethod
@@ -166,16 +184,7 @@ class User:
         return "A" in crud.read("user","username",username,["accountType"])
 
 class Course():
-    
-    def __init__(self):
-        self.id = "" # created by sql itself. 
-        self.coursename: string = ""
-        self.coursedescription: string
-        self.coursecapacity: int
-        self.professor: string = ""
-        self.students = []
-        self.announcementInbox
-    
+
     @staticmethod
     def create(coursename, coursedescription, coursecapacity, professor, students, announcementInbox):
         inputs = dict()
@@ -186,19 +195,44 @@ class Course():
         inputs['students'] = students
         inputs['announcementInbox'] = ""
         crud.create("course", inputs)
-       
 
-def edit_assignment(courseid, field, value):
-        crud.update("assignment", "courseid", courseid, field, value)
+class CreateCourse(Resource):
+    def put(self):
+        params = request.args
+        Course.create(params['coursename'],
+                      params['coursedescription'],
+                      params['coursecapacity'],
+                      params['professor'],
+                      params['students'],
+                      params['announcementInbox'])
+
+api.add_resource(CreateCourse, "/createcourse")
+
+class EditCourse(Resource):
+    def put(self):
+        courseid = request.args['courseid']
+        field = request.args['field']
+        newValue = request.args['newValue']
+        crud.update('course','courseid',courseid,field,newValue)
+
+api.add_resource(EditCourse,"/editcourse")
+
+class GetCourse(Resource):
+    def get(self):
+        courseid = request.args['courseid']
+        return crud.read("course","courseid",courseid,None)
+
+api.add_resource(GetCourse,"getcourse")
 
 class CreateAssignment(Resource):
 
-    def put(self, name, description, points, duedate, courseid, student):
+    def put(self):
         inputs = ["name","description","points","duedate","courseid","student"]
-        values = [name, description, int(points), duedate, courseid, student]
+        values = [request.args[i] for i in inputs]#[name, description,
+        # int(points), duedate, courseid, student]
         crud.create("assignments", inputs, values)
 
-api.add_resource(CreateAssignment,"/createassignment/<string:name>/<string:description>/<int:points>/<string:duedate>/<int:courseid>/<int:student>")
+api.add_resource(CreateAssignment,"/createassignment")
 
 class GetAssignment(Resource):
 
@@ -211,8 +245,7 @@ class GetAssignment(Resource):
                 values[ind]=int(values[ind])
         return crud.search("announcements", props, values,None)
 
-api.add_resource(GetAssignment, "/getassignment/<string:props>/<string:values>")
-
+api.add_resource(GetAssignment, "/getassignment")
 
 class EditAssignment(Resource):
     def put(self, courseid,assignmentid, field, value):
@@ -220,24 +253,41 @@ class EditAssignment(Resource):
             value = int(value)
         # GET ALL ASSIGNMENT IDS FOR COURSE
             students = crud.search('assignments',["courseid","assignmentid"],[courseid,assignmentid],["student"])
+
+
+            for s in students:
+                crud.update("assignment", "courseid", courseid, field, value)
             return students
 
-api.add_resource(EditAssignment,"/editassign/<int:courseid>/<int:id>/<string:field>/<string:value>")
+api.add_resource(EditAssignment,"/editassign")
+
+
+def getStudentsInCourse(courseid):
+    students = crud.search('assignments',["courseid","assignmentid"],[courseid,assignmentid],["student"])
+
+def getStudentsInCourseAssignments(courseid, assignmentid):
+    students = crud.search('assignments',["courseid","assignmentid"],[courseid,assignmentid],["student"])
+    return set(students)
 
 class GradeAssignment(Resource):
-    pass
+    def put(self, courseid,assignmentid, field, value):
+        if field=="points":
+            value = int(value)
+            students = getStudentsInCourse(courseid)
+            for s in students:
+                crud.update("assignment", "courseid", courseid, field, value)
+            return students
+
+api.add_resource(EditAssignment,"/gradeassignment")
 
 class PostAnnouncement(Resource):
 
     def post(self, courseid: int, message):
-        try:
-            crud.create("announcements",{"message":message,"course":courseid,"senddate":str(date.today())})
-            return "success"
-        except:
-            return "failure"
+        courseid = request.args['courseid']
+        crud.create("announcements",{"message":message,"course":courseid,"senddate":str(date.today())})
 
 
-api.add_resource(PostAnnouncement, "/announce/<int:courseid>/<string:message>")
+api.add_resource(PostAnnouncement, "/announce")
 
 
 class HelloWorld(Resource):
