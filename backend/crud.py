@@ -168,8 +168,6 @@ def search(table, properties, search_values, types, get):
         val = i[1]
         if types[prop]=="str":
             val = f"\"{val}\""
-        else:
-            val = int(val)
 
         field = prop + "=" + val
         searches.append(field)
