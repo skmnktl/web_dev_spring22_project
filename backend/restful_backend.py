@@ -191,7 +191,7 @@ class Course:
         inputs['coursedescription'] = coursedescription
         inputs['coursecapacity'] = coursecapacity
         inputs['professor'] = professor
-        inputs['student'] = students
+        inputs['students'] = students
         inputs['announcementInbox'] = ""
         crud.create("course", inputs)
 
@@ -229,7 +229,7 @@ class GetStudentsInCourse(Resource):
                                       ["courseid"],
                                       [courseid],
                                       dict([("courseid","int")]),
-                                      ["student"]))
+                                      ["students"]))
 
 api.add_resource(GetStudentsInCourse, "/getstudentsenrolledincourse")
 

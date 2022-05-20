@@ -19,9 +19,9 @@ CREATE TABLE `course` (
 	coursedescription VARCHAR(2000),
 	coursecapacity INT,
 	professor TEXT(256),
-	students INT unsigned,
+	students VARCHAR(2000),
 	announcementInbox VARCHAR(2000),
-    PRIMARY KEY (courseid,student)
+    PRIMARY KEY (courseid)
 
 );
 
