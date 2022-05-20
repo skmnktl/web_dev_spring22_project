@@ -231,7 +231,7 @@ class GetStudentsInCourse(Resource):
                                       ["courseid"],
                                       [courseid],
                                       dict([("courseid","int")]),
-                                      "students"))
+                                      ["students"]))
 
 api.add_resource(GetStudentsInCourse, "/getstudentsenrolledincourse")
 
