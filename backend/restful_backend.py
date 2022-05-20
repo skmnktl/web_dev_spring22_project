@@ -251,7 +251,8 @@ class GetAssignments(Resource):
 
         if len(props) != len(values): return "Incorrect number of property names and values"
         data = crud.search("assignment", props, values,types, None)
-        fields = sorted(data.keys())
+        data = json.loads(data)
+        fields = sorted(types.keys())
         result = []
         for line in data:
             d = dict(zip(fields,line))
