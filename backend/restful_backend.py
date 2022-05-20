@@ -251,7 +251,7 @@ class GetAssignment(Resource):
 
         if len(props) != len(values): return "Incorrect number of property names and values"
         data = crud.search("assignment", props, values,types, None)
-        print(f"data")
+        print(data)
         return data
 
 api.add_resource(GetAssignment, "/getassignment")

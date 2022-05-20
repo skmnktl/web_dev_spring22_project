@@ -180,4 +180,5 @@ def search(table, properties, search_values, types, get):
     print(search)
     cursor = conn.cursor()
     cursor.execute(search)
-    return cursor.fetchall()
+    gotten = cursor.fetchall()
+    return json.dumps(gotten)
