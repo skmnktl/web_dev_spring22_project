@@ -227,7 +227,7 @@ api.add_resource(GetCourse,"/getcourse")
 class GetStudentsInCourse(Resource):
     def get(self):
         courseid = request.args['courseid']
-        return json.loads(crud.read("course",
+        return json.loads(crud.get("course",
                                     ["courseid"],
                                     [courseid],
                                     ['int'],
