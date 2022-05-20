@@ -229,7 +229,15 @@ class CreateAssignment(Resource):
     def put(self):
         inputs = ["name","description","points","duedate","courseid",
                   "student","assignmentid"]
-        values = dict([(i,request.args[i]) for i in inputs])
+        vals = [(i,request.args[i]) for i in inputs]
+        values = {}
+        for v in vals:
+            a,b = values
+            if a in ["assignmentid","points"]:
+                b = int(b)
+            else:
+                b = f"\"{b}\""
+            dictValues[a] = b
         print(f" INPUTS {inputs} -> VALUES {values}")
         crud.create("assignment", values)
 
