@@ -267,7 +267,7 @@ class EditAssignment(Resource):
             value = int(value)
         # GET ALL ASSIGNMENT IDS FOR COURSE
             students = getStudentsInCourse(courseid)
-
+            print(students)
             for s in students:
                 crud.update("assignment", "courseid", courseid, field, value)
             return students
@@ -283,13 +283,17 @@ def getStudentsInCourse(courseid):
                            ["student"])
     return list(set(json.loads(students)))
 
+class GetStudentsInCourse(Resource):
+    def get(self):
+        return getStudentsInCourse(request.args["courseid"])
+
 def getStudentsInCourseAssignments(courseid, assignmentid):
     students = crud.search('assignments',
                            ["courseid","assignmentid"],
                            [courseid,assignmentid],
                            ["int","int"],
                            ["student"])
-    return set(students)
+    return set(list(json.loads(students)))
 
 class GradeAssignment(Resource):
     def put(self, courseid,assignmentid, field, value):
