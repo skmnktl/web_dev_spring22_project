@@ -23,12 +23,16 @@ create_user_schema =  CreateUserSchema()
 
 class CreateUser(Resource):
 
-    def get(self):
+    def post(self):
         props = request.args
-        User.createUser(props['accountType'], props['password'], props['username'], props['securityQuestions'], props['firstname'], props['lastname'])
+        User.createUser(props['accountType'],
+                        props['password'],
+                        props['username'],
+                        props['securityQuestions'],
+                        props['firstname'],
+                        props['lastname'])
         securityObj = UpdateSecurityQuestion()
-        securityObj.post(props) # inefficient more data is passed than necessary...
-        return "success"
+        securityObj.post(props)
 
 api.add_resource(CreateUser, '/createuser')
 
