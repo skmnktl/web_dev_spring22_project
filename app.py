@@ -84,16 +84,14 @@ def createAssign():
 	form = AssignmentForm()
 
 	if form.validate_on_submit():
-		url = "http://127.0.0.1:3310/createuser?accountType=TA&password=pass&username=teach-admin&securityQuestions=What is your mother's name?<?>mother&firstname=teacher&lastname=admin"
+		url = "http://127.0.0.1:3310/"
 
 		data = {"accountType":accountType,"password":password,"username":email,"firstname":firstName,"lastname":lastName,"securityQuestions":""}
-		encoded_data = json.dumps(data).encode()
 
-		req = request.Request('https://sharedNetwork:3310/createuser', data=encoded_data)
-		req.add_header('Content-Type', 'application/json')
-		response = request.urlopen(req)
+		req = requests.get(url)
+		print(req.url)
 
-		text = response.read()
+		# text = response.read()
 		return
 
 	return render_template("createAssignment.html",form=form,assignmentName=assignmentName,assignmentDescription=assignmentDescription,numberOfPoints=numberOfPoints,dueDate=dueDate)
