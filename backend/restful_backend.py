@@ -229,16 +229,7 @@ class CreateAssignment(Resource):
     def put(self):
         inputs = ["name","description","points","duedate","courseid",
                   "student","assignmentid"]
-        vals = [(i,request.args[i]) for i in inputs]
-        values = {}
-        for v in vals:
-            a,b = values
-            if a in ["assignmentid","points"]:
-                b = int(b)
-            else:
-                b = f"\"{b}\""
-            dictValues[a] = b
-        print(f" INPUTS {inputs} -> VALUES {values}")
+        vals = dict([(i,request.args[i]) for i in inputs])
         crud.create("assignment", values)
 
 api.add_resource(CreateAssignment,"/createassignment")
@@ -250,6 +241,8 @@ class GetAssignment(Resource):
         data = dict([d.split("<?>") for d in data])
         props = data.keys()
         values = data.values()
+        inputs = ["name","description","points","duedate","courseid",
+              "student","assignmentid"]
         print(f"{props} {values}")
         if len(props) != len(values): return "Incorrect number of property names and values"
         for ind,val in enumerate(props):
