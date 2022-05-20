@@ -219,6 +219,7 @@ class GetCourse(Resource):
     def get(self):
         courseid = request.args['courseid']
         data = list(crud.read("course","courseid",courseid,None))
+        print(data)
         fields = ["courseid",'coursename',"coursedescription",
                   "coursecapacity","professor","students"]
         return json.dumps(dict(list(zip(fields, data))))
