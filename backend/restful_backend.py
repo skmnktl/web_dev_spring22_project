@@ -218,7 +218,10 @@ api.add_resource(EditCourse,"/editcourse")
 class GetCourse(Resource):
     def get(self):
         courseid = request.args['courseid']
-        return crud.read("course","courseid",courseid,None)
+        data = json.loads(crud.read("course","courseid",courseid,None))[0]
+        fields = ["courseid",'coursename',"coursedescription",
+                  "coursecapacity","professor","students"]
+        return json.dumps(dict(zip(fields,data)))
 
 api.add_resource(GetCourse,"/getcourse")
 
