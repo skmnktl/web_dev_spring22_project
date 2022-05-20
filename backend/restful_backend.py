@@ -45,14 +45,13 @@ update_security_question = UpdateSecurityQuestionSchema()
 class UpdateSecurityQuestion(Resource):
 
     def post(self, props=None):
-        if props is None:
-            props = request.args
+        props = request.args
         securityQuestions = props['securityQuestions']
         username = props['username']
-        raw_questions = securityQuestions.split("<|>")
-        if raw_questions=="":
+        if securityQuestions=="":
             questions = dict()
         else:
+            raw_questions = securityQuestions.split("<|>")
             questions = dict([i.split("<?>") for i in raw_questions])
         
         for q in  questions.keys():
