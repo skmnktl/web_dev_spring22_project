@@ -242,6 +242,7 @@ class GetAssignment(Resource):
         data = dict([d.split("<?>") for d in data])
         props = data.keys()
         values = data.values()
+        print(f"{props} {values}")
         if len(props) != len(values): return "Incorrect number of property names and values"
         for ind,val in enumerate(props):
             if val=="points":
