@@ -266,8 +266,7 @@ class EditAssignment(Resource):
         if field=="points":
             value = int(value)
         # GET ALL ASSIGNMENT IDS FOR COURSE
-            students = crud.search('assignment',["courseid","assignmentid"],[courseid,assignmentid],["student"])
-
+            students = getStudentsInCourse(courseid)
 
             for s in students:
                 crud.update("assignment", "courseid", courseid, field, value)
@@ -277,12 +276,19 @@ api.add_resource(EditAssignment,"/editassign")
 
 
 def getStudentsInCourse(courseid):
-    raise NotImplementedError
-    #students = crud.search('assignments',["courseid","assignmentid"],
-    # [courseid,assignmentid],["student"])
+    students = crud.search('assignments',
+                           ["courseid"],
+                           [courseid],
+                           ["int"]
+                           ["student"])
+    return list(set(json.loads(students)))
 
 def getStudentsInCourseAssignments(courseid, assignmentid):
-    students = crud.search('assignments',["courseid","assignmentid"],[courseid,assignmentid],["student"])
+    students = crud.search('assignments',
+                           ["courseid","assignmentid"],
+                           [courseid,assignmentid],
+                           ["int","int"],
+                           ["student"])
     return set(students)
 
 class GradeAssignment(Resource):
