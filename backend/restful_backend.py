@@ -227,11 +227,8 @@ api.add_resource(GetCourse,"/getcourse")
 class GetStudentsInCourse(Resource):
     def get(self):
         courseid = request.args['courseid']
-        return json.loads(crud.search("course",
-                                    ["courseid"],
-                                    [courseid],
-                                    ['int'],
-                                    "students"))
+        return json.loads(crud.search("course",["courseid"],[courseid],
+                                      ["int"],students))
 
 api.add_resource(GetStudentsInCourse, "/getstudentsenrolledincourse")
 
