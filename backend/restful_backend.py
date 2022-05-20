@@ -237,9 +237,11 @@ api.add_resource(CreateAssignment,"/createassignment")
 
 class GetAssignment(Resource):
 
-    def get(self,props,values):
-        props = props.split("<|>")
-        values = values.split("<|>")
+    def get(self):
+        data = request.args["props"].split("<|>")
+        data = dict([data.split("<?>") for d in data])
+        props = data.keys()
+        values = data.values()
         if len(props) != len(values): return "Incorrect number of property names and values"
         for ind,val in enumerate(props):
             if val=="points":
