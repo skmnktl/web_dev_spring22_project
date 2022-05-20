@@ -183,6 +183,4 @@ def search(table, properties, search_values, types, get):
     cursor = conn.cursor()
     cursor.execute(search)
     gotten = cursor.fetchall()
-    for each in gotten:
-
     return json.dumps(gotten, sort_keys=True, default=str)
