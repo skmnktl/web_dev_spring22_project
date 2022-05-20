@@ -233,7 +233,8 @@ class GetStudentsInCourse(Resource):
                                     ['int'],
                                     "students"))
 
-api.add_resource(GetStudentsInCourse,"/getstudentsenrolledincourse")
+api.add_resource(GetStudentsInCourse, "/getstudentsenrolledincourse")
+
 
 class CreateAssignment(Resource):
 
