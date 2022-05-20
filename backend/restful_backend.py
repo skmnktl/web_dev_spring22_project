@@ -234,7 +234,7 @@ class CreateAssignment(Resource):
 
 api.add_resource(CreateAssignment,"/createassignment")
 
-class GetAssignment(Resource):
+class GetAssignments(Resource):
 
     def get(self):
         data = request.args["props"].split("<|>")
@@ -251,10 +251,14 @@ class GetAssignment(Resource):
 
         if len(props) != len(values): return "Incorrect number of property names and values"
         data = crud.search("assignment", props, values,types, None)
-        print(data)
-        return data
+        fields = sorted(data.keys())
+        result = []
+        for line in data:
+            d = dict(zip(fields,line))
+            result.append(d)
+        return result
 
-api.add_resource(GetAssignment, "/getassignment")
+api.add_resource(GetAssignment, "/getassignments")
 
 class EditAssignment(Resource):
     def put(self, courseid,assignmentid, field, value):

@@ -167,6 +167,7 @@ def search(table, properties, search_values, types, get):
     for i in zip(properties,search_values):
         prop = i[0]
         val = i[1]
+
         if types[prop]=="str":
             val = f"\"{val}\""
 
@@ -182,4 +183,6 @@ def search(table, properties, search_values, types, get):
     cursor = conn.cursor()
     cursor.execute(search)
     gotten = cursor.fetchall()
-    return json.dumps(gotten, default=str)
+    for each in gotten:
+
+    return json.dumps(gotten, sort_keys=True, default=str)
