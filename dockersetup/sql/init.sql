@@ -9,13 +9,13 @@ CREATE TABLE user (
 	firstname TEXT(256),
 	lastname TEXT(256),
     active BOOLEAN,
-    username TEXT(256),
+    username TEXT(256) UNIQUE,
     PRIMARY KEY (userid)
 );
 
 CREATE TABLE `course` (
 	courseid INT unsigned NOT NULL AUTO_INCREMENT,
-	coursename TEXT(256),
+	coursename TEXT(256) UNIQUE,
 	coursedescription VARCHAR(2000),
 	coursecapacity INT,
 	professor TEXT(256),
@@ -39,6 +39,7 @@ CREATE TABLE assignment (
 CREATE TABLE announcements (
     message VARCHAR(2000),
     senddate DATE,
-    courseid INT
+    courseid INT,
+    primary key (courseid, senddate, message)
 );
 

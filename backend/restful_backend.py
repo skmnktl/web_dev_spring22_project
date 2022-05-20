@@ -31,8 +31,6 @@ class CreateUser(Resource):
                         props['securityQuestions'],
                         props['firstname'],
                         props['lastname'])
-        securityObj = UpdateSecurityQuestion()
-        securityObj.post(props)
 
 api.add_resource(CreateUser, '/createuser')
 
@@ -44,7 +42,7 @@ update_security_question = UpdateSecurityQuestionSchema()
 
 class UpdateSecurityQuestion(Resource):
 
-    def post(self, props=None):
+    def post(self):
         props = request.args
         securityQuestions = props['securityQuestions']
         username = props['username']
