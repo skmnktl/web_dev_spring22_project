@@ -183,10 +183,9 @@ class User:
     def isAdmin(username):
         return "A" in crud.read("user","username",username,["accountType"])
 
-class Course():
-
+class Course:
     @staticmethod
-    def create(coursename, coursedescription, coursecapacity, professor, students, announcementInbox):
+    def create(coursename, coursedescription, coursecapacity, professor, students):
         inputs = dict()
         inputs['coursename'] = coursename
         inputs['coursedescription'] = coursedescription
@@ -203,8 +202,7 @@ class CreateCourse(Resource):
                       params['coursedescription'],
                       params['coursecapacity'],
                       params['professor'],
-                      params['students'],
-                      params['announcementInbox'])
+                      params['students'])
 
 api.add_resource(CreateCourse, "/createcourse")
 
