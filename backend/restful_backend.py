@@ -252,6 +252,7 @@ class DeleteStudentFromCourse(Resource):
         courseid = request.args['courseid']
         newValue = request.args['student']
         students = crud.read("course","courseid",courseid,["students"])
+        students = students[0][0]
         students = students.replace(newValue,"").replace("<|><|>","<|>")
         students = students.strip("<|>")
         crud.update('course','courseid',courseid,"students",students)
