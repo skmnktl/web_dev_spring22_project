@@ -191,7 +191,7 @@ class Course:
         inputs['coursedescription'] = coursedescription
         inputs['coursecapacity'] = coursecapacity
         inputs['professor'] = professor
-        inputs['students'] = students
+        inputs['student'] = students
         inputs['announcementInbox'] = ""
         crud.create("course", inputs)
 
