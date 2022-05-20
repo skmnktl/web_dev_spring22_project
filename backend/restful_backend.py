@@ -233,6 +233,29 @@ class GetStudentsInCourse(Resource):
 
 api.add_resource(GetStudentsInCourse, "/getstudentsenrolledincourse")
 
+class AddStudentToCourse(Resource):
+
+    def put(self):
+        courseid = request.args['courseid']
+        newValue = request.args['newValue']
+        students = crud.read("course","courseid",courseid,'field')
+        newValue += "<|>" + students
+        newValue = newValue.strip("<|>")
+        crud.update('course','courseid',courseid,"students",newValue)
+
+api.add_resource(AddStudentToCourse, "/addstudenttocourse")
+
+class DeleteStudentFromCourse(Resource):
+
+    def put(self):
+        courseid = request.args['courseid']
+        newValue = request.args['student']
+        students = crud.read("course","courseid",courseid,'field')
+        students = students.replace(newValue,"").replace("<|><|>","<|>")
+        students = students.strip("<|>")
+        crud.update('course','courseid',courseid,"students",students)
+
+api.add_resource(DeleteStudentFromCourse, "/deletestudentfromcourse")
 
 class CreateAssignment(Resource):
 
