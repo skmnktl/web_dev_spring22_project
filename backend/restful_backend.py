@@ -239,7 +239,7 @@ class AddStudentToCourse(Resource):
         courseid = request.args['courseid']
         newValue = request.args['student']
         students = crud.read("course","courseid",courseid,["students"])
-        print(students)
+        students = students[0][0]
         newValue += "<|>" + students
         newValue = newValue.strip("<|>")
         crud.update('course','courseid',courseid,"students",newValue)
