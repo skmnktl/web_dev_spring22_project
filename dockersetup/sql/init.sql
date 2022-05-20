@@ -1,7 +1,7 @@
 USE db;
 
 CREATE TABLE user (
-	userid INT unsigned NOT NULL AUTO_INCREMENT,
+    userid INT unsigned NOT NULL AUTO_INCREMENT,
 	password TEXT(256),
 	email TEXT(256),
 	accountType TEXT(3),
@@ -9,19 +9,19 @@ CREATE TABLE user (
 	firstname TEXT(256),
 	lastname TEXT(256),
     active BOOLEAN,
-    username TEXT(256) UNIQUE,
-    PRIMARY KEY (userid)
+    username CHAR(140),
+    PRIMARY KEY (userid, username)
 );
 
 CREATE TABLE `course` (
 	courseid INT unsigned NOT NULL AUTO_INCREMENT,
-	coursename TEXT(256) UNIQUE,
+	coursename CHAR(140),
 	coursedescription VARCHAR(2000),
 	coursecapacity INT,
 	professor TEXT(256),
 	students VARCHAR(2000),
 	announcementInbox VARCHAR(2000),
-    PRIMARY KEY (courseid)
+    PRIMARY KEY (courseid, coursename)
 
 );
 
@@ -37,9 +37,10 @@ CREATE TABLE assignment (
 );
 
 CREATE TABLE announcements (
+    announcementid INT unsigned NOT NULL AUTO_INCREMENT,
     message VARCHAR(2000),
     senddate DATE,
     courseid INT,
-    primary key (courseid, senddate, message)
+    PRIMARY KEY (announcementid)
 );
 
