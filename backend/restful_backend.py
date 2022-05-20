@@ -237,7 +237,7 @@ class AddStudentToCourse(Resource):
 
     def put(self):
         courseid = request.args['courseid']
-        newValue = request.args['newValue']
+        newValue = request.args['student']
         students = crud.read("course","courseid",courseid,'field')
         newValue += "<|>" + students
         newValue = newValue.strip("<|>")
