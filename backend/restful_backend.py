@@ -238,7 +238,7 @@ class AddStudentToCourse(Resource):
     def put(self):
         courseid = request.args['courseid']
         newValue = request.args['student']
-        students = crud.read("course","courseid",courseid,'field')
+        students = crud.read("course","courseid",courseid,["students"])
         newValue += "<|>" + students
         newValue = newValue.strip("<|>")
         crud.update('course','courseid',courseid,"students",newValue)
@@ -250,7 +250,7 @@ class DeleteStudentFromCourse(Resource):
     def put(self):
         courseid = request.args['courseid']
         newValue = request.args['student']
-        students = crud.read("course","courseid",courseid,'field')
+        students = crud.read("course","courseid",courseid,["students"])
         students = students.replace(newValue,"").replace("<|><|>","<|>")
         students = students.strip("<|>")
         crud.update('course','courseid',courseid,"students",students)
