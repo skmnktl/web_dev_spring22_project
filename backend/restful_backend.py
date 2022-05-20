@@ -221,7 +221,7 @@ class GetCourse(Resource):
         data = json.loads(crud.read("course","courseid",courseid,None))[0]
         fields = ["courseid",'coursename',"coursedescription",
                   "coursecapacity","professor","students"]
-        return json.dumps(dict(zip(fields,data)))
+        return json.dumps(dict(list(zip(fields, data))))
 
 api.add_resource(GetCourse,"/getcourse")
 
