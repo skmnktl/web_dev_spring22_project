@@ -241,14 +241,16 @@ class GetAssignment(Resource):
         data = dict([d.split("<?>") for d in data])
         props = data.keys()
         values = data.values()
-        inputs = ["name","description","points","duedate","courseid",
-              "student","assignmentid"]
-        print(f"{props} {values}")
+        types = dict([("name","str"),
+                      ("description","str"),
+                      ("points","int"),
+                      ("duedate","str"),
+                      ("courseid","int"),
+                      ("student","str"),
+                      ("assignmentid","int")])
+
         if len(props) != len(values): return "Incorrect number of property names and values"
-        for ind,val in enumerate(props):
-            if val=="points":
-                values[ind]=int(values[ind])
-        return crud.search("assignment", props, values,None)
+        return crud.search("assignment", props, values,types, None)
 
 api.add_resource(GetAssignment, "/getassignment")
 

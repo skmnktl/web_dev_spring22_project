@@ -156,13 +156,23 @@ def read(table, primary_key, key_value, columns: list=None):
     cursor.execute(get)
     return cursor.fetchall()
 
-def search(table, properties, search_values, get):
-    searches = [ i[0] + "=" + i[1] for i in zip(properties,search_values)]
+def search(table, properties, search_values, types, get):
+    searches = []
     if get is None:
         get = "*"
     else: 
         get = ", ".join(get)
 
+    for i in zip(properties,search_values):
+        prop = i[0]
+        val = i[1]
+        if types[val]=="str":
+            val = f"\"{val}\""
+        else:
+            val = int(val)
+
+        field = prop + "=" + val
+        searches.append(field)
     search = \
     f"""
     SELECT {get}
