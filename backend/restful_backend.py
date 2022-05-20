@@ -197,7 +197,7 @@ class Course():
         crud.create("course", inputs)
 
 class CreateCourse(Resource):
-    def put(self):
+    def post(self):
         params = request.args
         Course.create(params['coursename'],
                       params['coursedescription'],
