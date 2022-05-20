@@ -169,6 +169,7 @@ def search(table, properties, search_values, get):
     FROM {table}
     WHERE {" AND ".join(searches)};
     """
+    print(search)
     cursor = conn.cursor()
     cursor.execute(search)
     return cursor.fetchall()
