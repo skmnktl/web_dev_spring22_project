@@ -144,8 +144,6 @@ class User:
     @staticmethod
     def parseQuestions(username):
         raw_questions = crud.read("user","username",username,["securityQuestions"])
-        print(raw_questions)
-        return "PAUSE"
         raw_questions = raw_questions.split("<|>")
         questions = dict([i.split("<?>") for i in raw_questions])
         return questions
