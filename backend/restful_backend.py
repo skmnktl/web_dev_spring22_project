@@ -258,7 +258,7 @@ class GetAssignments(Resource):
             result.append(d)
         return result
 
-api.add_resource(GetAssignment, "/getassignments")
+api.add_resource(GetAssignments, "/getassignments")
 
 class EditAssignment(Resource):
     def put(self, courseid,assignmentid, field, value):
