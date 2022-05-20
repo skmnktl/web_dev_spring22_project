@@ -224,6 +224,17 @@ class GetCourse(Resource):
 
 api.add_resource(GetCourse,"/getcourse")
 
+class GetStudentsInCourse(Resource):
+    def get(self):
+        courseid = request.args['courseid']
+        return json.loads(crud.read("course",
+                                    ["courseid"],
+                                    [courseid],
+                                    ['int'],
+                                    "students"))
+
+api.add_resource(GetStudentsInCourse,"/getstudentsenrolledincourse")
+
 class CreateAssignment(Resource):
 
     def put(self):
@@ -266,7 +277,7 @@ class EditAssignment(Resource):
         if field=="points":
             value = int(value)
         # GET ALL ASSIGNMENT IDS FOR COURSE
-            students = getStudentsInCourse(courseid)
+            students = getStudentsInCourseForAssignment(courseid)
             print(students)
             for s in students:
                 crud.update("assignment", "courseid", courseid, field, value)
@@ -275,7 +286,7 @@ class EditAssignment(Resource):
 api.add_resource(EditAssignment,"/editassign")
 
 
-def getStudentsInCourse(courseid):
+def getStudentsInCourseForAssignment(courseid):
     students = crud.search('assignments',
                            ["courseid"],
                            [courseid],
@@ -283,9 +294,6 @@ def getStudentsInCourse(courseid):
                            ["student"])
     return list(set(json.loads(students)))
 
-class GetStudentsInCourse(Resource):
-    def get(self):
-        return getStudentsInCourse(request.args["courseid"])
 
 def getStudentsInCourseAssignments(courseid, assignmentid):
     students = crud.search('assignments',
