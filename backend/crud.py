@@ -166,7 +166,7 @@ def search(table, properties, search_values, types, get):
     for i in zip(properties,search_values):
         prop = i[0]
         val = i[1]
-        if types[val]=="str":
+        if types[prop]=="str":
             val = f"\"{val}\""
         else:
             val = int(val)
