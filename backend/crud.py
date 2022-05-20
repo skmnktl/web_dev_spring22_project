@@ -2,6 +2,7 @@ import datetime
 import time
 import pymysql.cursors
 import sys
+import json
 
 conn = pymysql.connect(host="database",
                        user="root",
