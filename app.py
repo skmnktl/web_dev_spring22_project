@@ -7,7 +7,17 @@ app = create_app()
 
 @app.route(routeUrls["courses"])
 def courses():
-	return render_template("courses.html",headings=headingsCourses,data=dataCourses)
+
+	data = {"courseID":accountType,"password":password,"username":email,"firstname":firstName,"lastname":lastName,"securityQuestions":""}
+	encoded_data = json.dumps(data).encode()
+
+	req = request.Request('https://sharedNetwork:3310/createuser', data=encoded_data)
+	req.add_header('Content-Type', 'application/json')
+	response = request.urlopen(req)
+
+	text = response.read()
+
+	return render_template("courses.html",headings=headingsCourses,data=dataCourses, course=courses)
 
 
 @app.route(routeUrls["grades"])
@@ -22,7 +32,7 @@ def assignments():
 
 @app.route(routeUrls["announcements"])
 def announcements():
-	return render_template("announcements.html",headings=headingsAnnouncements,data=dataAnnouncements)
+	return render_template("announcements.html",headings=headingsAnnouncements,data=dataAnnouncements,name=announcementCourseName)
 
 
 @app.route(routeUrls["createAccount"],methods=["GET","POST"])
@@ -39,9 +49,18 @@ def createAccount():
 	form = AccountForm()
 
 	if form.validate_on_submit():
-		# write to db
-		# https://www.youtube.com/watch?v=GbJPqu0ff9A&t=867s
-		pass
+		url = "http://127.0.0.1:3310/createuser?accountType=TA&password=pass&username=teach-admin&securityQuestions=What is your mother's name?<?>mother&firstname=teacher&lastname=admin"
+
+		data = {"accountType":accountType,"password":password,"username":email,"firstname":firstName,"lastname":lastName,"securityQuestions":""}
+		encoded_data = json.dumps(data).encode()
+
+		req = request.Request('https://sharedNetwork:3310/createuser', data=encoded_data)
+		req.add_header('Content-Type', 'application/json')
+		response = request.urlopen(req)
+
+		text = response.read()
+
+		return
 
 	return render_template("createAccount.html",
 							form=form,
@@ -65,8 +84,17 @@ def createAssign():
 	form = AssignmentForm()
 
 	if form.validate_on_submit():
-		# write to db
-		pass
+		url = "http://127.0.0.1:3310/createuser?accountType=TA&password=pass&username=teach-admin&securityQuestions=What is your mother's name?<?>mother&firstname=teacher&lastname=admin"
+
+		data = {"accountType":accountType,"password":password,"username":email,"firstname":firstName,"lastname":lastName,"securityQuestions":""}
+		encoded_data = json.dumps(data).encode()
+
+		req = request.Request('https://sharedNetwork:3310/createuser', data=encoded_data)
+		req.add_header('Content-Type', 'application/json')
+		response = request.urlopen(req)
+
+		text = response.read()
+		return
 
 	return render_template("createAssignment.html",form=form,assignmentName=assignmentName,assignmentDescription=assignmentDescription,numberOfPoints=numberOfPoints,dueDate=dueDate)
 
@@ -77,7 +105,16 @@ def createAnnounce():
 	form = AnnouncementForm()
 
 	if form.validate_on_submit():
-		# write to db
+		url = "http://127.0.0.1:3310/createuser?accountType=TA&password=pass&username=teach-admin&securityQuestions=What is your mother's name?<?>mother&firstname=teacher&lastname=admin"
+
+		data = {"accountType":accountType,"password":password,"username":email,"firstname":firstName,"lastname":lastName,"securityQuestions":""}
+		encoded_data = json.dumps(data).encode()
+
+		req = request.Request('https://sharedNetwork:3310/createuser', data=encoded_data)
+		req.add_header('Content-Type', 'application/json')
+		response = request.urlopen(req)
+
+		text = response.read()
 		pass
 	
 	return render_template("createAnnouncement.html",announcement=announcement,form=form)

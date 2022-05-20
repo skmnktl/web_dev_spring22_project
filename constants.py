@@ -31,25 +31,25 @@ routeUrls = {
 # secret key
 SECRET_KEY = "web_dev_team"
 
-headingsCourses = ("Course Name","Course Description","Course Capacity","Professor")
+headingsCourses = ("Course ID","Course Name","Course Description","Course Capacity","Professor")
 dataCourses = (
-	("Intro to Web Dev","An introductory web course","50","Prof. Jones"),
-	("Intro to Web Dev","An introductory web course","50","Prof. Jones"),
-	("Intro to Web Dev","An introductory web course","50","Prof. Jones")
+	(71,"Intro to Web Dev","An introductory web course","50","Prof. Jones"),
+	(82,"Intro to Web Dev","An introductory web course","50","Prof. Jones"),
+	(99,"Intro to Web Dev","An introductory web course","50","Prof. Jones")
 	)
 
-headingsAnnouncements = ("Announcement","Date")
+headingsAnnouncements = ("Announcement ID","Announcement","Date")
 dataAnnouncements = (
-    ("New assignment posted","5/7/2021"),
-    ("New assignment posted","5/7/2021"),
-    ("New assignment posted","5/7/2021")
+    (11,"New assignment posted","5/7/2021"),
+    (17,"New assignment posted","5/7/2021"),
+    (34,"New assignment posted","5/7/2021")
 )
 
 headingsAssignments = ("Assignment Name","Assignment Description","Number of Points","Due Date","Actions")
 dataAssignments = (
-    ("Final project","Build a website","100","5/21/2021"),
-    ("Final project","Build a website","100","5/21/2021"),
-    ("Final project","Build a website","100","5/21/2021")
+    ("Final project1","Build a website","100","5/21/2021"),
+    ("Final project2","Build a website","100","5/21/2021"),
+    ("Final project4","Build a website","100","5/21/2021")
 )
 
 headingsDash = ("Assignment Name","Assignment Description","Number of Points","Due Date")
@@ -112,6 +112,7 @@ dataAddToCourse = (
 )
 
 assignmentGradeName = ("Midterm project")
+announcementCourseName = ("Web Dev")
 
 test_email = "hardikajmani@gmail.com"
 test_pass  = "thisIsPass123$"
