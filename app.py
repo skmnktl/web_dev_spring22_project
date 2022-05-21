@@ -53,7 +53,7 @@ def createAccount():
         response = requests.post("http://backend:3310/createuser",
                                  params=params)
         print(response.text)
-        return
+        return render_template("createAccount.html")
 
     return render_template("createAccount.html",
                            form=form,
