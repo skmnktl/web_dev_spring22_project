@@ -28,7 +28,7 @@ def announcements():
 @app.route(routeUrls["createAccount"],methods=["GET","POST"])
 def createAccount():
     print("RUNNING ACCOUNT CREATION")
-    form = AccountForm(request.form)
+    form = AccountForm()
     firstName = form.firstName.data
     print(f"firstName before is {firstName}")
     lastName = form.lastName.data
@@ -39,7 +39,9 @@ def createAccount():
     securityAnswer1 = ""
     securityAnswer2 = ""
     securityAnswer3 = ""
-    if form.validate_on_submit() or True:
+    if form.validate_on_submit() or True: # SUPER HACKY WAY OF DOING IT;
+        # BYPASSING THE VALIDATION
+        # TODO FIX
         params = [("firstname",firstName),
                   ("lastname",lastName),
                   ("username",email),
@@ -50,7 +52,7 @@ def createAccount():
         response = requests.post("http://backend:3310/createuser",
                                  params=params)
         print(response.text)
-        return render_template("createAccount.html")
+        return
 
     return render_template("createAccount.html",
                            form=form,
