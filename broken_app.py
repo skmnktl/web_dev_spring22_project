@@ -1,23 +1,16 @@
 from libs import * 
 from constants import *
 from forms import *
+import requests
 
 app = create_app()
 
 
+
 @app.route(routeUrls["courses"])
 def courses():
-
-	data = {"courseID":accountType,"password":password,"username":email,"firstname":firstName,"lastname":lastName,"securityQuestions":""}
-	encoded_data = json.dumps(data).encode()
-
-	req = request.Request('https://sharedNetwork:3310/createuser', data=encoded_data)
-	req.add_header('Content-Type', 'application/json')
-	response = request.urlopen(req)
-
-	text = response.read()
-
-	return render_template("courses.html",headings=headingsCourses,data=dataCourses, course=courses)
+	return render_template("courses.html", headings=headingsCourses,
+                           data=dataCourses, course=courses)
 
 
 @app.route(routeUrls["grades"])
@@ -49,18 +42,7 @@ def createAccount():
 	form = AccountForm()
 
 	if form.validate_on_submit():
-		url = "http://127.0.0.1:3310/createuser?accountType=TA&password=pass&username=teach-admin&securityQuestions=What is your mother's name?<?>mother&firstname=teacher&lastname=admin"
-
-		data = {"accountType":accountType,"password":password,"username":email,"firstname":firstName,"lastname":lastName,"securityQuestions":""}
-		encoded_data = json.dumps(data).encode()
-
-		req = request.Request('https://sharedNetwork:3310/createuser', data=encoded_data)
-		req.add_header('Content-Type', 'application/json')
-		response = request.urlopen(req)
-
-		text = response.read()
-
-		return
+		pass
 
 	return render_template("createAccount.html",
 							form=form,
@@ -84,15 +66,7 @@ def createAssign():
 	form = AssignmentForm()
 
 	if form.validate_on_submit():
-		url = "http://127.0.0.1:3310/"
-
-		data = {"accountType":accountType,"password":password,"username":email,"firstname":firstName,"lastname":lastName,"securityQuestions":""}
-
-		req = requests.get(url)
-		print(req.url)
-
-		# text = response.read()
-		return
+		pass
 
 	return render_template("createAssignment.html",form=form,assignmentName=assignmentName,assignmentDescription=assignmentDescription,numberOfPoints=numberOfPoints,dueDate=dueDate)
 
@@ -103,16 +77,6 @@ def createAnnounce():
 	form = AnnouncementForm()
 
 	if form.validate_on_submit():
-		url = "http://127.0.0.1:3310/createuser?accountType=TA&password=pass&username=teach-admin&securityQuestions=What is your mother's name?<?>mother&firstname=teacher&lastname=admin"
-
-		data = {"accountType":accountType,"password":password,"username":email,"firstname":firstName,"lastname":lastName,"securityQuestions":""}
-		encoded_data = json.dumps(data).encode()
-
-		req = request.Request('https://sharedNetwork:3310/createuser', data=encoded_data)
-		req.add_header('Content-Type', 'application/json')
-		response = request.urlopen(req)
-
-		text = response.read()
 		pass
 	
 	return render_template("createAnnouncement.html",announcement=announcement,form=form)
