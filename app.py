@@ -29,12 +29,12 @@ def announcements():
 def createAccount():
     print("RUNNING ACCOUNT CREATION")
     form = AccountForm()
-    firstName = form.firstName
-    lastName = None
-    email = None
-    accountID = None
-    password = None
-    accountType = None
+    firstName = form.firstName.value
+    lastName = form.lastName.value
+    email = form.email.value
+    accountID = form.accountID.value
+    password = form.password.value
+    accountType = form.accountType.value
     securityAnswer1 = ""
     securityAnswer2 = ""
     securityAnswer3 = ""
