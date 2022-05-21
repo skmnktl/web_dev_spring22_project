@@ -39,7 +39,7 @@ def createAccount():
     securityAnswer2 = ""
     securityAnswer3 = ""
 
-    print(firstName)
+    print(f"firstName is {firstName}")
 
     if form.validate_on_submit():
         print("CREATING NEW ACCOUNT")
