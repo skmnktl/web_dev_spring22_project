@@ -339,7 +339,12 @@ class GradeAssignment(Resource):
     def put(self, courseid,assignmentid, field, value):
         if field=="points":
             value = int(value)
-            students = getStudentsInCourse(courseid)
+            courseid = request.args['courseid']
+            students = json.loads(crud.search("course",
+                                      ["courseid"],
+                                      [courseid],
+                                      dict([("courseid","int")]),
+                                      ["students"]))
             for s in students:
                 crud.update("assignment", "courseid", courseid, field, value)
             return students
