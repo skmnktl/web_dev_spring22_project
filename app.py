@@ -31,8 +31,13 @@ def createAccount():
     firstName = form.firstName
     lastName = form.lastName
     email = form.email
+    accountID = None
     password = form.password
     accountType = form.accountType
+    securityAnswer1 = ""
+    securityAnswer2 = ""
+    securityAnswer3 = ""
+
 
     if form.validate_on_submit():
         print("CREATING NEW ACCOUNT")
