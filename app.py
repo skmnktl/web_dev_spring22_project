@@ -47,7 +47,8 @@ def createAccount():
                   ("password",password),
                   ("securityQuestions","")]
         params = dict(params)
-        response = requests.post("http://localhost:3310/createuser", params=params)
+        response = requests.post("http://backend:3310/createuser",
+                                 params=params)
         print(response.text)
         return
 

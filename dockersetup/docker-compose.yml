@@ -42,3 +42,21 @@ services:
       FLASK_RUN_HOST: 0.0.0.0
       FLASK_ENV: development
       WORKING_DIRECTORY: /web_dev_spring22_project/backend/
+
+
+  frontend:
+    build: 
+      context: ./
+      dockerfile: Dockerfile_Frontend
+    container_name: frontend
+    networks:
+      - sharedNetwork
+    ports:
+      - 3330:3330
+    command: "tail -f /dev/null"
+    environment:
+      FLASK_APP : app.py
+      FLASK_RUN_PORT: 3330
+      FLASK_RUN_HOST: 0.0.0.0
+      FLASK_ENV: development
+      WORKING_DIRECTORY: /web_dev_spring22_project/
