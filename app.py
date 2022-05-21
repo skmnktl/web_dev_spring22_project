@@ -27,25 +27,16 @@ def announcements():
 
 @app.route(routeUrls["createAccount"],methods=["GET","POST"])
 def createAccount():
-    firstName = None
-    lastName = None
-    email = None
-    accountID = None
-    password = None
-    accountType = None
-    securityAnswer1 = None
-    securityAnswer2 = None
-    securityAnswer3 = None
     form = AccountForm()
 
     if form.validate_on_submit():
         print("CREATING NEW ACCOUNT")
-        params = [("firstname",firstName),
-                  ("lastname",lastName),
-                  ("username",email),
-                  ("accountType",accountType),
-                  ("password",password),
-                  ("securityQuestions","")]
+        params = [("firstname",form.firstName),
+                  ("lastname",form.lastName),
+                  ("username",form.email),
+                  ("accountType",form.accountType),
+                  ("password",form.password),
+                  ("securityQuestions","")] # TODO
         params = dict(params)
         response = requests.post("http://backend:3310/createuser",
                                  params=params)
