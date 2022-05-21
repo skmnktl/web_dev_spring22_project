@@ -8,10 +8,11 @@ class AccountForm(FlaskForm):
 	email          = StringField("Email: ",       validators=[DataRequired()])
 	accountID      = IntegerField("Account ID: ", validators=[DataRequired()])
 	password       = StringField("Password: ",    validators=[DataRequired()])
-	accountType    = RadioField("Account Type",   choices=[("student","Student"),("teacher","Teacher")])
-	securityAnswer1 = StringField("Your Answer: ", validators=[DataRequired()])
-	securityAnswer2 = StringField("Your Answer: ", validators=[DataRequired()])
-	securityAnswer3 = StringField("Your Answer: ", validators=[DataRequired()])
+	accountType    = RadioField("Account Type",   choices=[("student",
+                                                            "Student"),
+                                                           ("teacher",
+                                                            "Teacher"),
+                                                           ("admin","Admin")])
 	submit = SubmitField("Create Account")
 
 
