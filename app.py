@@ -28,13 +28,13 @@ def announcements():
 @app.route(routeUrls["createAccount"],methods=["GET","POST"])
 def createAccount():
     print("RUNNING ACCOUNT CREATION")
-    form = AccountForm(request.form)
-    firstName = form.firstName.data
-    lastName = form.lastName.data
-    email = form.email.data
+    form = AccountForm()
+    firstName = None
+    lastName = None
+    email = None
     accountID = None
-    password = form.password.data
-    accountType = form.accountType.data
+    password = None
+    accountType = None
     securityAnswer1 = ""
     securityAnswer2 = ""
     securityAnswer3 = ""
