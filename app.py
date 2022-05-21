@@ -29,7 +29,7 @@ def announcements():
 def createAccount():
     print("RUNNING ACCOUNT CREATION")
     form = AccountForm()
-    firstName = None
+    firstName = form.firstName
     lastName = None
     email = None
     accountID = None
