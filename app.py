@@ -39,7 +39,7 @@ def createAccount():
     securityAnswer1 = ""
     securityAnswer2 = ""
     securityAnswer3 = ""
-    if request.method == 'POST' and form.validate():
+    if request.method == 'GET' and form.validate():
         params = [("firstname",firstName),
                   ("lastname",lastName),
                   ("username",email),
