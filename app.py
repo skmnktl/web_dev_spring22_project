@@ -39,7 +39,7 @@ def createAccount():
     securityAnswer1 = ""
     securityAnswer2 = ""
     securityAnswer3 = ""
-    if form.validate():
+    if form.validate_on_submit() or True:
         params = [("firstname",firstName),
                   ("lastname",lastName),
                   ("username",email),
@@ -59,7 +59,10 @@ def createAccount():
                            email=email,
                            accountID=accountID,
                            password=password,
-                           accountType=accountType)
+                           accountType=accountType,
+                           securityAnswer1=securityAnswer1,
+                           securityAnswer2=securityAnswer2,
+                           securityAnswer3=securityAnswer3)
 
 
 @app.route(routeUrls["createAssign"],methods=["GET","POST"])
