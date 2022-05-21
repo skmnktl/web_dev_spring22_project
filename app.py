@@ -39,14 +39,16 @@ def createAccount():
     form = AccountForm()
 
     if form.validate_on_submit():
+        print("CREATING NEW ACCOUNT")
         params = [("firstname",firstName),
                   ("lastname",lastName),
                   ("username",email),
-                  ("accountType",accountType),("password",password),
-                  ("securityQuestons","")]
+                  ("accountType",accountType),
+                  ("password",password),
+                  ("securityQuestions","")]
         params = dict(params)
-        response = requests.post("http://localhost:3310/createuser",
-                                 params=params)
+        response = requests.post("http://localhost:3310/createuser", params=params)
+
         print(response.text)
         return
 

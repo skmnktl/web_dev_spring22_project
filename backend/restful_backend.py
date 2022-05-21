@@ -23,6 +23,7 @@ create_user_schema =  CreateUserSchema()
 
 class CreateUser(Resource):
     def post(self):
+        print(request.args)
         props = request.args
         User.createUser(props['accountType'],
                         props['password'],
