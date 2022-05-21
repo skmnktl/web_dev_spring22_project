@@ -59,10 +59,7 @@ def createAccount():
                            email=email,
                            accountID=accountID,
                            password=password,
-                           accountType=accountType,
-                           securityAnswer1=securityAnswer1,
-                           securityAnswer2=securityAnswer2,
-                           securityAnswer3=securityAnswer3)
+                           accountType=accountType)
 
 
 @app.route(routeUrls["createAssign"],methods=["GET","POST"])
