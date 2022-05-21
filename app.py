@@ -30,6 +30,7 @@ def createAccount():
     print("RUNNING ACCOUNT CREATION")
     form = AccountForm()
     firstName = form.firstName.data
+    print(f"firstName before is {firstName}")
     lastName = form.lastName.data
     email = form.email.data
     accountID = form.accountID.data
@@ -38,11 +39,18 @@ def createAccount():
     securityAnswer1 = ""
     securityAnswer2 = ""
     securityAnswer3 = ""
-
-    print(f"firstName is {firstName}")
-
     if form.validate_on_submit():
         print("CREATING NEW ACCOUNT")
+        firstName = form.firstName.data
+        print(f"firstName after is {firstName}")
+        lastName = form.lastName.data
+        email = form.email.data
+        accountID = form.accountID.data
+        password = form.password.data
+        accountType = form.accountType.data
+        securityAnswer1 = ""
+        securityAnswer2 = ""
+        securityAnswer3 = ""
         params = [("firstname",firstName),
                   ("lastname",lastName),
                   ("username",email),
