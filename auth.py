@@ -22,9 +22,6 @@ def login_post():
     email    = request.form.get('email')
     password = request.form.get('password')
 
-    # print("password : {}".format(password))
-    # print("hasehd password : {}".format(generate_password_hash(password, method='sha256')))
-    # print("hasehd test : {}".format(generate_password_hash(test_pass, method='sha256')))
     #change it to request call
     # get request to the authenticate endpoint email, hashpasswored
     if check_password_hash(generate_password_hash(test_pass, method='sha256'), password):
@@ -34,6 +31,7 @@ def login_post():
 
     flash('Please check your login details and try again.')
     return redirect(url_for('auth.login'))
+
 
 @auth.route(routeUrls['logout'])
 @login_required

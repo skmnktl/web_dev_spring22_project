@@ -4,6 +4,9 @@
 from libs import *
 from models import *
 
+########################################
+###### constants ################
+########################################
 # routing urls
 routeUrls = {
     "main"   : "/", 
@@ -117,6 +120,11 @@ announcementCourseName = ("Web Dev")
 test_email = "hardikajmani@gmail.com"
 test_pass  = "thisIsPass123$"
 user = User(1, test_email, generate_password_hash(test_pass, method='sha256'), "hardik")
+
+
+########################################
+###### Methods #################
+########################################
 
 ## create app
 def create_app():

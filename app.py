@@ -4,7 +4,6 @@ from forms import *
 
 app = create_app()
 
-
 @app.route(routeUrls["courses"])
 def courses():
     return render_template("courses.html", headings=headingsCourses, data=dataCourses, course=courses)
@@ -25,7 +24,7 @@ def announcements():
     return render_template("announcements.html", headings=headingsAnnouncements, data=dataAnnouncements, name=announcementCourseName)
 
 
-@app.route(routeUrls["createAccount"], methods=["GET","POST"])
+@app.route(routeUrls["createAccount"], methods=["GET", "POST"])
 def createAccount():
     print("RUNNING ACCOUNT CREATION")
     form = AccountForm()
@@ -48,9 +47,9 @@ def createAccount():
                   ("accountType",accountType),
                   ("password",password),
                   ("securityQuestions","")] # TODO
-        params = dict(params)
-        # response = requests.post("http://backend:3310/createuser", params=params)
-        print(params)
+        params = dict(params) # isLoggedin -> user id -> go in the logs table -> fetc thed -> if? true : false
+        response = requests.post("http://backend:3310/createuser", params=params)
+        #print(response)
         return redirect(url_for('auth.login'))
 
     return render_template("createAccount.html",
@@ -170,3 +169,6 @@ def addToCourse():
 @app.errorhandler(500)
 def page_not_found(e):
     return render_template("500.html"),
+
+
+    

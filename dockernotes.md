@@ -22,3 +22,8 @@
 Remove the -a flag to see all containers. 
 
 4. You can remove the docker containers with `docker compose down` or delete a specific container using the container id by running `docker rm container_id`.
+
+
+
+5. Mysql
+mysql -uroot -pdb
