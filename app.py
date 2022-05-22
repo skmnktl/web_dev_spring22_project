@@ -39,7 +39,7 @@ def createAccount():
     securityAnswer1 = ""
     securityAnswer2 = ""
     securityAnswer3 = ""
-    if True: # SUPER HACKY WAY OF DOING IT;
+    if form.validate_on_submit(): # SUPER HACKY WAY OF DOING IT;
         # BYPASSING THE VALIDATION
         # TODO FIX
         params = [("firstname",firstName),
