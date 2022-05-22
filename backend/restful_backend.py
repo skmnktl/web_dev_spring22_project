@@ -397,7 +397,7 @@ class VerifyLoginUser(Resource):
     def get(self):
         pass
 
-api.add_resource(LoginUser, "/verifylogin")
+api.add_resource(VerifyLoginUser, "/verifylogin")
 
 
 # logout user -> removes the user from login table
@@ -405,7 +405,7 @@ class LogoutUser(Resource):
     def put(self):
         pass
 
-api.add_resource(LoginUser, "/logout")
+api.add_resource(LogoutUser, "/logout")
 
 
 
