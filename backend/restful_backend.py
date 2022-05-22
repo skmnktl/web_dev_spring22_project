@@ -127,9 +127,10 @@ class User:
     @staticmethod
     def getUserInfo(username):
         row = crud.read("user","username",username)
+        columns = ['userid','password','email','accountType','securityQuestions','firstname','lastname','active','username']
         #TODO: add fields required
         if len(row) > 0:
-            return {"value" : row}, True
+            return dict(zip(columns, row[0])), True
         else:
             return {}, False
     
@@ -388,8 +389,25 @@ class LoginUser(Resource):
         if not (resp): #and User.authentication(props["username"], props["password"])):
             return False
         
-        print(props)
-        print(user)
+        try:
+            """
+            userid INT unsigned NOT NULL,
+            password TEXT(256),
+            email TEXT(256),
+            """
+            print(props)
+            print(user)
+            print("here")
+            crud.create("loggedIn", {
+                "userid": int(user["userid"]),
+                "password": user["password"],
+                "email": user["email"]
+            })
+            return True
+        except Exception as e:
+            return json.dumps({"error": str(e)})
+
+        
 
 api.add_resource(LoginUser, "/login")
 
