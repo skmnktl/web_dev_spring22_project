@@ -125,6 +125,7 @@ class User:
     @staticmethod
     def getUserInfo(username):
         row = crud.read("user","username",username)
+        #TODO: add fields required
         return {"value" : row}
     
     @staticmethod
@@ -173,6 +174,15 @@ class User:
     @staticmethod
     def authentication(username: str, password: str):
         return password == crud.read("user","username",username,["password"])
+    
+    @staticmethod
+    def authentication(username: str, password: str):
+        return password == crud.read("user","username",username,["password"])
+
+    @staticmethod
+    def userExists(username: str) -> bool:
+        #TODO return a bool 
+        pass
     
     @staticmethod
     def isStudent(username):

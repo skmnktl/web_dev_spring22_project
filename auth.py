@@ -22,11 +22,12 @@ def login_post():
     email    = request.form.get('email')
     password = request.form.get('password')
 
-    print("password : {}".format(password))
-    print("hasehd password : {}".format(generate_password_hash(password, method='sha256')))
-    print("hasehd test : {}".format(generate_password_hash(test_pass, method='sha256')))
+    # print("password : {}".format(password))
+    # print("hasehd password : {}".format(generate_password_hash(password, method='sha256')))
+    # print("hasehd test : {}".format(generate_password_hash(test_pass, method='sha256')))
+    #change it to request call
+    # get request to the authenticate endpoint email, hashpasswored
     if check_password_hash(generate_password_hash(test_pass, method='sha256'), password):
-        time.sleep(2)
         user = User(1, test_email, generate_password_hash(test_pass, method='sha256'), "hardik")
         login_user(user)
         return redirect(url_for('tempDash'))
