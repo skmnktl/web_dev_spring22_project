@@ -1,8 +1,10 @@
 import crud
 import json
 from random import choice
+import typing
 from datetime import date
 from flask import Flask, request, abort
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_restful import Resource, Api
 from marshmallow import Schema, fields
 
@@ -126,7 +128,10 @@ class User:
     def getUserInfo(username):
         row = crud.read("user","username",username)
         #TODO: add fields required
-        return {"value" : row}
+        if len(row) > 0:
+            return {"value" : row}, True
+        else:
+            return {}, False
     
     @staticmethod
     def changeUserData(username, field, newValue):
@@ -172,17 +177,11 @@ class User:
         crud.update('user','username',username,'securityQuestions',new_questions)
     
     @staticmethod
-    def authentication(username: str, password: str):
-        return password == crud.read("user","username",username,["password"])
-    
-    @staticmethod
-    def authentication(username: str, password: str):
-        return password == crud.read("user","username",username,["password"])
-
-    @staticmethod
-    def userExists(username: str) -> bool:
-        #TODO return a bool 
-        pass
+    def authentication(username: str, password: str) -> bool:
+        #MODIFIED : Authenticate with hashed passsword
+        return check_password_hash(
+                    password,
+                    crud.read("user","username",username,["password"]))
     
     @staticmethod
     def isStudent(username):
@@ -367,8 +366,47 @@ class PostAnnouncement(Resource):
         courseid = request.args['courseid']
         crud.create("announcements",{"message":message,"course":courseid,"senddate":str(date.today())})
 
-
 api.add_resource(PostAnnouncement, "/announce")
+
+# login classes
+# EDITED - hardikajmani
+
+# login user -> adds the user to login table
+class LoginUser(Resource):
+    def post(self):
+        """
+            gets username and password
+            sends back the id to logg in
+        """
+        props = request.args
+
+        #1. check if user exists
+        user, resp = User.getUserInfo(props["username"])
+        
+        # if user doesnt exist or incorrect password
+        if not (resp and User.authentication(props["password"])):
+            return False
+        
+        print(props)
+        print(user)
+
+api.add_resource(LoginUser, "/login")
+
+# verifies user is logged in -> checks the id in login_table
+class VerifyLoginUser(Resource):
+    def get(self):
+        pass
+
+api.add_resource(LoginUser, "/verifylogin")
+
+
+# logout user -> removes the user from login table
+class LogoutUser(Resource):
+    def put(self):
+        pass
+
+api.add_resource(LoginUser, "/logout")
+
 
 
 class HelloWorld(Resource):
