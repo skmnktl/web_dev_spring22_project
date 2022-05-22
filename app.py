@@ -25,7 +25,7 @@ def announcements():
     return render_template("announcements.html", headings=headingsAnnouncements, data=dataAnnouncements, name=announcementCourseName)
 
 
-@app.route(routeUrls["createAccount"],methods=["GET","POST"])
+@app.route(routeUrls["createAccount"], methods=["GET","POST"])
 def createAccount():
     print("RUNNING ACCOUNT CREATION")
     form = AccountForm()
@@ -39,9 +39,8 @@ def createAccount():
     securityAnswer1 = ""
     securityAnswer2 = ""
     securityAnswer3 = ""
-    if form.validate_on_submit() or True: # SUPER HACKY WAY OF DOING IT;
-        # BYPASSING THE VALIDATION
-        # TODO FIX
+    print(form.validate_on_submit())
+    if form.validate_on_submit(): 
         params = [("firstname",firstName),
                   ("lastname",lastName),
                   ("username",email),
@@ -49,25 +48,24 @@ def createAccount():
                   ("password",password),
                   ("securityQuestions","")] # TODO
         params = dict(params)
-        response = requests.post("http://backend:3310/createuser",
-                                 params=params)
-        print(response.text)
-        return render_template("login.html", form=form)
+        # response = requests.post("http://backend:3310/createuser", params=params)
+        print(params)
+        return redirect(url_for('auth.login'))
 
     return render_template("createAccount.html",
-                           form=form,
-                           firstName=firstName,
-                           lastName=lastName,
-                           email=email,
-                           accountID=accountID,
-                           password=password,
-                           accountType=accountType,
-                           securityAnswer1=securityAnswer1,
-                           securityAnswer2=securityAnswer2,
-                           securityAnswer3=securityAnswer3)
+                        form=form,
+                        firstName=firstName,
+                        lastName=lastName,
+                        email=email,
+                        accountID=accountID,
+                        password=password,
+                        accountType=accountType,
+                        securityAnswer1=securityAnswer1,
+                        securityAnswer2=securityAnswer2,
+                        securityAnswer3=securityAnswer3)
 
 
-@app.route(routeUrls["createAssign"],methods=["GET","POST"])
+@app.route(routeUrls["createAssign"], methods=["GET", "POST"])
 def createAssign():
     assignmentName = None
     assignmentDescription = None

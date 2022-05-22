@@ -59,6 +59,7 @@
 					<p id="warning" style="display:none">Please review fields. Email must be an email, account ID must be an integer, passwords must be >5 characters and contain a letter and symbol.</p>
 
 					 <div id="submitButton" style="display:none">
+						{{ form.hidden_tag() }}
 					 	{{ form.submit() }}
 					</div>
 
