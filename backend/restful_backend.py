@@ -384,7 +384,7 @@ class LoginUser(Resource):
         user, resp = User.getUserInfo(props["username"])
         
         # if user doesnt exist or incorrect password
-        if not (resp and User.authentication(props["password"])):
+        if not (resp and User.authentication(props["username"], props["password"])):
             return False
         
         print(props)
