@@ -38,9 +38,7 @@ def createAccount():
     securityAnswer1 = ""
     securityAnswer2 = ""
     securityAnswer3 = ""
-    if form.validate_on_submit(): # SUPER HACKY WAY OF DOING IT;
-        # BYPASSING THE VALIDATION
-        # TODO FIX
+    if form.validate_on_submit(): 
         params = [("firstname",firstName),
                   ("lastname",lastName),
                   ("username",email),
@@ -48,10 +46,11 @@ def createAccount():
                   ("password",password),
                   ("securityQuestions","")] # TODO
         params = dict(params) # isLoggedin -> user id -> go in the logs table -> fetc thed -> if? true : false
-        response = requests.post("http://backend:3310/createuser", params=params)
-        #print(response)
+        response = requests.post(apiUrls["createUser"], params=params)
+        print(response.text)
         return redirect(url_for('auth.login'))
 
+    # if not submit validated or new page
     return render_template("createAccount.html",
                         form=form,
                         firstName=firstName,

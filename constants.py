@@ -31,6 +31,14 @@ routeUrls = {
     "submitAssign"  : "/submitassign",
 }
 
+
+# apis
+backend = "http://backend:3310"
+
+apiUrls = {
+    "createUser": backend + "/createuser"
+}
+
 # secret key
 SECRET_KEY = "web_dev_team"
 
@@ -119,7 +127,7 @@ announcementCourseName = ("Web Dev")
 
 test_email = "hardikajmani@gmail.com"
 test_pass  = "thisIsPass123$"
-user = User(1, test_email, generate_password_hash(test_pass, method='sha256'), "hardik")
+# user = User(1, test_email, generate_password_hash(test_pass, method='sha256'), "hardik")
 
 
 ########################################

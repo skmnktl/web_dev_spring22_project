@@ -2,14 +2,8 @@ from libs import *
 from constants import *
 from forms import *
 
-class User(UserMixin):
-    email = ""
-    password = ""
-    name = ""
+class CurrUser(UserMixin):
     id = ""
 
-    def __init__(self, id, email, password, name) -> None:
+    def __init__(self, id) -> None:
         self.id = id
-        self.email = email
-        self.password = password
-        self.name = name
