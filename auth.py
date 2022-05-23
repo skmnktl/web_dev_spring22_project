@@ -40,6 +40,8 @@ def login_post():
     if resp["login"]:
         user = User(int(resp["userid"]))
         login_user(user)
+        print(current_user.get_id())
+        print(current_user.is_authenticated)
         return redirect(url_for('tempDash'))
     
     flash(resp["reason"])
