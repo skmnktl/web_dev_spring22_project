@@ -401,7 +401,7 @@ class LoginUser(Resource):
 
             return json.dumps({
                                 "login": True,
-                                "id"   : int(1)
+                                "userid"   : int(1)
                             })
         except Exception as e:
             return json.dumps({
