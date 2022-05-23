@@ -7,7 +7,7 @@ auth = Blueprint('auth', __name__)
 
 
 @auth.route(routeUrls["login"])
-def login_user():
+def login():
     form = Login()
     email = None
     password = None
@@ -22,7 +22,7 @@ def login_post():
     email    = request.form.get('email')
     password = request.form.get('password')
 
-    
+
     if current_user.is_authenticated:
         return redirect(url_for('tempDash'))
     
@@ -47,20 +47,24 @@ def login_post():
     flash(resp["reason"])
     return redirect(url_for('auth.login'))
 
-
 @auth.route(routeUrls['logout'])
 @login_required
-def logout_user(alias):
+def logout():
+    print(routeUrls['logout'] + "/{}".format(current_user.get_id()))
+    return redirect(routeUrls['logout'] + "/{}".format(current_user.get_id()))
+
+@auth.route(routeUrls['logout'] + "/<alias>")
+@login_required
+def logout_(alias):
     # if alias.user_id == current_user.id:
     # send username password
     params = [("userid", current_user.id)]
     #send logout request
     response = requests.post(apiUrls["logout"], params=params)
-    resp = json.loads(response.text)
-    if bool(resp.text):
+    if json.loads(response.text):
         logout_user()
         flash('Logout Success!!')
     else:
         flash('User not logged in!!')
-    return redirect(url_for('/'))
+    return redirect(url_for('auth.login'))
 
