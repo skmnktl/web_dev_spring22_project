@@ -50,14 +50,7 @@ def login_post():
 @auth.route(routeUrls['logout'])
 @login_required
 def logout():
-    print(routeUrls['logout'] + "/{}".format(current_user.get_id()))
-    return redirect(routeUrls['logout'] + "/{}".format(current_user.get_id()))
-
-@auth.route(routeUrls['logout'] + "/<alias>")
-@login_required
-def logout_(alias):
-    # if alias.user_id == current_user.id:
-    # send username password
+    # send current user id
     params = [("userid", current_user.id)]
     #send logout request
     response = requests.post(apiUrls["logout"], params=params)
