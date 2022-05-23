@@ -151,8 +151,8 @@ def create_app():
         response = requests.post(apiUrls["verifylogin"], params=params)
 
         # check if login exist
-        if bool(response.text):
-            return current_user
+        if json.loads(response.text):
+            return User(id)
         
         return None
       

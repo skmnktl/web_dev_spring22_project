@@ -38,7 +38,7 @@ def login_post():
     print(resp)
     # check login and create user
     if resp["login"]:
-        user = CurrUser(int(resp["userid"]))
+        user = User(int(resp["userid"]))
         login_user(user)
         return redirect(url_for('tempDash'))
     
