@@ -387,7 +387,10 @@ class LoginUser(Resource):
         # if user doesnt exist or incorrect password
         #TODO: create hashed pass
         if not (resp): #and User.authentication(props["username"], props["password"])):
-            return False
+            return json.dumps({
+                                "login": False,
+                                "reason": "User Not Found or Incorrect Pass"
+                            })
         
         try:
             crud.create("loggedIn", {
@@ -395,9 +398,16 @@ class LoginUser(Resource):
                 "password": user["password"],
                 "email": user["email"]
             })
-            return True
+
+            return json.dumps({
+                                "login": True,
+                                "id"   : int(1)
+                            })
         except Exception as e:
-            return json.dumps({"error": str(e)})
+            return json.dumps({
+                                "login": False,
+                                "reason": str(e)
+                            })
 
         
 

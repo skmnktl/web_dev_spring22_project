@@ -18,25 +18,42 @@ def login():
 
 @auth.route(routeUrls["login"], methods=['POST'])
 def login_post():
-    # login code goes here
+    # login code
     email    = request.form.get('email')
     password = request.form.get('password')
 
-    #change it to request call
-    # get request to the authenticate endpoint email, hashpasswored
-    if check_password_hash(generate_password_hash(test_pass, method='sha256'), password):
-        user = User(1, test_email, generate_password_hash(test_pass, method='sha256'), "hardik")
+    # send username password
+    params = [
+                ("username",email),
+                ("password", password)
+            ]
+
+    response = requests.post(apiUrls["login"], params=params)
+    resp = json.loads(response.text)
+
+    # check login and create user
+    if bool(resp["login"]):
+        user = CurrUser(int(resp["userid"]))
         login_user(user)
         return redirect(url_for('tempDash'))
-
-    flash('Please check your login details and try again.')
+    
+    flash(resp["reason"])
     return redirect(url_for('auth.login'))
 
 
 @auth.route(routeUrls['logout'])
 @login_required
-def logout():
-    logout_user()
-    flash('Logout Success!!')
+def logout(alias):
+    if alias.user_id == current_user.id:
+        # send username password
+        params = [("userid", current_user.id)]
+        #send logout request
+        response = requests.post(apiUrls["logout"], params=params)
+        resp = json.loads(response.text)
+        if bool(resp.text):
+            logout_user()
+            flash('Logout Success!!')
+        else:
+            flash('User not logged in!!')
     return redirect(url_for('auth.login'))
 

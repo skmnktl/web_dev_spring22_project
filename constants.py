@@ -36,7 +36,10 @@ routeUrls = {
 backend = "http://backend:3310"
 
 apiUrls = {
-    "createUser": backend + "/createuser"
+    "createUser":  backend + "/createuser",
+    "login":       backend + "/login",
+    "logout":      backend + "/logout",
+    "verifylogin": backend + "/verifylogin"
 }
 
 # secret key
@@ -142,18 +145,17 @@ def create_app():
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
     
-
     @login_manager.user_loader
-    def load_user(user_id):
-        #TODO: research on it
-        if int(user_id) == int(user.id):
-            # since the user_id is just the primary key of our user table, use it in the query for the user
-            return user
-        # user_d, fetch db 
+    def load_user(id):
+        params = [("userid", id)]
+        response = requests.post(apiUrls["verifylogin"], params=params)
+
+        # check if login exist
+        if bool(response.text):
+            return current_user
+        
         return None
-    
-    # db.init_app(app)
-    # sets autoreload on changes    
+      
     app.run(debug=True)
     app.config['SECRET_KEY'] = SECRET_KEY
 
