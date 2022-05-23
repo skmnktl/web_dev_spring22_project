@@ -5,16 +5,19 @@ from forms import *
 app = create_app()
 
 @app.route(routeUrls["courses"])
+@login_required
 def courses():
     return render_template("courses.html", headings=headingsCourses, data=dataCourses, course=courses)
 
 
 @app.route(routeUrls["grades"])
+@login_required
 def grades():
     return render_template("grades.html", headings=headingsGrades, data=dataGrades)
 
 
 @app.route(routeUrls["assignments"])
+@login_required
 def assignments():
     return render_template("assignments.html", headings=headingsAssignments, data=dataAssignments)
 
@@ -26,7 +29,9 @@ def announcements():
 
 @app.route(routeUrls["createAccount"], methods=["GET", "POST"])
 def createAccount():
-    print("RUNNING ACCOUNT CREATION")
+    if current_user.is_authenticated:
+        # user is already logged in
+        redirect(url_for(tempDash))
     form = AccountForm()
     firstName = form.firstName.data
     print(f"firstName before is {firstName}")
@@ -64,7 +69,9 @@ def createAccount():
                         securityAnswer3=securityAnswer3)
 
 
+
 @app.route(routeUrls["createAssign"], methods=["GET", "POST"])
+@login_required
 def createAssign():
     assignmentName = None
     assignmentDescription = None
@@ -79,6 +86,7 @@ def createAssign():
 
 
 @app.route(routeUrls["createAnnounce"],methods=["GET","POST"])
+@login_required
 def createAnnounce():
     announcement = None
     form = AnnouncementForm()
@@ -90,6 +98,7 @@ def createAnnounce():
 
 
 @app.route(routeUrls["createCourse"],methods=["GET","POST"])
+@login_required
 def createCourse():
     courseName = None
     courseDescription = None
@@ -104,6 +113,7 @@ def createCourse():
     return render_template("createCourse.html", form=form, courseName=courseName, courseDescription=courseDescription, courseCapacity=courseCapacity, courseProfessor=courseProfessor)
 
 @app.route(routeUrls["adminDash"],methods=["GET","POST"])
+@login_required
 def adminDash():
     form = ActivateUserForm()
 
@@ -114,18 +124,22 @@ def adminDash():
     return render_template("adminDashboard.html", headingsUserSummary=headingsUserSummary, headingsUsers=headingsUsers, dataUserSummary=dataUserSummary, dataUsers=dataUsers, form=form)
 
 @app.route(routeUrls["teacherDash"])
+@login_required
 def teacherDash():
     return render_template("teacherDashboard.html", headings=headingsDash, dataToGrade=dataDashTeacherToGrade)
 
 @app.route(routeUrls["studentDash"])
+@login_required
 def studentDash():
     return render_template("studentDashboard.html", headings=headingsDash, dataToDo=dataDashStudentToDo, dataUpcoming=dataDashStudentUpcoming, dataPastDue=dataDashStudentPastDue)
 
 @app.route(routeUrls["tempDash"])
+@login_required
 def tempDash():
     return render_template("tempDashboard.html")
 
 @app.route(routeUrls["editProfile"])
+@login_required
 def editProfile():
     return render_template("editProfile.html")
 
@@ -134,6 +148,7 @@ def forgotPassword():
     return render_template("forgotPassword.html")
 
 @app.route(routeUrls["submitAssign"],methods=["GET","POST"])
+@login_required
 def submitAssign():
     assignmentSubmission = None
     form = SubmitAssignmentForm()
@@ -155,6 +170,7 @@ def gradeAssign():
     return render_template("gradeAssignment.html", headings=headingsGradeAssignment, data=dataGradeAssignment, assignmentGradeSubmission=assignmentGradeSubmission, form=form, name=assignmentGradeName)
 
 @app.route(routeUrls["addToCourse"],methods=["GET","POST"])
+@login_required
 def addToCourse():
     form = AddToCourseForm()
 
