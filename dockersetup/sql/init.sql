@@ -45,8 +45,9 @@ CREATE TABLE announcements (
 );
 
 
-CREATE TABLE logged_in (
+CREATE TABLE loggedIn (
     userid INT unsigned NOT NULL,
 	password TEXT(256),
-	email TEXT(256)
+	email TEXT(256),
+    PRIMARY KEY (userid)
 );

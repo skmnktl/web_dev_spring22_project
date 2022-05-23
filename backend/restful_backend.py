@@ -390,14 +390,6 @@ class LoginUser(Resource):
             return False
         
         try:
-            """
-            userid INT unsigned NOT NULL,
-            password TEXT(256),
-            email TEXT(256),
-            """
-            print(props)
-            print(user)
-            print("here")
             crud.create("loggedIn", {
                 "userid": int(user["userid"]),
                 "password": user["password"],
@@ -414,7 +406,12 @@ api.add_resource(LoginUser, "/login")
 # verifies user is logged in -> checks the id in login_table
 class VerifyLoginUser(Resource):
     def get(self):
-        pass
+        """
+            Gets a response in return for id, whether
+            user exists in loggedin table or not
+        """
+        row = crud.read("loggedIn","userid", request.args["userid"])
+        return len(row) > 0
 
 api.add_resource(VerifyLoginUser, "/verifylogin")
 
