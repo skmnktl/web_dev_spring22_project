@@ -400,8 +400,8 @@ class LoginUser(Resource):
             })
 
             return json.dumps({
-                                "login": True,
-                                "userid"   : int(1)
+                                "login"  : True,
+                                "userid" : int(user["userid"])
                             })
         except Exception as e:
             return json.dumps({
