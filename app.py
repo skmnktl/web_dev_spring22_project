@@ -31,7 +31,8 @@ def announcements():
 def createAccount():
     if current_user.is_authenticated:
         # user is already logged in
-        redirect(url_for(tempDash))
+        flash("User is already logged in!!")
+        redirect(url_for('tempDash'))
     form = AccountForm()
     firstName = form.firstName.data
     print(f"firstName before is {firstName}")
@@ -159,6 +160,7 @@ def submitAssign():
     return render_template("submitAssignment.html", form=form, assignmentSubmission=assignmentSubmission, name=assignmentName, description=assignmentDescription)
 
 @app.route(routeUrls["gradeAssign"],methods=["GET","POST"])
+@login_required
 def gradeAssign():
     assignmentGradeSubmission = None
     form = GradeAssignmentForm()
