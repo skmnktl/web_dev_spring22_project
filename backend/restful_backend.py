@@ -418,8 +418,14 @@ api.add_resource(VerifyLoginUser, "/verifylogin")
 
 # logout user -> removes the user from login table
 class LogoutUser(Resource):
-    def put(self):
-        pass
+    def post(self):
+        # check if user is logged in
+        row = crud.read("loggedIn","userid", request.args["userid"])
+        if len(row) > 0:
+            crud.delete("loggedIn","userid", request.args["userid"])
+            return True
+        else:
+            return False
 
 api.add_resource(LogoutUser, "/logout")
 
