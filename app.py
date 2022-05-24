@@ -10,7 +10,7 @@ def courses():
     #fetch all the course ids
     response = requests.get(apiUrls["getCourseIds"])
     courses = []
-    courseids = json.loads(json.loads(response.text))["courseids"]
+    courseids = json.loads(response.text)
     # appedn all the courses
     for courseid in courseids:
         response = requests.get(apiUrls["getCourse"],
