@@ -110,8 +110,10 @@ def createAssign():
 @app.route(routeUrls["createAnnounce"],methods=["GET","POST"])
 @login_required
 def createAnnounce():
-    announcement = None
     form = AnnouncementForm()
+    announcement = form.announcement.data
+    courseID = ""
+
 
     if form.validate_on_submit():
         pass
