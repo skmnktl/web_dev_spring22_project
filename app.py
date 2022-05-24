@@ -75,12 +75,13 @@ def createAccount():
         return redirect(url_for('auth.login'))
 
     # if not submit validated or new page
-    return render_template("createAccount.html",
+    return render_template(
+                        "createAccount.html",
                         form=form,
                         firstName=firstName,
                         lastName=lastName,
                         email=email,
-                        accountID = accountID
+                        accountID = accountID,
                         password=password,
                         accountType=accountType,
                         securityAnswer1=securityAnswer1,
