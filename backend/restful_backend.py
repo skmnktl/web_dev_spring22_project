@@ -1,3 +1,4 @@
+from sqlalchemy import false
 import crud
 import json
 from random import choice
@@ -198,24 +199,31 @@ class User:
 
 class Course:
     @staticmethod
-    def create(coursename, coursedescription, coursecapacity, professor, students):
-        inputs = dict()
-        inputs['coursename'] = coursename
-        inputs['coursedescription'] = coursedescription
-        inputs['coursecapacity'] = coursecapacity
-        inputs['professor'] = professor
-        inputs['students'] = students
-        inputs['announcementInbox'] = ""
-        crud.create("course", inputs)
+    def create(coursename, coursedescription, coursecapacity, professor, students) -> bool:
+        try:
+            inputs = dict()
+            inputs['coursename'] = coursename
+            inputs['coursedescription'] = coursedescription
+            inputs['coursecapacity'] = coursecapacity
+            inputs['professor'] = professor
+            inputs['students'] = students
+            inputs['announcementInbox'] = ""
+            crud.create("course", inputs)
+            return True
+        except Exception as e:
+            return False
 
 class CreateCourse(Resource):
     def post(self):
         params = request.args
-        Course.create(params['coursename'],
+
+        if Course.create(params['coursename'],
                       params['coursedescription'],
                       params['coursecapacity'],
-                      params['professor'],
-                      params['students'])
+                      params['professor'], ""):
+            return True
+        else:
+            return False
 
 api.add_resource(CreateCourse, "/createcourse")
 

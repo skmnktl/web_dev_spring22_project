@@ -41,6 +41,7 @@ apiUrls = {
     "logout":       backend + "/logout",
     "verifylogin":  backend + "/verifylogin",
     "createAssign": backend + "/createassignment",
+    "createCourse": backend + "/createcourse",
 }
 
 # secret key
