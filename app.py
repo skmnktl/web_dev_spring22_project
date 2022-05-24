@@ -44,12 +44,12 @@ def assignments():
 @app.route(routeUrls["announcements"])
 def announcements():
     #fetch all the course ids
-    response = requests.get(apiUrls["getannouncement"])
+    response = requests.get(apiUrls["getAnnouncements"])
     announcements = []
     announcementids = json.loads(response.text)
     # appedn all the courses
     for announcementid in announcementids:
-        response = requests.get(apiUrls["getannouncement"],
+        response = requests.get(apiUrls["getAnnouncements"],
                                 params={
                                     "announcementid":int(announcementid)
                                 })

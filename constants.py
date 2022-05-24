@@ -44,6 +44,7 @@ apiUrls = {
     "createCourse": backend + "/createcourse",
     "getCourseIds": backend + "/getallcourseids",
     "getCourse"   : backend + "/getcourse",
+    "getAnnouncements"   : backend + "/getannouncements",
 }
 
 # secret key
