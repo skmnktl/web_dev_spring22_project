@@ -266,10 +266,10 @@ class GetAllCourseIDsForStudent(Resource):
         SELECT students
         FROM course
         WHERE
-            `studentid` LIKE \"%<|>{student}<|>%\" OR
-            `studentid` LIKE \"{student}<|>%\" OR
-            `studentid` LIKE \"%<|>{student}\"
-            `studentid` = \"{student}\"
+            `studentid` LIKE \"%<|>{student}<|>%\"
+            OR `studentid` LIKE \"{student}<|>%\"
+            OR `studentid` LIKE \"%<|>{student}\"
+            OR `studentid` = \"{student}\";
         """
         print(search)
         cursor = crud.conn.cursor()
