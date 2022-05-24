@@ -49,7 +49,7 @@ apiUrls = {
 # secret key
 SECRET_KEY = "web_dev_team"
 
-headingsCourses = ("Course ID","Course Name","Course Description","Course Capacity","Professor")
+headingsCourses = ("Course ID","Course Name","Course Description","Course Capacity","Professor","Actions")
 dataCourses = (
 	("Intro to Web Dev","An introductory web course","50","Prof. Jones"),
 	("Intro to Web Dev","An introductory web course","50","Prof. Jones"),
@@ -136,7 +136,7 @@ test_email = "hardikajmani@gmail.com"
 test_pass  = "thisIsPass123$"
 
 
-coursesDict = [
+coursesArray = [
             {'courseid': 1, 
             'coursename': 'webdev', 
             'coursedescription': 'desc', 
