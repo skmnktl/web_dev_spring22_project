@@ -418,9 +418,11 @@ api.add_resource(PostAnnouncement, "/postannouncement")
 class GetAnnouncements(Resource):
 
     def get(self):
+        print("REQ RECEIVED)
+        courseid = request.args['courseid']
         announcements = json.loads(crud.search("announcements",
                                                 ["courseid"],
-                                                [request.args['courseid']],
+                                                [courseid],
                                                 dict([("courseid","int")]),
                                                 None))
         announcementsList = []
