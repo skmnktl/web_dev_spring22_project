@@ -28,13 +28,14 @@
 						<tbody>
 							{% for row in data %}
 							<tr>
+								<td>{{ courseID }}</td>
 								{% for cell in row %}
 									<td>{{ cell }}</td>
 								{% endfor %}
 								<td>
-									<a href="{{ url_for('announcements'), id=course.id, name=course.name }}">Announcements</a><br>
-									<a href="{{ url_for('assignments') }}">Assignments</a><br>
-									<a href="{{ url_for('grades') }}">Grades</a><br>
+									<a href="{{ url_for('announcements'), courseID=courseID }}">Announcements</a><br>
+									<a href="{{ url_for('assignments'), courseID=courseID }}">Assignments</a><br>
+									<a href="{{ url_for('grades'), courseID=courseID }}">Grades</a><br>
 								</td>
 							</tr>
 							{% endfor %}

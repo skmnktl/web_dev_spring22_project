@@ -42,6 +42,8 @@ apiUrls = {
     "verifylogin":  backend + "/verifylogin",
     "createAssign": backend + "/createassignment",
     "createCourse": backend + "/createcourse",
+    "getCourseIds": backend + "/getallcourseid",
+    "getCourse"   : backend + "/getcourse",
 }
 
 # secret key
@@ -49,9 +51,9 @@ SECRET_KEY = "web_dev_team"
 
 headingsCourses = ("Course ID","Course Name","Course Description","Course Capacity","Professor")
 dataCourses = (
-	(71,"Intro to Web Dev","An introductory web course","50","Prof. Jones"),
-	(82,"Intro to Web Dev","An introductory web course","50","Prof. Jones"),
-	(99,"Intro to Web Dev","An introductory web course","50","Prof. Jones")
+	("Intro to Web Dev","An introductory web course","50","Prof. Jones"),
+	("Intro to Web Dev","An introductory web course","50","Prof. Jones"),
+	("Intro to Web Dev","An introductory web course","50","Prof. Jones")
 	)
 
 headingsAnnouncements = ("Announcement ID","Announcement","Date")
