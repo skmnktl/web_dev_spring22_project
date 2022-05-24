@@ -7,6 +7,11 @@ app = create_app()
 @app.route(routeUrls["courses"])
 @login_required
 def courses():
+    #fetch all the course ids
+    response = requests.post(apiUrls["getCourseIds"])
+    print(response.text)
+    
+    
     return render_template(
                             "courses.html", 
                             headings = headingsCourses,

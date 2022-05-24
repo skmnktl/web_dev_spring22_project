@@ -42,6 +42,8 @@ apiUrls = {
     "verifylogin":  backend + "/verifylogin",
     "createAssign": backend + "/createassignment",
     "createCourse": backend + "/createcourse",
+    "getCourseIds": backend + "/getallcourseid",
+    "getCourse"   : backend + "/getcourse",
 }
 
 # secret key
