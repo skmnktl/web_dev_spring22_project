@@ -54,7 +54,7 @@ def createAccount():
                   ("lastname",lastName),
                   ("username",email),
                   ("accountType",accountType),
-                  ("password",generate_password_hash(password, method='sha256')),
+                  ("password", password)#generate_password_hash(password, method='sha256')),
                   ("securityQuestions",f"Q1<|>{securityAnswer1}Q2<|>{securityAnswer2}Q3<|>{securityAnswer3}")]
         params = dict(params)
         response = requests.post(apiUrls["createUser"], params=params)
