@@ -272,7 +272,7 @@ class GetAllCourseIDsForStudent(Resource):
             `studentid` = \"{student}\"
         """
         print(search)
-        cursor = conn.cursor()
+        cursor = crud.conn.cursor()
         cursor.execute(search)
         gotten = cursor.fetchall()
         result = json.dumps(gotten, sort_keys=True, default=str)
