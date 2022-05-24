@@ -210,16 +210,17 @@ class Course:
             crud.create("course", inputs)
             return True
         except Exception as e:
+            print("Error: {}".format(e))
             return False
 
 class CreateCourse(Resource):
     def post(self):
         params = request.args
 
-        if Course.create(params['coursename'],
-                      params['coursedescription'],
-                      params['coursecapacity'],
-                      params['professor'], ""):
+        if Course.create(params['courseName'],
+                      params['courseDescription'],
+                      params['courseCapacity'],
+                      params['courseProfessor'], ""):
             return True
         else:
             return False
