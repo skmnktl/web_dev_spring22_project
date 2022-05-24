@@ -43,7 +43,7 @@ def createAccount():
     lastName  = form.lastName.data
     email     = form.email.data
     accountID = form.accountID.data
-    password  = form.password.data
+    password  = generate_password_hash(form.password.data, method='sha256')
     accountType = form.accountType.data
     securityAnswer1 = ""
     securityAnswer2 = ""
@@ -98,7 +98,7 @@ def createAssign():
         else:
             flash("Couldn't add the assignment")
     else:
-        flash("Invalid Enteries!okay oka")
+        flash("Invalid Enteries!")
 
     return render_template("createAssignment.html", 
                             form=form, 

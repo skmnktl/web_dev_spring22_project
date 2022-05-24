@@ -423,7 +423,8 @@ class LoginUser(Resource):
         
         # if user doesnt exist or incorrect password
         #TODO: create hashed pass
-        if not (resp): #and User.authentication(props["username"], props["password"])):
+        if not (resp) and\
+        User.authentication(props["username"], props["password"]):
             return json.dumps({
                                 "login": False,
                                 "reason": "User Not Found or Incorrect Pass"
