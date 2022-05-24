@@ -19,13 +19,12 @@ def login():
         # send username password
         params = [
                     ("username",email),
-                    ("password", generate_password_hash(password, method='sha256'))
+                    ("password", password)
                 ]
 
         response = requests.post(apiUrls["login"], params=params)
         resp = json.loads(response.text)
         resp = json.loads(resp)
-        print(generate_password_hash(password, method='sha256'))
         # check login and create user
         if resp["login"]:
             user = User(int(resp["userid"]))

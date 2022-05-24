@@ -181,8 +181,8 @@ class User:
     def authentication(username: str, password: str) -> bool:
         #MODIFIED : Authenticate with hashed passsword
         return check_password_hash(
-                    password,
-                    crud.read("user","username",username,["password"]))
+                    crud.read("user","username",username,["password"]),
+                    password)
     
     @staticmethod
     def isStudent(username):
@@ -464,7 +464,7 @@ class LoginUser(Resource):
         
         # if user doesnt exist or incorrect password
         #TODO: create hashed pass
-        if not (resp) and\
+        if (not resp) and\
         User.authentication(props["username"], props["password"]):
             return json.dumps({
                                 "login": False,
