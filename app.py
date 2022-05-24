@@ -137,7 +137,6 @@ def createCourse():
             "courseProfessor": courseProfessor,
         }
         response = requests.post(apiUrls["createCourse"], params=params)
-        
         if json.loads(response.text):
             flash("Course Added")
         else:
