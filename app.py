@@ -18,6 +18,24 @@ def courses():
                                     "courseid":int(courseid)
                                 })
         courses.append(json.loads(json.loads(response.text)))
+    """
+        [
+            {'courseid': 1, 
+            'coursename': 'webdev', 
+            'coursedescription': 'desc', 
+            'coursecapacity': 0, 
+            'professor': 'name', 
+            'students': ''
+        }, 
+        {
+            'courseid': 2,
+            'coursename': 'aehfa',
+            'coursedescription': 'adc',
+            'coursecapacity': 2,
+            'professor': 'adva',
+            'students': ''}
+        ]
+    """
     return render_template(
                             "courses.html", 
                             headings = headingsCourses,
