@@ -42,11 +42,11 @@ def login():
                             email = email,
                             password = password)
 
-@auth.route(routeUrls["login"], )
-def login_post():
-    # login code
-    email    = request.form.get('email')
-    password = request.form.get('password')
+# @auth.route(routeUrls["login"], )
+# def login_post():
+#     # login code
+#     email    = request.form.get('email')
+#     password = request.form.get('password')
 
 
     
