@@ -401,8 +401,9 @@ class GetAnnouncement(Resource):
 
     def get(self):
         courseid = request.args['courseid']
-        message = request.args['message']
-        crud.create("announcements",{"message":message,"course":courseid,"senddate":str(date.today())})
+        announcementid = request.args['announcementid']
+        types = dict([("courseid","int"),("announcementid","int")])
+        crud.search("assignment", ['courseid','announcementid'], [courseid, announcementid],types, None)
 
 api.add_resource(GetAnnouncement, "/getannouncement")
 
