@@ -262,7 +262,7 @@ class GetAllCourseIDs(Resource):
     def get(self):
         ids = json.loads(crud.search("course",["True"],["TRUE"],
                                                      dict([("True","int")]), ["courseid"]))
-        return [courseid for lst in ids for courseid in lst]
+        return json.dumps({"courseids": [courseid for lst in ids for courseid in lst]})
 
 api.add_resource(GetAllCourseIDs, "/getallcourseids")
 
@@ -318,7 +318,16 @@ class CreateAssignment(Resource):
         inputs = ["name","description","points","duedate","courseid",
                 "student","assignmentid"]
         values = dict([(i,request.args[i]) for i in inputs])
-        crud.create("assignment", values)
+        courseid = request.args['courseid']
+        students = crud.search("course",
+                                ["courseid"],
+                                [courseid],
+                                dict([("courseid","int")]),
+                                ["students"]))
+
+        for student in students:
+            values["student"] = student
+            crud.create("assignment", values)
 
 api.add_resource(CreateAssignment,"/createassignment")
 

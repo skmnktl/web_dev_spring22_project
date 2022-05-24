@@ -8,9 +8,16 @@ app = create_app()
 @login_required
 def courses():
     #fetch all the course ids
-    response = requests.post(apiUrls["getCourseIds"])
-    print(response.text)
-    
+    response = requests.get(apiUrls["getCourseIds"])
+    courses = []
+    courseids = json.loads(json.loads(response.text))["courseids"]
+    # appedn all the courses
+    for courseid in courseids:
+        response = requests.get(apiUrls["getCourse"],
+                                params={
+                                    "courseid":int(courseid)
+                                })
+        courses.append(json.loads(response.text))
     
     return render_template(
                             "courses.html", 
@@ -140,10 +147,12 @@ def createCourse():
 
     if form.validate_on_submit():
         params = {
-            "courseName": courseName,
-            "courseDescription": courseDescription,
-            "courseCapacity": courseCapacity,
-            "courseProfessor": courseProfessor,
+            "coursename": courseName,
+            "coursedescription": courseDescription,
+            "coursecapacity": courseCapacity,
+            "professor": courseProfessor,
+            "students":"",
+            "announcementsInbox":""
         }
         response = requests.post(apiUrls["createCourse"], params=params)
         if json.loads(response.text):
