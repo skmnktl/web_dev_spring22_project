@@ -333,6 +333,7 @@ api.add_resource(CreateAssignment,"/createassignment")
 class GetAssignments(Resource):
 
     def get(self):
+
         data = request.args["props"].split("<|>")
         data = dict([d.split("<?>") for d in data])
         props = data.keys()
@@ -354,6 +355,7 @@ class GetAssignments(Resource):
             d = dict(zip(fields,line))
             result.append(d)
         return result
+
 
 api.add_resource(GetAssignments, "/getassignments")
 
@@ -416,6 +418,17 @@ api.add_resource(PostAnnouncement, "/postannouncement")
 class GetAnnouncements(Resource):
 
     def get(self):
+        announcements = json.loads(crud.search("announcements",["courseid"],[request.args['courseid'],
+                                                             dict([("courseid","int")]), None))
+        announcementsList = []
+        for announcement in announcements:
+            announcementsList.append({"message":announcement[1],
+                                             "announcementid":announcement[0],
+                                             "date":announcement[2]
+                                             })
+        return announcementsList
+
+        """
         courseid = request.args['courseid']
         announcementid = request.args['announcementid']
         types = dict([("courseid","int"),("announcementid","int"),("message","str"),("senddate","str")])
@@ -427,6 +440,7 @@ class GetAnnouncements(Resource):
             d = dict(zip(fields,line))
             result.append(d)
         return result
+        """
 
 api.add_resource(GetAnnouncement, "/getannouncements")
 
