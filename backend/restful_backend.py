@@ -442,7 +442,7 @@ class GetAnnouncements(Resource):
         return result
         """
 
-api.add_resource(GetAnnouncement, "/getannouncements")
+api.add_resource(GetAnnouncements, "/getannouncements")
 
 # login classes
 # EDITED - hardikajmani
