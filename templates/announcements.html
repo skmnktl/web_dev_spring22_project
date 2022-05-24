@@ -16,7 +16,7 @@
 		<div class="flex-container">
 			<div id="announcements">	
 				
-				<h3>Course: {{ name }}</h3>
+				<h3>Course: {{ coursename }}</h3>
 
 					<table id="tblAnnouncements" border =solid>
 						<thead>
@@ -27,7 +27,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							{% for row in data %}
+							{% for announcement in announcements %}
 							<tr>
 								{% for cell in row %}
 								<td>{{ cell }}</td>
@@ -40,7 +40,7 @@
 
 			<div id="annoucementLinks">
 				<br>
-				<a href="{{ url_for('createAnnounce') }}">Create New Announcement (only visible for Teachers)</a><br>
+				<a href="{{ url_for('createAnnounce', courseid=courseid) }}">Create New Announcement (only visible for Teachers)</a><br>
 				<a href="{{ url_for('auth.logout') }}">Log Out</a>
 				<br>
 			</div>
