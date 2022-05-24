@@ -134,6 +134,26 @@ announcementCourseName = ("Web Dev")
 
 test_email = "hardikajmani@gmail.com"
 test_pass  = "thisIsPass123$"
+
+
+coursesDict = [
+            {'courseid': 1, 
+            'coursename': 'webdev', 
+            'coursedescription': 'desc', 
+            'coursecapacity': 0, 
+            'professor': 'name', 
+            'students': ''
+        }, 
+        {
+            'courseid': 2,
+            'coursename': 'aehfa',
+            'coursedescription': 'adc',
+            'coursecapacity': 2,
+            'professor': 'adva',
+            'students': ''}
+        ]
+    
+
 # user = User(1, test_email, generate_password_hash(test_pass, method='sha256'), "hardik")
 
 
