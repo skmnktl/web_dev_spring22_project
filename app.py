@@ -23,7 +23,8 @@ def courses():
                             "courses.html", 
                             headings = headingsCourses,
                             data = dataCourses, 
-                            course = courses
+                            course = courses,
+                            courseID = 22
                         )
 
 
@@ -144,10 +145,12 @@ def createCourse():
 
     if form.validate_on_submit():
         params = {
-            "courseName": courseName,
-            "courseDescription": courseDescription,
-            "courseCapacity": courseCapacity,
-            "courseProfessor": courseProfessor,
+            "coursename": courseName,
+            "coursedescription": courseDescription,
+            "coursecapacity": courseCapacity,
+            "professor": courseProfessor,
+            "students":"",
+            "announcementsInbox":""
         }
         response = requests.post(apiUrls["createCourse"], params=params)
         if json.loads(response.text):
