@@ -272,8 +272,8 @@ class GetAllCourseIDsForStudent(Resource):
         student = request.args["studentid"]
         search = \
         f"""
-        SELECT {get}
-        FROM {table}
+        SELECT students
+        FROM course
         WHERE
             `studentid` LIKE \"%<|>{student}<|>%\" OR
             `studentid` LIKE \"{student}<|>%\" OR
@@ -284,7 +284,8 @@ class GetAllCourseIDsForStudent(Resource):
         cursor = conn.cursor()
         cursor.execute(search)
         gotten = cursor.fetchall()
-        return json.dumps(gotten, sort_keys=True, default=str)
+        result = json.dumps(gotten, sort_keys=True, default=str)
+        return [courseid for lst in result for courseid in lst]
 
 api.add_resource(GetAllCourseIDsForStudent,"/getallcourseidsforstudent")
 
