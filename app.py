@@ -11,7 +11,8 @@ def courses():
                             "courses.html", 
                             headings = headingsCourses,
                             data = dataCourses, 
-                            course = courses
+                            course = courses,
+                            courseID = 22
                         )
 
 
