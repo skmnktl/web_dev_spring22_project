@@ -274,9 +274,8 @@ class GetAllCourseIDsForStudent(Resource):
         print(search)
         cursor = crud.conn.cursor()
         cursor.execute(search)
-        gotten = cursor.fetchall()
-        result = json.dumps(gotten, sort_keys=True, default=str)
-        return result
+        result =  cursor.fetchall()
+        return [courseid for lst in result for courseid in lst]
 
 api.add_resource(GetAllCourseIDsForStudent,"/getallcourseidsforstudent")
 
