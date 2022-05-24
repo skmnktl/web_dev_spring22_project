@@ -165,10 +165,10 @@ def createCourse():
 
     if form.validate_on_submit():
         params = {
-            "coursename": courseName,
-            "coursedescription": courseDescription,
-            "coursecapacity": courseCapacity,
-            "professor": courseProfessor
+            "courseName": courseName,
+            "courseDescription": courseDescription,
+            "courseCapacity": courseCapacity,
+            "courseProfessor": courseProfessor
         }
         response = requests.post(apiUrls["createCourse"], params=params)
         if json.loads(response.text):
