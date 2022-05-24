@@ -263,7 +263,7 @@ class GetAllCourseIDsForStudent(Resource):
         student = request.args["studentid"]
         search = \
         f"""
-        SELECT courseid
+        SELECT courseidfla
         FROM course
         WHERE
             `students` LIKE \"%<|>{student}<|>%\"
@@ -309,18 +309,8 @@ class CreateAssignment(Resource):
     def post(self):
         inputs = ["name","description","points","duedate","courseid",
                 "student","assignmentid"]
-        # TODO: Need to fix this
-        # 1. Read from request.args
-        # 2. Get the course id of the course
-        # 3. get all the sutdent registered with that course
-        # 4. add with primary key (course id, ass id, student id)
         values = dict([(i,request.args[i]) for i in inputs])
-        try:
-            crud.create("assignment", values)
-            return True
-        except Exception as e:
-            return False
-
+        crud.create("assignment", values)
 
 api.add_resource(CreateAssignment,"/createassignment")
 
@@ -400,8 +390,18 @@ api.add_resource(GradeAssignment,"/gradeassignment")
 
 class PostAnnouncement(Resource):
 
-    def post(self, courseid: int, message):
+    def post(self):
         courseid = request.args['courseid']
+        message = request.args['message']
+        crud.create("announcements",{"message":message,"course":courseid,"senddate":str(date.today())})
+
+api.add_resource(PostAnnouncement, "/announce")
+
+class GetAnnouncement(Resource):
+
+    def get(self):
+        courseid = request.args['courseid']
+        message = request.args['message']
         crud.create("announcements",{"message":message,"course":courseid,"senddate":str(date.today())})
 
 api.add_resource(PostAnnouncement, "/announce")
