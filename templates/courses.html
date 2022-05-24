@@ -26,16 +26,17 @@
 							</tr>
 						</thead>
 						<tbody>
-							{% for row in data %}
+							{% for course in courses %}
 							<tr>
-								<td>{{ courseID }}</td>
-								{% for cell in row %}
-									<td>{{ cell }}</td>
-								{% endfor %}
+								<td>{{ course.courseid }}</td>
+								<td>{{ course.coursename }}</td>
+								<td>{{ course.coursedescription }}</td>
+								<td>{{ course.coursecapacity }}</td>
+								<td>{{ course.professor }}</td>
 								<td>
-									<a href="{{ url_for('announcements', courseID=courseID) }}">Announcements</a><br>
-									<a href="{{ url_for('assignments', courseID=courseID) }}">Assignments</a><br>
-									<a href="{{ url_for('grades', courseID=courseID) }}">Grades</a><br>
+									<a href="{{ url_for('announcements', courseID=course.courseid) }}">Announcements</a><br>
+									<a href="{{ url_for('assignments', courseID=course.courseid) }}">Assignments</a><br>
+									<a href="{{ url_for('grades', courseID=course.courseid) }}">Grades</a><br>
 								</td>
 							</tr>
 							{% endfor %}
