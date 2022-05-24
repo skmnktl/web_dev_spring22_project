@@ -28,11 +28,9 @@
 						<tbody>
 							{% for row in data %}
 							<tr>
-								<td>{{ course.id }}</td>
-								<td>{{ course.name }}</td>
-								<td>{{ course.description }}</td>
-								<td>{{ course.capacity }}</td>
-								<td>{{ course.professor }}</td>
+								{% for cell in row %}
+									<td>{{ cell }}</td>
+								{% endfor %}
 								<td>
 									<a href="{{ url_for('announcements'), id=course.id, name=course.name }}">Announcements</a><br>
 									<a href="{{ url_for('assignments') }}">Assignments</a><br>
