@@ -48,6 +48,7 @@ def createAccount():
     form = AccountForm()
     firstName = form.firstName.data
     lastName  = form.lastName.data
+    accountID  = form.accountID.data
     email     = form.email.data
     password  = form.password.data
     accountType = form.accountType.data
@@ -72,6 +73,7 @@ def createAccount():
                         firstName=firstName,
                         lastName=lastName,
                         email=email,
+                        accountID = accountID
                         password=password,
                         accountType=accountType,
                         securityAnswer1=securityAnswer1,
