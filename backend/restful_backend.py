@@ -263,7 +263,7 @@ class GetAllCourseIDsForStudent(Resource):
         student = request.args["studentid"]
         search = \
         f"""
-        SELECT students
+        SELECT courseid
         FROM course
         WHERE
             `students` LIKE \"%<|>{student}<|>%\"
