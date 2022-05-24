@@ -7,7 +7,12 @@ app = create_app()
 @app.route(routeUrls["courses"])
 @login_required
 def courses():
-    return render_template("courses.html", headings=headingsCourses, data=dataCourses, course=courses)
+    return render_template(
+                            "courses.html", 
+                            headings = headingsCourses,
+                            data = dataCourses, 
+                            course = courses
+                        )
 
 
 @app.route(routeUrls["grades"])
@@ -29,18 +34,16 @@ def announcements():
 
 @app.route(routeUrls["createAccount"], methods=["GET", "POST"])
 def createAccount():
-    print( current_user.is_authenticated)
     if current_user.is_authenticated:
         # user is already logged in
         flash("User is already logged in!!")
         return redirect(url_for('tempDash'))
     form = AccountForm()
     firstName = form.firstName.data
-    print(f"firstName before is {firstName}")
-    lastName = form.lastName.data
-    email = form.email.data
+    lastName  = form.lastName.data
+    email     = form.email.data
     accountID = form.accountID.data
-    password = form.password.data
+    password  = form.password.data
     accountType = form.accountType.data
     securityAnswer1 = ""
     securityAnswer2 = ""
@@ -52,9 +55,8 @@ def createAccount():
                   ("accountType",accountType),
                   ("password",password),
                   ("securityQuestions","")] # TODO
-        params = dict(params) # isLoggedin -> user id -> go in the logs table -> fetc thed -> if? true : false
+        params = dict(params)
         response = requests.post(apiUrls["createUser"], params=params)
-        print(response.text)
         return redirect(url_for('auth.login'))
 
     # if not submit validated or new page
@@ -75,16 +77,35 @@ def createAccount():
 @app.route(routeUrls["createAssign"], methods=["GET", "POST"])
 @login_required
 def createAssign():
-    assignmentName = None
-    assignmentDescription = None
-    numberOfPoints =  None
-    dueDate = None
     form = AssignmentForm()
+    assignmentName        = form.assignmentName.data
+    assignmentDescription = form.assignmentDescription.data
+    numberOfPoints        = form.numberOfPoints.data
+    dueDate               = form.dueDate.data
 
     if form.validate_on_submit():
-        return
+        # create a post request
+        params = {
+            "assignmentName": assignmentName,
+            "assignmentDescription": assignmentDescription,
+            "numberOfPoints": numberOfPoints,
+            "dueDate": dueDate
+        }
+        response = requests.post(apiUrls["createAssign"], params=params)
 
-    return render_template("createAssignment.html", form=form, assignmentName=assignmentName, assignmentDescription=assignmentDescription, numberOfPoints=numberOfPoints, dueDate=dueDate)
+        if json.loads(response.text):
+            flash("Assignment Added")
+        else:
+            flash("Couldn't add the assignment")
+    else:
+        flash("Invalid Enteries!okay oka")
+
+    return render_template("createAssignment.html", 
+                            form=form, 
+                            assignmentName=assignmentName, 
+                            assignmentDescription=assignmentDescription, 
+                            numberOfPoints=numberOfPoints, 
+                            dueDate=dueDate)
 
 
 @app.route(routeUrls["createAnnounce"],methods=["GET","POST"])
@@ -102,17 +123,23 @@ def createAnnounce():
 @app.route(routeUrls["createCourse"],methods=["GET","POST"])
 @login_required
 def createCourse():
-    courseName = None
-    courseDescription = None
-    courseCapacity = None
-    courseProfessor = None
     form = CourseForm()
+    courseName        = form.courseName.data
+    courseDescription = form.courseDescription.data
+    courseCapacity    = form.courseCapacity.data
+    courseProfessor   = form.courseProfessor.data
+    
 
     if form.validate_on_submit():
         # write to db
         pass
 
-    return render_template("createCourse.html", form=form, courseName=courseName, courseDescription=courseDescription, courseCapacity=courseCapacity, courseProfessor=courseProfessor)
+    return render_template("createCourse.html", 
+                    form=form, 
+                    courseName=courseName, 
+                    courseDescription=courseDescription, 
+                    courseCapacity=courseCapacity, 
+                    courseProfessor=courseProfessor)
 
 @app.route(routeUrls["adminDash"],methods=["GET","POST"])
 @login_required
@@ -181,7 +208,15 @@ def addToCourse():
         userID = "55" # passed in from url
         assignmentID = "55" # passed in from table
     # edit db
-    return render_template("addToCourse.html", headings=headingsAddToCourse, data=dataAddToCourse, firstName=firstNameAddToCourse, lastName=lastNameAddToCourse, email=emailAddToCourse, form=form)
+    return render_template(
+                            "addToCourse.html", 
+                            headings = headingsAddToCourse, 
+                            data = dataAddToCourse, 
+                            firstName = firstNameAddToCourse, 
+                            lastName = lastNameAddToCourse, 
+                            email = emailAddToCourse, 
+                            form = form
+                        )
 
 # Internal Server Error
 @app.errorhandler(500)

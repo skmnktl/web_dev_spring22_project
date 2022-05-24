@@ -36,10 +36,11 @@ routeUrls = {
 backend = "http://backend:3310"
 
 apiUrls = {
-    "createUser":  backend + "/createuser",
-    "login":       backend + "/login",
-    "logout":      backend + "/logout",
-    "verifylogin": backend + "/verifylogin"
+    "createUser":   backend + "/createuser",
+    "login":        backend + "/login",
+    "logout":       backend + "/logout",
+    "verifylogin":  backend + "/verifylogin",
+    "createAssign": backend + "/createassignment",
 }
 
 # secret key

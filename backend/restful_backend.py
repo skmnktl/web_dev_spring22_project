@@ -306,12 +306,21 @@ class DeleteStudentFromCourse(Resource):
 api.add_resource(DeleteStudentFromCourse, "/deletestudentfromcourse")
 
 class CreateAssignment(Resource):
-
-    def put(self):
+    def post(self):
         inputs = ["name","description","points","duedate","courseid",
-                  "student","assignmentid"]
+                "student","assignmentid"]
+        # TODO: Need to fix this
+        # 1. Read from request.args
+        # 2. Get the course id of the course
+        # 3. get all the sutdent registered with that course
+        # 4. add with primary key (course id, ass id, student id)
         values = dict([(i,request.args[i]) for i in inputs])
-        crud.create("assignment", values)
+        try:
+            crud.create("assignment", values)
+            return True
+        except Exception as e:
+            return False
+
 
 api.add_resource(CreateAssignment,"/createassignment")
 
