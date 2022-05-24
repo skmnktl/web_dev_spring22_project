@@ -258,6 +258,36 @@ class GetAllCourseIDs(Resource):
 
 api.add_resource(GetAllCourseIDs, "/getallcourseids")
 
+class GetAllCourseIDs(Resource):
+    def get(self):
+        ids = json.loads(crud.search("course",["True"],["TRUE"],
+                                                     dict([("True","int")]), ["courseid"]))
+        return [courseid for lst in ids for courseid in lst]
+
+api.add_resource(GetAllCourseIDs, "/getallcourseids")
+
+
+class GetAllCourseIDsForStudent(Resource):
+    def get(self):
+        student = request.args["studentid"]
+        search = \
+        f"""
+        SELECT {get}
+        FROM {table}
+        WHERE
+            `studentid` LIKE \"%<|>{student}<|>%\" OR
+            `studentid` LIKE \"{student}<|>%\" OR
+            `studentid` LIKE \"%<|>{student}\"
+            `studentid` = \"{student}\"
+        """
+        print(search)
+        cursor = conn.cursor()
+        cursor.execute(search)
+        gotten = cursor.fetchall()
+        return json.dumps(gotten, sort_keys=True, default=str)
+
+api.add_resource(GetAllCourseIDsForStudent,"/getallcourseidsforstudent")
+
 class AddStudentToCourse(Resource):
 
     def put(self):
