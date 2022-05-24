@@ -43,7 +43,7 @@ def createAccount():
     lastName  = form.lastName.data
     email     = form.email.data
     accountID = form.accountID.data
-    password  = generate_password_hash(form.password.data, method='sha256')
+    password  = form.password.data
     accountType = form.accountType.data
     securityAnswer1 = ""
     securityAnswer2 = ""
@@ -53,7 +53,7 @@ def createAccount():
                   ("lastname",lastName),
                   ("username",email),
                   ("accountType",accountType),
-                  ("password",password),
+                  ("password",generate_password_hash(password, method='sha256')),
                   ("securityQuestions","")] # TODO
         params = dict(params)
         response = requests.post(apiUrls["createUser"], params=params)
