@@ -47,6 +47,7 @@ def announcements():
     response = requests.get(apiUrls["getAnnouncements"])
     announcements = []
     announcementids = json.loads(response.text)
+    print(json.loads(response.text))
     # appedn all the courses
     for announcementid in announcementids:
         response = requests.get(apiUrls["getAnnouncements"],
