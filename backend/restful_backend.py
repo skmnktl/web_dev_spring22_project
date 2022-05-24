@@ -237,7 +237,6 @@ class GetCourse(Resource):
                   "coursecapacity","professor","students"]
         return json.dumps(dict(list(zip(fields, data))))
 
-
 api.add_resource(GetCourse,"/getcourse")
 
 class GetStudentsInCourse(Resource):
@@ -250,6 +249,13 @@ class GetStudentsInCourse(Resource):
                                       ["students"]))
 
 api.add_resource(GetStudentsInCourse, "/getstudentsenrolledincourse")
+
+class GetAllCourseIDs(Resource):
+    def get(self):
+        return json.loads(crud.search("course",["True"],["TRUE"],
+                                                     dict([("True","int")]), ["courseid"]))
+
+api.add_resource(GetAllCourseIDs, "/getallcourseids")
 
 class AddStudentToCourse(Resource):
 
