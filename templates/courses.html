@@ -33,7 +33,6 @@
 								<td>{{ course.coursedescription }}</td>
 								<td>{{ course.coursecapacity }}</td>
 								<td>{{ course.professor }}</td>
-								<td>{{ course.students }}</td>
 								<td>
 									<a href="{{ url_for('announcements', courseID=course.courseID) }}">Announcements</a><br>
 									<a href="{{ url_for('assignments', courseID=course.courseID) }}">Assignments</a><br>
