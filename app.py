@@ -20,13 +20,13 @@ def courses():
         courses.append(json.loads(json.loads(response.text)))
     """
         [
-            {'courseid': 1, 
-            'coursename': 'webdev', 
-            'coursedescription': 'desc', 
-            'coursecapacity': 0, 
-            'professor': 'name', 
+            {'courseid': 1,
+            'coursename': 'webdev',
+            'coursedescription': 'desc',
+            'coursecapacity': 0,
+            'professor': 'name',
             'students': ''
-        }, 
+        },
         {
             'courseid': 2,
             'coursename': 'aehfa',
@@ -36,6 +36,7 @@ def courses():
             'students': ''}
         ]
     """
+
     return render_template(
                             "courses.html", 
                             headings = headingsCourses,
