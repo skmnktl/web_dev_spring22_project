@@ -53,7 +53,7 @@ def announcements():
                                 params={
                                     "announcementid":int(announcementid)
                                 })
-        announcements.append(json.loads(json.loads(response.text)))
+        announcements.append(json.loads(response.text))
 
     return render_template("announcements.html", headings=headingsAnnouncements, data=dataAnnouncements, name=announcementCourseName, announcements=announcements)
 
