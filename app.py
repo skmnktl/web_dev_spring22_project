@@ -110,6 +110,7 @@ def createAccount():
 def createAssign():
     form = AssignmentForm()
     assignmentName        = form.assignmentName.data
+    assignmentID        = form.assignmentID.data
     assignmentDescription = form.assignmentDescription.data
     numberOfPoints        = form.numberOfPoints.data
     dueDate               = form.dueDate.data
@@ -136,6 +137,7 @@ def createAssign():
     return render_template("createAssignment.html", 
                             form=form, 
                             assignmentName=assignmentName, 
+                            assignmentID=assignmentID, 
                             assignmentDescription=assignmentDescription, 
                             numberOfPoints=numberOfPoints, 
                             dueDate=dueDate)
