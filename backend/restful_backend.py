@@ -323,7 +323,7 @@ class CreateAssignment(Resource):
                                 ["courseid"],
                                 [courseid],
                                 dict([("courseid","int")]),
-                                ["students"]))
+                                ["students"])
 
         for student in students:
             values["student"] = student
