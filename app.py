@@ -49,12 +49,12 @@ def createAccount():
     securityAnswer1 = ""
     securityAnswer2 = ""
     securityAnswer3 = ""
-    if form.validate_on_submit() or True:
+    if form.validate_on_submit():
         params = [("firstname",firstName),
                   ("lastname",lastName),
                   ("username",email),
                   ("accountType",accountType),
-                  ("password", password)#generate_password_hash(password, method='sha256')),
+                  ("password", generate_password_hash(password, method='sha256')),
                   ("securityQuestions",f"Q1<|>{securityAnswer1}Q2<|>{securityAnswer2}Q3<|>{securityAnswer3}")]
         params = dict(params)
         response = requests.post(apiUrls["createUser"], params=params)
