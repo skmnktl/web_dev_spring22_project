@@ -403,7 +403,7 @@ class GetAnnouncement(Resource):
         courseid = request.args['courseid']
         announcementid = request.args['announcementid']
         types = dict([("courseid","int"),("announcementid","int")])
-        crud.search("assignment", ['courseid','announcementid'], [courseid, announcementid],types, None)
+        crud.search("announcement", ['courseid','announcementid'], [courseid, announcementid],types, None)
 
 api.add_resource(GetAnnouncement, "/getannouncement")
 
