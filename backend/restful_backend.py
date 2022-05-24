@@ -315,8 +315,7 @@ api.add_resource(DeleteStudentFromCourse, "/deletestudentfromcourse")
 
 class CreateAssignment(Resource):
     def post(self):
-        inputs = ["name","description","points","duedate","courseid",
-                "student","assignmentid"]
+        inputs = ["name","description","points","duedate","courseid"]
         values = dict([(i,request.args[i]) for i in inputs])
         courseid = request.args['courseid']
         students = crud.search("course",

@@ -117,10 +117,12 @@ def createAssign():
     if form.validate_on_submit():
         # create a post request
         params = {
-            "assignmentName": assignmentName,
-            "assignmentDescription": assignmentDescription,
-            "numberOfPoints": numberOfPoints,
-            "dueDate": dueDate
+            "name": assignmentName,
+            "description": assignmentDescription,
+            "points": numberOfPoints,
+            "duedate": dueDate,
+            "courseid": "TODO",
+            "assignmentid": 10000
         }
         response = requests.post(apiUrls["createAssign"], params=params)
 
