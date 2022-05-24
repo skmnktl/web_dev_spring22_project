@@ -42,7 +42,7 @@ apiUrls = {
     "verifylogin":  backend + "/verifylogin",
     "createAssign": backend + "/createassignment",
     "createCourse": backend + "/createcourse",
-    "getCourseIds": backend + "/getallcourseid",
+    "getCourseIds": backend + "/getallcourseids",
     "getCourse"   : backend + "/getcourse",
 }
 

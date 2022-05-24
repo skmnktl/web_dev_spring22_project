@@ -8,9 +8,16 @@ app = create_app()
 @login_required
 def courses():
     #fetch all the course ids
-    response = requests.post(apiUrls["getCourseIds"])
-    print(response.text)
-    
+    response = requests.get(apiUrls["getCourseIds"])
+    courses = []
+    courseids = json.loads(json.loads(response.text))["courseids"]
+    # appedn all the courses
+    for courseid in courseids:
+        response = requests.get(apiUrls["getCourse"],
+                                params={
+                                    "courseid":int(courseid)
+                                })
+        courses.append(json.loads(response.text))
     
     return render_template(
                             "courses.html", 
