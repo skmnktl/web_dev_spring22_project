@@ -128,7 +128,7 @@ def createAssign():
         else:
             flash("Couldn't add the assignment")
     else:
-        flash("Invalid Enteries!")
+        flash("Invalid Entries!")
 
     return render_template("createAssignment.html", 
                             form=form, 
@@ -175,8 +175,9 @@ def createCourse():
             flash("Course Added")
         else:
             flash("Couldn't add the course")
+        return redirect(url_for('courses'))
     else:
-        flash("Invalid Enteries!")
+        flash("Invalid Entries!")
 
     return render_template("createCourse.html", 
                     form=form, 
