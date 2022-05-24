@@ -395,7 +395,7 @@ class PostAnnouncement(Resource):
         message = request.args['message']
         crud.create("announcements",{"message":message,"course":courseid,"senddate":str(date.today())})
 
-api.add_resource(PostAnnouncement, "/announce")
+api.add_resource(PostAnnouncement, "/postannouncement")
 
 class GetAnnouncement(Resource):
 
@@ -404,7 +404,7 @@ class GetAnnouncement(Resource):
         message = request.args['message']
         crud.create("announcements",{"message":message,"course":courseid,"senddate":str(date.today())})
 
-api.add_resource(PostAnnouncement, "/announce")
+api.add_resource(GetAnnouncement, "/getannouncement")
 
 # login classes
 # EDITED - hardikajmani
