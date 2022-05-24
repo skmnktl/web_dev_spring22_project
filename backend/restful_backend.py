@@ -402,8 +402,15 @@ class GetAnnouncement(Resource):
     def get(self):
         courseid = request.args['courseid']
         announcementid = request.args['announcementid']
-        types = dict([("courseid","int"),("announcementid","int")])
-        return crud.search("announcements", ['courseid','announcementid'], [courseid, announcementid],types, None)
+        types = dict([("courseid","int"),("announcementid","int"),("message","str"),("senddate","str")])
+        data = crud.search("announcements", ['courseid','announcementid'], [courseid, announcementid],types, None)
+        data = json.loads(data)
+        fields = sorted(types.keys())
+        result = []
+        for line in data:
+            d = dict(zip(fields,line))
+            result.append(d)
+        return result
 
 api.add_resource(GetAnnouncement, "/getannouncement")
 
