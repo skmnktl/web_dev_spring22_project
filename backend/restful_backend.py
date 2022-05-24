@@ -180,8 +180,12 @@ class User:
     @staticmethod
     def authentication(username: str, password: str) -> bool:
         #MODIFIED : Authenticate with hashed passsword
+        print(password)
+        print(check_password_hash(
+                    crud.read("user","username",username,["password"])[0][0],
+                    password))
         return check_password_hash(
-                    crud.read("user","username",username,["password"]),
+                    crud.read("user","username",username,["password"])[0][0],
                     password)
     
     @staticmethod
@@ -416,11 +420,12 @@ class PostAnnouncement(Resource):
 api.add_resource(PostAnnouncement, "/postannouncement")
 
 class GetAnnouncements(Resource):
-
     def get(self):
+        print("REQ RECEIVED")
+        courseid = request.args['courseid']
         announcements = json.loads(crud.search("announcements",
                                                 ["courseid"],
-                                                [request.args['courseid']],
+                                                [courseid],
                                                 dict([("courseid","int")]),
                                                 None))
         announcementsList = []
@@ -430,20 +435,6 @@ class GetAnnouncements(Resource):
                                              "date":announcement[2]
                                              })
         return announcementsList
-
-        """
-        courseid = request.args['courseid']
-        announcementid = request.args['announcementid']
-        types = dict([("courseid","int"),("announcementid","int"),("message","str"),("senddate","str")])
-        data = crud.search("announcements", ['courseid'], [courseid],types, None)
-        data = json.loads(data)
-        fields = sorted(types.keys())
-        result = []
-        for line in data:
-            d = dict(zip(fields,line))
-            result.append(d)
-        return result
-        """
 
 api.add_resource(GetAnnouncements, "/getannouncements")
 
@@ -464,8 +455,8 @@ class LoginUser(Resource):
         
         # if user doesnt exist or incorrect password
         #TODO: create hashed pass
-        if (not resp) and\
-        User.authentication(props["username"], props["password"]):
+        if not (resp and\
+        User.authentication(props["username"], props["password"])):
             return json.dumps({
                                 "login": False,
                                 "reason": "User Not Found or Incorrect Pass"

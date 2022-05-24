@@ -43,7 +43,19 @@ def assignments():
 
 @app.route(routeUrls["announcements"])
 def announcements():
-    return render_template("announcements.html", headings=headingsAnnouncements, data=dataAnnouncements, name=announcementCourseName)
+    #fetch all the course ids
+    response = requests.get(apiUrls["getannouncement"])
+    announcements = []
+    announcementids = json.loads(response.text)
+    # appedn all the courses
+    for announcementid in announcementids:
+        response = requests.get(apiUrls["getannouncement"],
+                                params={
+                                    "announcementid":int(announcementid)
+                                })
+        announcements.append(json.loads(json.loads(response.text)))
+
+    return render_template("announcements.html", headings=headingsAnnouncements, data=dataAnnouncements, name=announcementCourseName, announcements=announcements)
 
 
 @app.route(routeUrls["createAccount"], methods=["GET", "POST"])
