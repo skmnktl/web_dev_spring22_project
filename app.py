@@ -168,9 +168,7 @@ def createCourse():
             "coursename": courseName,
             "coursedescription": courseDescription,
             "coursecapacity": courseCapacity,
-            "professor": courseProfessor,
-            "students":"",
-            "announcementsInbox":""
+            "professor": courseProfessor
         }
         response = requests.post(apiUrls["createCourse"], params=params)
         if json.loads(response.text):
