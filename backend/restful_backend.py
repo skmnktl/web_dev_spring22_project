@@ -318,7 +318,16 @@ class CreateAssignment(Resource):
         inputs = ["name","description","points","duedate","courseid",
                 "student","assignmentid"]
         values = dict([(i,request.args[i]) for i in inputs])
-        crud.create("assignment", values)
+        courseid = request.args['courseid']
+        students = crud.search("course",
+                                ["courseid"],
+                                [courseid],
+                                dict([("courseid","int")]),
+                                ["students"]))
+
+        for student in students:
+            values["student"] = student
+            crud.create("assignment", values)
 
 api.add_resource(CreateAssignment,"/createassignment")
 
