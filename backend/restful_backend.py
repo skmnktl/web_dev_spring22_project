@@ -393,7 +393,7 @@ class PostAnnouncement(Resource):
     def post(self):
         courseid = request.args['courseid']
         message = request.args['message']
-        crud.create("announcements",{"message":message,"course":courseid,"senddate":str(date.today())})
+        crud.create("announcements",{"message":message,"courseid":courseid,"senddate":str(date.today())})
 
 api.add_resource(PostAnnouncement, "/postannouncement")
 
