@@ -50,6 +50,9 @@
 				<a href="{{ url_for('createAccount') }}">Create Account</a><br>
 
 			</div>
+
+			<div class="credits_button_container" data-commentid="1"></div>
+
 		</div>
 
 		<script>
@@ -64,6 +67,14 @@
 
 			}
 		</script>
+
+		    <!-- Load React. -->
+				<!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+				<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+				<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+				<!-- Load our React component. -->
+				<script src="{{ url_for('static', filename='credits_button.js')}}"></script>
 
 	</body>
 </html>

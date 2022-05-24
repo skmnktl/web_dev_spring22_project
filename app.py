@@ -48,12 +48,12 @@ def createAccount():
     firstName = form.firstName.data
     lastName  = form.lastName.data
     email     = form.email.data
-    accountID = form.accountID.data
     password  = form.password.data
     accountType = form.accountType.data
     securityAnswer1 = ""
     securityAnswer2 = ""
     securityAnswer3 = ""
+
     if form.validate_on_submit():
         params = [("firstname",firstName),
                   ("lastname",lastName),
@@ -71,7 +71,6 @@ def createAccount():
                         firstName=firstName,
                         lastName=lastName,
                         email=email,
-                        accountID=accountID,
                         password=password,
                         accountType=accountType,
                         securityAnswer1=securityAnswer1,
