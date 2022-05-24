@@ -6,7 +6,7 @@ from models import *
 auth = Blueprint('auth', __name__)
 
 
-@auth.route(routeUrls["login"], methods=['POST'])
+@auth.route(routeUrls["login"], methods=['GET','POST'])
 def login():
     form = Login()
     email = form.email.data
@@ -42,11 +42,11 @@ def login():
                             email = email,
                             password = password)
 
-@auth.route(routeUrls["login"], )
-def login_post():
-    # login code
-    email    = request.form.get('email')
-    password = request.form.get('password')
+# @auth.route(routeUrls["login"], )
+# def login_post():
+#     # login code
+#     email    = request.form.get('email')
+#     password = request.form.get('password')
 
 
     
