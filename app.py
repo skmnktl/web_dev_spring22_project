@@ -38,6 +38,7 @@ def createAccount():
         # user is already logged in
         flash("User is already logged in!!")
         return redirect(url_for('tempDash'))
+    print("CREATING ACCOUNT")
     form = AccountForm()
     firstName = form.firstName.data
     lastName  = form.lastName.data
