@@ -77,6 +77,6 @@ class AddToCourseForm(FlaskForm):
 
 
 class Login(FlaskForm):
-	email     = StringField("Email: ",   validators=[DataRequired()])
+	email     = StringField("Email: ",   validators=[DataRequired(), Email()])
 	password  = StringField("Password: ",validators=[DataRequired()])
 	submit	  = SubmitField("Login")
