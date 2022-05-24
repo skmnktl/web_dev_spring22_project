@@ -17,8 +17,7 @@ def courses():
                                 params={
                                     "courseid":int(courseid)
                                 })
-        courses.append(json.loads(response.text))
-    
+        courses.append(json.loads(json.loads(response.text)))
     return render_template(
                             "courses.html", 
                             headings = headingsCourses,
