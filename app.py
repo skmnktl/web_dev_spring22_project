@@ -45,18 +45,7 @@ def assignments():
 def announcements():
     #fetch all the course ids
     response = requests.get(apiUrls["getannouncements"])
-    announcements = []
-    announcementids = json.loads(response.text)
-    # appedn all the courses
-    for announcement in announcementids:
-        response = requests.get(apiUrls["getannouncements"],
-                                params={
-                                    "announcementid":announcement["announcementid"],
-                                    "message": announcement['messageid'],
-                                    "date": announcement['date']
-                                })
-        announcements.append(json.loads(json.loads(response.text)))
-
+    announcements = json.loads(response.text)
     return render_template("announcements.html", headings=headingsAnnouncements, data=dataAnnouncements, name=announcementCourseName, announcements=announcements)
 
 
