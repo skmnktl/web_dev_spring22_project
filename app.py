@@ -181,9 +181,9 @@ def adminDash():
     form = ActivateUserForm()
     countActiveTeachers = json.loads(requests.get(backend+"/countactiveteachers").text)
     countActiveStudents = json.loads(requests.get(backend+"/countactivestudents").text)
-    countActiveStudents = json.loads(requests.get(backend+"/countcourses").text)
+    countCourses = json.loads(requests.get(backend+"/countcourses").text)
 
-    userSummary = [countActiveStudents,countActiveTeachers,6000]
+    userSummary = [countActiveStudents,countActiveTeachers,countCourses]
     if form.validate_on_submit():
         userID = "55" # passed in from table
     # edit db
