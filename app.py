@@ -179,8 +179,8 @@ def createCourse():
 @login_required
 def adminDash():
     form = ActivateUserForm()
-    countActiveTeachers = requests.get(backend+"/countactiveteachers")
-    countActiveStudents = requests.get(backend+"/countactivestudents")
+    countActiveTeachers = json.loads(requests.get(backend+"/countactiveteachers").text)
+    countActiveStudents = json.loads(requests.get(backend+"/countactivestudents").text)
 
     userSummary = [countActiveStudents,countActiveTeachers,6000]
     if form.validate_on_submit():
