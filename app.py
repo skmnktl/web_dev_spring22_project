@@ -52,9 +52,13 @@ def assignments():
         dataAssignments = {}
         flash(response["error"])
         
-    return render_template("assignments.html", 
-                            headings=headingsAssignments, 
-                            data=dataAssignments)
+    return render_template(
+                            "assignments.html", 
+                            headings = headingsAssignments, 
+                            data     = dataAssignments,
+                            courseid = courseid
+                        )
+
 
 @app.route(routeUrls["createAccount"], methods=["GET", "POST"])
 def createAccount():
@@ -98,6 +102,7 @@ def createAccount():
                         securityAnswer1=securityAnswer1,
                         securityAnswer2=securityAnswer2,
                         securityAnswer3=securityAnswer3)
+
 
 @app.route(routeUrls["createAssign"], methods=["GET", "POST"])
 @login_required
