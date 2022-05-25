@@ -49,7 +49,7 @@ def announcements():
     announcementids = json.loads(response.text)
     # appedn all the courses
     for announcement in announcementids:
-        response = requests.get(apiUrls["getannouncement"],
+        response = requests.get(apiUrls["getannouncements"],
                                 params={
                                     "announcementid":announcement["announcementid"],
                                     "message": announcement['messageid'],
