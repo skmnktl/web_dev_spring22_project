@@ -389,7 +389,7 @@ class GetAssignments(Resource):
             for line in data:
                 if line[0] not in result.keys():
                     result[line[0]] = line
-            return results
+            return result
         except Exception as e:
             return json.dumps(
                 {
