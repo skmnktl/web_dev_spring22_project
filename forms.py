@@ -48,7 +48,7 @@ class AnnouncementForm(FlaskForm):
 
 class AssignmentForm(FlaskForm):
 	assignmentName = StringField("Assignment Name: ", validators=[DataRequired()])
-	assignmentID =  IntegerField("Number of Points: ", validators=[DataRequired()])
+	assignmentID =  IntegerField("Assignment ID: ", validators=[DataRequired()])
 	assignmentDescription = StringField("Assignment Description: ", validators=[DataRequired()])
 	numberOfPoints =  IntegerField("Number of Points: ", validators=[DataRequired()])
 	dueDate = DateField("Due Date: ", validators=[DataRequired()])

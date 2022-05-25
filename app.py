@@ -104,11 +104,11 @@ def createAccount():
 def createAssign():
     form = AssignmentForm()
     assignmentName        = form.assignmentName.data
-    assignmentID        = form.assignmentID.data
+    assignmentID          = form.assignmentID.data
     assignmentDescription = form.assignmentDescription.data
     numberOfPoints        = form.numberOfPoints.data
     dueDate               = form.dueDate.data
-
+    courseid              = int(request.args['courseid'])
     if form.validate_on_submit():
         # create a post request
         params = {
@@ -116,15 +116,17 @@ def createAssign():
             "description": assignmentDescription,
             "points": numberOfPoints,
             "duedate": dueDate,
-            "courseid": "TODO",
-            "assignmentid": 10000
+            "courseid": courseid,
+            "assignmentid": assignmentID
         }
-        response = requests.post(apiUrls["createAssign"], params=params)
+        response = json.loads(requests.post(apiUrls["createAssign"], params=params).text)
 
-        if json.loads(response.text):
+        if response["response"]:
             flash("Assignment Added")
+            return redirect(url_for('assignments', courseid=courseid))
         else:
             flash("Couldn't add the assignment")
+            flash(response["error"])
     else:
         flash("Invalid Enteries!")
 
