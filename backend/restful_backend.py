@@ -408,6 +408,17 @@ def ActiveStudents(Resource):
 
 api.add_resource(ActiveStudents, "/activestudents")
 
+def ActiveTeachers(Resource):
+    def get():
+        teachers = crud.search('user',
+                                   ["accountType"],
+                                   ["T"],
+                                   ["str"]
+                                   ["userid",'active'])
+        return teachers
+
+api.add_resource(ActiveStudents, "/activestudents")
+
 def getStudentsInCourseForAssignment(courseid):
     students = crud.search('assignments',
                            ["courseid"],
