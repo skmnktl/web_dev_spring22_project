@@ -471,7 +471,7 @@ class AllUsers(Resource):
                                    None))
         return users
 
-api.add_resource(ActiveTeachers, "/allusers")
+api.add_resource(AllUsers, "/allusers")
 
 def getStudentsInCourseForAssignment(courseid):
     students = crud.search('assignments',
