@@ -399,7 +399,7 @@ class ActiveStudents(Resource):
                                    ["accountType"],
                                    ["S"],
                                    {"accountType":"str"},
-                                   ["userid",'active'])
+                                   None)
         return students
 
 api.add_resource(ActiveStudents, "/activestudents")
@@ -410,7 +410,7 @@ class ActiveTeachers(Resource):
                                    ["accountType"],
                                    ["T"],
                                    {"accountType":"str"},
-                                   ["userid",'active'])
+                                   None)
         return teachers
 
 api.add_resource(ActiveTeachers, "/activeteachers")
