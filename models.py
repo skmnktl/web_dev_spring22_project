@@ -13,5 +13,5 @@ class User(UserMixin):
     def is_admin(self) -> bool:
         return self.accountType == "admin"
 
-    def accountType(self):
+    def returnAccountType(self):
         return self.accountType

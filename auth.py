@@ -32,7 +32,7 @@ def login():
             print(current_user.get_id())
             print(current_user.is_authenticated)
             print(current_user.is_admin())
-            print(current_user.accountType())
+            print(current_user.returnAccountType())
             return redirect(url_for('tempDash'))
         
         flash(resp["reason"])
