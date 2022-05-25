@@ -127,7 +127,7 @@ def createAnnounce():
     form = AnnouncementForm()
     announcement = form.announcement.data
     print(request.args)
-    courseID = request.args['courseID']
+    courseID = int(request.args['courseID'])
     if form.validate_on_submit():
         params={"message":announcement,"courseid":courseID}
         print(params)
