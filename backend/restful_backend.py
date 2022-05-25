@@ -370,6 +370,8 @@ class GetAssignments(Resource):
                         ("description","str"),
                         ("points","int"),
                         ("duedate","str"),
+                        ("courseid","int"),
+                        ("student","str"),
                         ("assignmentid","int")])
             data = crud.search("assignment", ["courseid"], [courseid], types, None)
             data = json.loads(data)
@@ -377,11 +379,15 @@ class GetAssignments(Resource):
             result = {}
             for line in data:
                 if line[0] not in result.keys():
+                    # not needed
+                    line.pop('courseid', None)
+                    line.pop('student', None)
+                    
                     result[line[0]] = line
             return {
                     "response": True,
                     "data"    : result
-                }
+            }
         except Exception as e:
             return  {
                     "response": False,
