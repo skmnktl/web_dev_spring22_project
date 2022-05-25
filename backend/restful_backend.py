@@ -405,8 +405,8 @@ class ActiveStudents(Resource):
                                            ["student"],
                                            {"accountType":"str"},
                                            ["userid",'active']))
-        s = list(set(students+students2))
-        filtered = [1 for i in s if i[1]]
+        s = dict(students+students2)
+        filtered = [1 for i in s.values() if i[1]]
         return sum(filtered)
 
 api.add_resource(ActiveStudents, "/countactivestudents")
@@ -432,8 +432,8 @@ class ActiveTeachers(Resource):
                                                    ["TA"],
                                                    {"accountType":"str"},
                                                    ["userid",'active']))
-        t = list(set(teachers + teachers2 + teachers3))
-        filtered = [1 for i in t if i[1]]
+        t = dict(teachers + teachers2 + teachers3)
+        filtered = [1 for i in t.values() if i[1]]
         return sum(filtered)
 
 api.add_resource(ActiveTeachers, "/countactiveteachers")
