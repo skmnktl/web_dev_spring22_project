@@ -319,6 +319,7 @@ class AddStudentToCourse(Resource):
 
 api.add_resource(AddStudentToCourse, "/addstudenttocourse")
 
+
 class DeleteStudentFromCourse(Resource):
 
     def post(self):
@@ -331,6 +332,7 @@ class DeleteStudentFromCourse(Resource):
         crud.update('course','courseid',courseid,"students",students)
 
 api.add_resource(DeleteStudentFromCourse, "/deletestudentfromcourse")
+
 
 class CreateAssignment(Resource):
     def post(self):
@@ -362,6 +364,7 @@ class CreateAssignment(Resource):
 
 api.add_resource(CreateAssignment,"/createassignment")
 
+
 class GetAssignments(Resource):
     def get(self):
         try:
@@ -390,10 +393,40 @@ class GetAssignments(Resource):
                     "response": False,
                     "error"   : str(e)
                 }
-            
-
 
 api.add_resource(GetAssignments, "/getassignments")
+
+class GetAllAssignmentsStudent(Resource):
+    def get(self):
+        try:
+            studentid =  request.args["studentid"]
+            types = dict([("name","str"),
+                        ("description","str"),
+                        ("points","int"),
+                        ("duedate","str"),
+                        ("courseid","int"),
+                        ("student","str"),
+                        ("assignmentid","int")])
+            data = crud.search("assignment", ["student"], [studentid], types, None)
+            data = json.loads(data)
+            print(data)
+            result = {}
+            for line in data:
+                if line[0] not in result.keys():
+                    # not needed                    
+                    result[line[0]] = line[:-2]
+            return {
+                    "response": True,
+                    "data"    : result
+            }
+        except Exception as e:
+            return  {
+                    "response": False,
+                    "error"   : str(e)
+                }
+
+api.add_resource(GetAllAssignmentsStudent, "/getallassignmentsstudent")
+
 
 class EditAssignment(Resource):
     def put(self, courseid,assignmentid, field, value):

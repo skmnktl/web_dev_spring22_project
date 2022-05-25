@@ -226,12 +226,24 @@ def teacherDash():
 @app.route(routeUrls["studentDash"])
 @login_required
 def studentDash():
-    return render_template("studentDashboard.html", headings=headingsDash, dataToDo=dataDashStudentToDo, dataUpcoming=dataDashStudentUpcoming, dataPastDue=dataDashStudentPastDue)
+    # get all the student assignments
+    
+    return render_template(
+        "studentDashboard.html", 
+        headings = headingsDash, 
+        dataToDo = dataDashStudentToDo, 
+        dataUpcoming = dataDashStudentUpcoming, 
+        dataPastDue = dataDashStudentPastDue
+    )
 
 @app.route(routeUrls["tempDash"])
 @login_required
 def tempDash():
-    return render_template("tempDashboard.html")
+    userid = current_user.get_id()
+    return render_template(
+        "tempDashboard.html",
+        userid = userid
+    )
 
 @app.route(routeUrls["editProfile"])
 @login_required
