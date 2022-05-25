@@ -405,7 +405,7 @@ class ActiveStudents(Resource):
                                            ["student"],
                                            {"accountType":"str"},
                                            ["userid",'active']))
-        s = students+students2
+        s = list(set(students+students2))
         filtered = [1 for i in s if i[1]]
         return sum(filtered)
 
@@ -432,7 +432,7 @@ class ActiveTeachers(Resource):
                                                    ["TA"],
                                                    {"accountType":"str"},
                                                    ["userid",'active']))
-        t = teachers + teachers2 + teachers3
+        t = list(set(teachers + teachers2 + teachers3))
         filtered = [1 for i in t if i[1]]
         return sum(filtered)
 
