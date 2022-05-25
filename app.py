@@ -126,11 +126,9 @@ def createAssign():
 def createAnnounce():
     form = AnnouncementForm()
     announcement = form.announcement.data
-    print(request.args)
     courseID = int(request.args['courseid'])
     if form.validate_on_submit():
         params={"message":announcement,"courseid":courseID}
-        print(params)
         requests.post(routeUrls['createAnnouncement'],params=params)
         return "Created!"
 
