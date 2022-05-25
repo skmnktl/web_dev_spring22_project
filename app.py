@@ -181,12 +181,12 @@ def adminDash():
     countActiveTeachers = requests.get(backend+"/countactiveteachers")
     countActiveStudents = requests.get(backend+"/countactivestudents")
 
-    dataUserSummary = [countActiveStudents,countActiveTeachers,6000]
+    userSummary = [countActiveStudents,countActiveTeachers,6000]
     if form.validate_on_submit():
         userID = "55" # passed in from table
     # edit db
 
-    return render_template("adminDashboard.html", headingsUserSummary=headingsUserSummary, headingsUsers=headingsUsers, dataUserSummary=dataUserSummary, dataUsers=dataUsers, form=form)
+    return render_template("adminDashboard.html", headingsUserSummary=headingsUserSummary, headingsUsers=headingsUsers, dataUserSummary=userSummary, dataUsers=dataUsers, form=form)
 
 @app.route(routeUrls["teacherDash"])
 @login_required
