@@ -369,6 +369,15 @@ class EditAssignment(Resource):
 
 api.add_resource(EditAssignment,"/editassign")
 
+def ActiveStudents(Resource):
+    def get():
+        students = crud.search('user',
+                                   ["accountType"],
+                                   ["S"],
+                                   ["str"]
+                                   ["userid",'active'])
+        return students
+
 
 def getStudentsInCourseForAssignment(courseid):
     students = crud.search('assignments',
