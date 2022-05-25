@@ -370,8 +370,6 @@ class GetAssignments(Resource):
                         ("description","str"),
                         ("points","int"),
                         ("duedate","str"),
-                        ("courseid","int"),
-                        ("student","str"),
                         ("assignmentid","int")])
             data = crud.search("assignment", ["courseid"], [courseid], types, None)
             data = json.loads(data)
@@ -383,7 +381,7 @@ class GetAssignments(Resource):
             return {
                     "response": True,
                     "data"    : result
-            }
+                }
         except Exception as e:
             return  {
                     "response": False,

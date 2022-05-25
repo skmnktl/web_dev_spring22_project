@@ -66,7 +66,7 @@ dataAnnouncements = (
     (34,"New assignment posted","5/7/2021")
 )
 
-headingsAssignments = ("Assignment Name","Assignment Description","Number of Points","Due Date","Actions")
+headingsAssignments = ("ID", "Assignment Name","Assignment Description","Number of Points","Due Date","Actions")
 dataAssignments = (
     ("Final project1","Build a website","100","5/21/2021"),
     ("Final project2","Build a website","100","5/21/2021"),

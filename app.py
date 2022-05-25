@@ -42,9 +42,12 @@ def assignments():
     params = {
         "courseid": courseid
     }
-    response = json.loads(requests.post(apiUrls["getAssign"], params=params))
+    response = json.loads(requests.get(apiUrls["getAssign"], params=params).text)
+    print(response)
     if response["response"]:
-        dataAssignments = response["data"]
+        dataAssignments = []
+        for d in response["data"].keys():
+            dataAssignments.append(response["data"][d])
     else:
         dataAssignments = {}
         flash(response["error"])
