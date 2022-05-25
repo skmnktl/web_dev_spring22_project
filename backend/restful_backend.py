@@ -446,6 +446,18 @@ class ActiveTeachers(Resource):
 
 api.add_resource(ActiveTeachers, "/countactiveteachers")
 
+
+class AllUsers(Resource):
+    def get(self):
+        users = json.loads(crud.search('user',
+                                   ["TRUE"],
+                                   ["TRUE],
+                                   {"TRUE":"int"},
+                                   None))
+        return users
+
+api.add_resource(ActiveTeachers, "/allusers")
+
 def getStudentsInCourseForAssignment(courseid):
     students = crud.search('assignments',
                            ["courseid"],
