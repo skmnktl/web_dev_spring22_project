@@ -177,7 +177,7 @@ def create_app():
 
         # check if login exist
         if json.loads(response.text):
-            return User(id)
+            return User(id, current_user.accountType())
         
         return None
       
