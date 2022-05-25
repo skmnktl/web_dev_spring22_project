@@ -409,6 +409,9 @@ class ActiveStudents(Resource):
 
 api.add_resource(ActiveStudents, "/activestudents")
 
+
+def concat(l1, l2):
+    return l1.extend(l2)
 class ActiveTeachers(Resource):
     def get(self):
         teachers = crud.search('user',
@@ -426,7 +429,7 @@ class ActiveTeachers(Resource):
                                                    ["TA"],
                                                    {"accountType":"str"},
                                                    ["userid",'active'])
-        t = teachers + teachers2+teachers3
+        t = concat(concat(teachers,teachers2),teachers3)
         return t
 
 api.add_resource(ActiveTeachers, "/activeteachers")
