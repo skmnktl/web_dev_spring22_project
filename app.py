@@ -211,7 +211,15 @@ def adminDash():
     allUsers = json.loads(requests.get(backend+"/allusers").text)
     userData = []
     for user in allUsers:
-        userData.append([user['userid'], user['firstname'], user['lastname'],user['email'],user['accountType'],user['active'])
+        userData.append(
+                [
+                    user['userid'], 
+                    user['firstname'], 
+                    user['lastname'],
+                    user['email'],
+                    user['accountType'],
+                    user['active']
+                ])
     if form.validate_on_submit():
         userID = "55" # passed in from table
     # edit db
@@ -227,7 +235,7 @@ def teacherDash():
 @login_required
 def studentDash():
     # get all the student assignments
-    
+
     return render_template(
         "studentDashboard.html", 
         headings = headingsDash, 
