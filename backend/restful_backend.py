@@ -395,16 +395,16 @@ api.add_resource(EditAssignment,"/editassign")
 
 class ActiveStudents(Resource):
     def get(self):
-        students = crud.search('user',
+        students = json.loads(crud.search('user',
                                    ["accountType"],
                                    ["S"],
                                    {"accountType":"str"},
-                                   ["userid",'active'])
-        students2 = crud.search('user',
+                                   ["userid",'active']))
+        students2 = json.loads(crud.search('user',
                                            ["accountType"],
                                            ["student"],
                                            {"accountType":"str"},
-                                           ["userid",'active'])
+                                           ["userid",'active']))
         return students+students2
 
 api.add_resource(ActiveStudents, "/activestudents")
@@ -414,21 +414,21 @@ def concat(l1, l2):
     return l1.extend(l2)
 class ActiveTeachers(Resource):
     def get(self):
-        teachers = crud.search('user',
+        teachers = json.loads(crud.search('user',
                                    ["accountType"],
                                    ["T"],
                                    {"accountType":"str"},
-                                   ["userid",'active'])
-        teachers2 = crud.search('user',
+                                   ["userid",'active']))
+        teachers2 = json.loads(crud.search('user',
                                            ["accountType"],
                                            ["TA"],
                                            {"accountType":"str"},
-                                           ["userid",'active'])
-        teachers3 = crud.search('user',
+                                           ["userid",'active']))
+        teachers3 = json.loads(crud.search('user',
                                                    ["accountType"],
                                                    ["TA"],
                                                    {"accountType":"str"},
-                                                   ["userid",'active'])
+                                                   ["userid",'active']))
         t = concat(concat(teachers,teachers2),teachers3)
         return t
 
