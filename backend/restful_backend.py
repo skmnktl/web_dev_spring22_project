@@ -393,6 +393,14 @@ class EditAssignment(Resource):
 
 api.add_resource(EditAssignment,"/editassign")
 
+class CountCourses(Resource):
+    def get(self):
+        ids = json.loads(crud.search("course",["True"],["TRUE"],
+                                                             dict([("True","int")]), ["courseid"]))
+        return json.dumps(len(list(set([courseid for lst in ids for courseid in lst]))))
+
+ api.add_resource(CountCourses,"/countcourses")
+
 class ActiveStudents(Resource):
     def get(self):
         students = json.loads(crud.search('user',
