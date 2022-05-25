@@ -472,7 +472,7 @@ class AllUsers(Resource):
         fields = ['userid','pass',"email","accountType","securityQuestions","firstname","lastname","active","username"]
         userDicts = []
         for user in users:
-            userDicts.append(dict(list(zip(fields,user)))
+            userDicts.append(dict(list(zip(fields,user))))
         return userDicts
 
 api.add_resource(AllUsers, "/allusers")
