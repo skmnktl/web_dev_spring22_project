@@ -432,7 +432,7 @@ class ActiveTeachers(Resource):
                                                    ["TA"],
                                                    {"accountType":"str"},
                                                    ["userid",'active']))
-        t = teachers = teachers2 + teachers3
+        t = teachers + teachers2 + teachers3
         filtered = [1 for i in t if i[1]]
         return sum(filtered)
 
