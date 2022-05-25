@@ -40,15 +40,6 @@ def grades():
 def assignments():
     return render_template("assignments.html", headings=headingsAssignments, data=dataAssignments)
 
-
-@app.route(routeUrls["announcements"])
-def announcements():
-    courseid = request.args['courseid']
-    response = requests.get(apiUrls["getAnnouncements"],params = {"courseid":courseid})
-    announcements = json.loads(response.text)
-    return render_template("announcements.html", headings=headingsAnnouncements, data=dataAnnouncements, name=announcementCourseName, announcements=announcements)
-
-
 @app.route(routeUrls["createAccount"], methods=["GET", "POST"])
 def createAccount():
     if current_user.is_authenticated:
@@ -135,14 +126,23 @@ def createAssign():
 def createAnnounce():
     form = AnnouncementForm()
     announcement = form.announcement.data
-    courseID = request.args['courseid']
+    courseID = request.args['courseID']
     if form.validate_on_submit():
         params={"message":announcement,"courseid":courseID}
         print(params)
+        print(request.args)
         requests.post(routeUrls['createAnnouncement'],params=params)
         return "Created!"
 
     return render_template("createAnnouncement.html", announcement=announcement, form=form)
+
+@app.route(routeUrls["announcements"])
+def announcements():
+    courseid = request.args['courseid']
+    response = requests.get(apiUrls["getAnnouncements"],params = {"courseid":courseid})
+    announcements = json.loads(response.text)
+    return render_template("announcements.html", headings=headingsAnnouncements, data=dataAnnouncements, name=announcementCourseName, announcements=announcements)
+
 
 
 @app.route(routeUrls["createCourse"],methods=["GET","POST"])
