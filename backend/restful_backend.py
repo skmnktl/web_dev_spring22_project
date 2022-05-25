@@ -485,16 +485,15 @@ api.add_resource(LoginUser, "/login")
 
 # verifies user is logged in -> checks the id in login_table
 class VerifyLoginUser(Resource):
-    def get(self):
+    def post(self):
         """
             Gets a response in return for id, whether
             user exists in loggedin table or not
         """
         row = crud.read("loggedIn","userid", request.args["userid"])
-        print(json.loads(row))
         if len(row) > 0:
              #1. check if user exists
-            user, resp = User.getUserInfo(json.loads(row)["username"])
+            user, resp = User.getUserInfo(row[0][2]) #username
             return json.dumps(
                 {
                     "status": True,
