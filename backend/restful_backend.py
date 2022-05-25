@@ -293,14 +293,28 @@ api.add_resource(GetAllCourseIDsForStudent,"/getallcourseidsforstudent")
 
 class AddStudentToCourse(Resource):
 
-    def put(self):
-        courseid = request.args['courseid']
-        newValue = request.args['student']
-        students = crud.read("course","courseid",courseid,["students"])
-        students = students[0][0]
-        newValue += "<|>" + students
-        newValue = newValue.strip("<|>")
-        crud.update('course','courseid',courseid,"students",newValue)
+    def post(self):
+        try:
+            courseid = request.args['courseid']
+            newValue = request.args['student']
+            students = crud.read("course","courseid",courseid,["students"])
+            students = students[0][0]
+            newValue += "<|>" + students
+            newValue = newValue.strip("<|>")
+            crud.update('course','courseid',courseid,"students",newValue)
+        return json.dumps(
+                {
+                    "response": True
+                }
+            )
+        except Exception as e:
+            return json.dumps(
+                {
+                    "response": False,
+                    "error"   : str(e)
+                }
+            )
+
 
 api.add_resource(AddStudentToCourse, "/addstudenttocourse")
 
@@ -319,18 +333,32 @@ api.add_resource(DeleteStudentFromCourse, "/deletestudentfromcourse")
 
 class CreateAssignment(Resource):
     def post(self):
-        inputs = ["name","description","points","duedate","courseid"]
-        values = dict([(i,request.args[i]) for i in inputs])
-        courseid = request.args['courseid']
-        students = crud.search("course",
-                                ["courseid"],
-                                [courseid],
-                                dict([("courseid","int")]),
-                                ["students"])
-
-        for student in students:
-            values["student"] = student
-            crud.create("assignment", values)
+        try:
+            inputs = ["name","description","points","duedate","courseid"]
+            values = dict([(i,request.args[i]) for i in inputs])
+            courseid = request.args['courseid']
+            students = crud.search("course",
+                                    ["courseid"],
+                                    [courseid],
+                                    dict([("courseid","int")]),
+                                    ["students"])
+            students = json.loads(students)[0]
+            for student in students:
+                if student != "":
+                    values["student"] = int(student)
+                    crud.create("assignment", values)
+            return json.dumps(
+                {
+                    "response": True
+                }
+            )
+        except Exception as e:
+            return json.dumps(
+                {
+                    "response": False,
+                    "error"   : str(e)
+                }
+            )
 
 api.add_resource(CreateAssignment,"/createassignment")
 
