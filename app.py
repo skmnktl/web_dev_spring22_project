@@ -41,8 +41,8 @@ def assignments():
     return render_template("assignments.html", headings=headingsAssignments, data=dataAssignments)
 
 
-@app.route(routeUrls["announcements"])
-def announcements():
+@app.route(routeUrls["announcements"]+"/<courseid>")
+def announcements(courseid):
     response = requests.get(apiUrls["getannouncements"],params = {"courseid":courseid})
     announcements = json.loads(response.text)
     return render_template("announcements.html", headings=headingsAnnouncements, data=dataAnnouncements, name=announcementCourseName, announcements=announcements)
