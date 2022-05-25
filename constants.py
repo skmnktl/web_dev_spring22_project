@@ -1,7 +1,6 @@
 """
     This file holds all the constants to be used
 """
-from turtle import back
 from libs import *
 from models import *
 
