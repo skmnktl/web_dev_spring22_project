@@ -411,7 +411,6 @@ class GradeAssignment(Resource):
 api.add_resource(GradeAssignment,"/gradeassignment")
 
 class PostAnnouncement(Resource):
-
     def post(self):
         courseid = request.args['courseid']
         message = request.args['message']
