@@ -335,13 +335,8 @@ class CreateAssignment(Resource):
 api.add_resource(CreateAssignment,"/createassignment")
 
 class GetAssignments(Resource):
-
     def get(self):
-
-        data = request.args["props"].split("<|>")
-        data = dict([d.split("<?>") for d in data])
-        props = data.keys()
-        values = data.values()
+        courseid =  request.args["courseid"]
         types = dict([("name","str"),
                       ("description","str"),
                       ("points","int"),
@@ -349,15 +344,13 @@ class GetAssignments(Resource):
                       ("courseid","int"),
                       ("student","str"),
                       ("assignmentid","int")])
-
-        if len(props) != len(values): return "Incorrect number of property names and values"
-        data = crud.search("assignment", props, values,types, None)
+        data = crud.search("assignment", "courseid", courseid, types, None)
         data = json.loads(data)
-        fields = sorted(types.keys())
+        print(data)
         result = []
         for line in data:
-            d = dict(zip(fields,line))
-            result.append(d)
+            #d = dict(zip(fields,line))
+            result.append(line)
         return result
 
 
