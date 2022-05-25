@@ -406,7 +406,7 @@ class ActiveStudents(Resource):
                                            {"accountType":"str"},
                                            ["userid",'active']))
         s = students+students2
-        filtered = [1 for i in t if i[1]]
+        filtered = [1 for i in s if i[1]]
         return sum(filtered)
 
 api.add_resource(ActiveStudents, "/countactivestudents")
