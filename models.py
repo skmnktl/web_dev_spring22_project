@@ -1,4 +1,3 @@
-from backend.restful_backend import AccountType
 from libs import * 
 from constants import *
 from forms import *
