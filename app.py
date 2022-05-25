@@ -178,8 +178,10 @@ def createCourse():
 @app.route(routeUrls["adminDash"],methods=["GET","POST"])
 @login_required
 def adminDash():
-    form = ActivateUserForm()
+    countActiveTeachers = requests.get(backend+"/countactiveteachers")
+    countActiveStudents = requests.get(backend+"/countactivestudents")
 
+    dataUserSummary = [countActiveStudents,countActiveTeachers,6000]
     if form.validate_on_submit():
         userID = "55" # passed in from table
     # edit db
