@@ -398,7 +398,7 @@ class ActiveStudents(Resource):
         students = crud.search('user',
                                    ["accountType"],
                                    ["S"],
-                                   ["str"]
+                                   ["str"],
                                    ["userid",'active'])
         return students
 
@@ -409,7 +409,7 @@ class ActiveTeachers(Resource):
         teachers = crud.search('user',
                                    ["accountType"],
                                    ["T"],
-                                   ["str"]
+                                   ["str"],
                                    ["userid",'active'])
         return teachers
 
