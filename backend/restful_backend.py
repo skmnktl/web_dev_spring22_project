@@ -394,7 +394,7 @@ class EditAssignment(Resource):
 api.add_resource(EditAssignment,"/editassign")
 
 def ActiveStudents(Resource):
-    def get():
+    def get(self):
         students = crud.search('user',
                                    ["accountType"],
                                    ["S"],
@@ -405,7 +405,7 @@ def ActiveStudents(Resource):
 api.add_resource(ActiveStudents, "/activestudents")
 
 def ActiveTeachers(Resource):
-    def get():
+    def get(self):
         teachers = crud.search('user',
                                    ["accountType"],
                                    ["T"],
