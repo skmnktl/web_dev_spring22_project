@@ -299,10 +299,21 @@ class AddStudentToCourse(Resource):
             newValue = request.args['student']
             students = crud.read("course","courseid",courseid,["students"])
             students = students[0][0]
+            if str(newValue) in students:
+                return json.dumps(
+                    {
+                        "response": False,
+                        "error"   : "Student already added!!"
+                    }
+                )
             newValue += "<|>" + students
             newValue = newValue.strip("<|>")
             crud.update('course','courseid',courseid,"students",newValue)
-            return json.dumps({"response": True})
+            return json.dumps(
+                    {
+                        "response": True
+                    }
+                )
         except Exception as e:
             return json.dumps(
                 {
@@ -316,7 +327,7 @@ api.add_resource(AddStudentToCourse, "/addstudenttocourse")
 
 class DeleteStudentFromCourse(Resource):
 
-    def put(self):
+    def post(self):
         courseid = request.args['courseid']
         newValue = request.args['student']
         students = crud.read("course","courseid",courseid,["students"])
@@ -330,7 +341,7 @@ api.add_resource(DeleteStudentFromCourse, "/deletestudentfromcourse")
 class CreateAssignment(Resource):
     def post(self):
         try:
-            inputs = ["name","description","points","duedate","courseid"]
+            inputs = ["assignmentid", "name", "description", "points", "duedate", "courseid"]
             values = dict([(i,request.args[i]) for i in inputs])
             courseid = request.args['courseid']
             students = crud.search("course",
@@ -338,11 +349,13 @@ class CreateAssignment(Resource):
                                     [courseid],
                                     dict([("courseid","int")]),
                                     ["students"])
-            students = json.loads(students)[0]
+            students = json.loads(students)[0][0].split("<|>")
+            print(students)
             for student in students:
                 if student != "":
                     values["student"] = int(student)
                     crud.create("assignment", values)
+                    print("creating assignmnet")
             return json.dumps(
                 {
                     "response": True
@@ -360,22 +373,30 @@ api.add_resource(CreateAssignment,"/createassignment")
 
 class GetAssignments(Resource):
     def get(self):
-        courseid =  request.args["courseid"]
-        types = dict([("name","str"),
-                      ("description","str"),
-                      ("points","int"),
-                      ("duedate","str"),
-                      ("courseid","int"),
-                      ("student","str"),
-                      ("assignmentid","int")])
-        data = crud.search("assignment", "courseid", courseid, types, None)
-        data = json.loads(data)
-        print(data)
-        result = []
-        for line in data:
-            #d = dict(zip(fields,line))
-            result.append(line)
-        return result
+        try:
+            courseid =  request.args["courseid"]
+            types = dict([("name","str"),
+                        ("description","str"),
+                        ("points","int"),
+                        ("duedate","str"),
+                        ("courseid","int"),
+                        ("student","str"),
+                        ("assignmentid","int")])
+            data = crud.search("assignment", ["courseid"], [courseid], types, None)
+            data = json.loads(data)
+            print(data)
+            result = {}
+            for line in data:
+                if line[0] not in result.keys():
+                    result[line[0]] = line
+            return results
+        except Exception as e:
+            return json.dumps(
+                {
+                    "response": False,
+                    "error"   : str(e)
+                }
+            )
 
 
 api.add_resource(GetAssignments, "/getassignments")
