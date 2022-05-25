@@ -399,8 +399,13 @@ class ActiveStudents(Resource):
                                    ["accountType"],
                                    ["S"],
                                    {"accountType":"str"},
-                                   None)
-        return students
+                                   ["userid",'active'])
+        students2 = crud.search('user',
+                                           ["accountType"],
+                                           ["student"],
+                                           {"accountType":"str"},
+                                           ["userid",'active'])
+        return students+students2
 
 api.add_resource(ActiveStudents, "/activestudents")
 
@@ -410,8 +415,18 @@ class ActiveTeachers(Resource):
                                    ["accountType"],
                                    ["T"],
                                    {"accountType":"str"},
-                                   None)
-        return teachers
+                                   ["userid",'active'])
+        teachers2 = crud.search('user',
+                                           ["accountType"],
+                                           ["TA"],
+                                           {"accountType":"str"},
+                                           ["userid",'active'])
+        teachers3 = crud.search('user',
+                                                   ["accountType"],
+                                                   ["TA"],
+                                                   {"accountType":"str"},
+                                                   ["userid",'active'])
+        return teachers+teachers2+teachers3
 
 api.add_resource(ActiveTeachers, "/activeteachers")
 
