@@ -491,7 +491,22 @@ class VerifyLoginUser(Resource):
             user exists in loggedin table or not
         """
         row = crud.read("loggedIn","userid", request.args["userid"])
-        return len(row) > 0
+        print(json.loads(row))
+        if len(row) > 0:
+             #1. check if user exists
+            user, resp = User.getUserInfo(json.loads(row)["username"])
+            return json.dumps(
+                {
+                    "status": True,
+                    "accountType": user["accountType"] 
+                }
+            )
+        else:
+            return json.dumps(
+                {
+                    "status": False
+                }
+            )
 
 api.add_resource(VerifyLoginUser, "/verifylogin")
 

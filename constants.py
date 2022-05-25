@@ -176,8 +176,9 @@ def create_app():
         response = requests.post(apiUrls["verifylogin"], params=params)
 
         # check if login exist
-        if json.loads(response.text):
-            return User(id, current_user.accountType())
+        resp = json.loads(response.text)
+        if resp["status"]:
+            return User(id, resp["accountType"])
         
         return None
       
