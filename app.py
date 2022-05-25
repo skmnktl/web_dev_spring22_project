@@ -129,7 +129,7 @@ def createAnnounce():
     courseID = int(request.args['courseid'])
     if form.validate_on_submit():
         params={"message":announcement,"courseid":courseID}
-        requests.post(routeUrls['createAnnouncement'],params=params)
+        requests.post(apiUrls['createAnnouncement'],params=params)
         return "Created!"
 
     return render_template("createAnnouncement.html", announcement=announcement, form=form)
