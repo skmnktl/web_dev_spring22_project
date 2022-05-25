@@ -469,7 +469,11 @@ class AllUsers(Resource):
                                    ["TRUE"],
                                    {"TRUE":"int"},
                                    None))
-        return users
+        fields = ['userid','pass',"email","accountType","securityQuestions","firstname","lastname","active","username"]
+        userDicts = []
+        for user in users:
+            userDicts.append(dict(list(zip(fields,user)))
+        return userDicts
 
 api.add_resource(AllUsers, "/allusers")
 
@@ -477,7 +481,7 @@ def getStudentsInCourseForAssignment(courseid):
     students = crud.search('assignments',
                            ["courseid"],
                            [courseid],
-                           ["int"]
+                           ["int"],
                            ["student"])
     return list(set(json.loads(students)))
 
