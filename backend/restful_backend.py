@@ -454,7 +454,6 @@ class LoginUser(Resource):
         user, resp = User.getUserInfo(props["username"])
         
         # if user doesnt exist or incorrect password
-        #TODO: create hashed pass
         if not (resp and\
         User.authentication(props["username"], props["password"])):
             return json.dumps({
@@ -471,7 +470,8 @@ class LoginUser(Resource):
 
             return json.dumps({
                                 "login"  : True,
-                                "userid" : int(user["userid"])
+                                "userid" : int(user["userid"]),
+                                "accountType": user["accountType"]
                             })
         except Exception as e:
             return json.dumps({
