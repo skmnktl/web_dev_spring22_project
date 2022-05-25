@@ -135,11 +135,13 @@ def createAssign():
 def createAnnounce():
     form = AnnouncementForm()
     announcement = form.announcement.data
-    courseID = ""
-
-
+    courseID = request.args['courseid']
     if form.validate_on_submit():
-        pass
+        request.post(routeUrls['createAnnouncement'],params={"message":announcement,"courseid":courseid})
+        courseid = request.args['courseid']
+        response = requests.get(apiUrls["getAnnouncements"],params = {"courseid":courseid})
+        announcements = json.loads(response.text)
+        return render_template("courses.html", headings=headingsAnnouncements, data=dataAnnouncements, name=announcementCourseName, announcements=announcements)
 
     return render_template("createAnnouncement.html", announcement=announcement, form=form)
 
