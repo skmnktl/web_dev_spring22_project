@@ -141,7 +141,7 @@ def createAnnounce():
         courseid = request.args['courseid']
         response = requests.get(apiUrls["getAnnouncements"],params = {"courseid":courseid})
         announcements = json.loads(response.text)
-        return render_template("courses.html", headings=headingsAnnouncements, data=dataAnnouncements, name=announcementCourseName, announcements=announcements)
+        #return render_template("courses.html", headings=headingsAnnouncements, data=dataAnnouncements, name=announcementCourseName, announcements=announcements)
 
     return render_template("createAnnouncement.html", announcement=announcement, form=form)
 
