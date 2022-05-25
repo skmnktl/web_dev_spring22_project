@@ -302,7 +302,7 @@ class AddStudentToCourse(Resource):
             newValue += "<|>" + students
             newValue = newValue.strip("<|>")
             crud.update('course','courseid',courseid,"students",newValue)
-        return json.dumps({"response": True})
+            return json.dumps({"response": True})
         except Exception as e:
             return json.dumps(
                 {
