@@ -426,7 +426,8 @@ class ActiveTeachers(Resource):
                                                    ["TA"],
                                                    {"accountType":"str"},
                                                    ["userid",'active'])
-        return teachers+teachers2+teachers3
+        t = teachers + teachers2+teachers3
+        return t
 
 api.add_resource(ActiveTeachers, "/activeteachers")
 
