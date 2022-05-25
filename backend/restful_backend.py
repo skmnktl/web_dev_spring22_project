@@ -399,7 +399,7 @@ class CountCourses(Resource):
                                                              dict([("True","int")]), ["courseid"]))
         return json.dumps(len(list(set([courseid for lst in ids for courseid in lst]))))
 
- api.add_resource(CountCourses,"/countcourses")
+api.add_resource(CountCourses,"/countcourses")
 
 class ActiveStudents(Resource):
     def get(self):
