@@ -300,27 +300,21 @@ class AddStudentToCourse(Resource):
             students = crud.read("course","courseid",courseid,["students"])
             students = students[0][0]
             if str(newValue) in students:
-                return json.dumps(
-                    {
+                return {
                         "response": False,
                         "error"   : "Student already added!!"
-                    }
-                )
+                       }
             newValue += "<|>" + students
             newValue = newValue.strip("<|>")
             crud.update('course','courseid',courseid,"students",newValue)
-            return json.dumps(
-                    {
+            return  {
                         "response": True
                     }
-                )
         except Exception as e:
-            return json.dumps(
-                {
+            return  {
                     "response": False,
                     "error"   : str(e)
-                }
-            )
+                    }
 
 
 api.add_resource(AddStudentToCourse, "/addstudenttocourse")
@@ -355,19 +349,16 @@ class CreateAssignment(Resource):
                 if student != "":
                     values["student"] = int(student)
                     crud.create("assignment", values)
-                    print("creating assignmnet")
-            return json.dumps(
-                {
+                    
+            return {
                     "response": True
-                }
-            )
+                   }
+
         except Exception as e:
-            return json.dumps(
-                {
+            return  {
                     "response": False,
                     "error"   : str(e)
-                }
-            )
+                    }
 
 api.add_resource(CreateAssignment,"/createassignment")
 
@@ -389,14 +380,16 @@ class GetAssignments(Resource):
             for line in data:
                 if line[0] not in result.keys():
                     result[line[0]] = line
-            return result
+            return {
+                    "response": True,
+                    "data"    : result
+            }
         except Exception as e:
-            return json.dumps(
-                {
+            return  {
                     "response": False,
                     "error"   : str(e)
                 }
-            )
+            
 
 
 api.add_resource(GetAssignments, "/getassignments")
@@ -510,19 +503,19 @@ api.add_resource(PostAnnouncement, "/postannouncement")
 
 class GetAnnouncements(Resource):
     def get(self):
-        print("REQ RECEIVED")
         courseid = request.args['courseid']
         announcements = json.loads(crud.search("announcements",
-                                                ["courseid"],
-                                                [courseid],
-                                                dict([("courseid","int")]),
-                                                None))
+                                               ["courseid"],
+                                               [courseid],
+                                               dict([("courseid","int")]),
+                                               None))
         announcementsList = []
         for announcement in announcements:
-            announcementsList.append({"message":announcement[1],
-                                             "announcementid":announcement[0],
-                                             "date":announcement[2]
-                                             })
+            announcementsList.append({
+                                        "message":announcement[1],
+                                        "announcementid":announcement[0],
+                                        "date":announcement[2]
+                                    })
         return announcementsList
 
 api.add_resource(GetAnnouncements, "/getannouncements")

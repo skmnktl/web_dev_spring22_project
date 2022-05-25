@@ -38,7 +38,20 @@ def grades():
 @app.route(routeUrls["assignments"])
 @login_required
 def assignments():
-    return render_template("assignments.html", headings=headingsAssignments, data=dataAssignments)
+    courseid = int(request.args['courseid'])
+    params = {
+        "courseid": courseid
+    }
+    response = json.loads(requests.post(apiUrls["getAssign"], params=params))
+    if response["response"]:
+        dataAssignments = response["data"]
+    else:
+        dataAssignments = {}
+        flash(response["error"])
+        
+    return render_template("assignments.html", 
+                            headings=headingsAssignments, 
+                            data=dataAssignments)
 
 @app.route(routeUrls["createAccount"], methods=["GET", "POST"])
 def createAccount():

@@ -1,6 +1,7 @@
 """
     This file holds all the constants to be used
 """
+from turtle import back
 from libs import *
 from models import *
 
@@ -36,16 +37,17 @@ routeUrls = {
 backend = "http://backend:3310"
 
 apiUrls = {
-    "createUser":   backend + "/createuser",
-    "login":        backend + "/login",
-    "logout":       backend + "/logout",
-    "verifylogin":  backend + "/verifylogin",
-    "createAssign": backend + "/createassignment",
-    "createCourse": backend + "/createcourse",
-    "getCourseIds": backend + "/getallcourseids",
-    "getCourse"   : backend + "/getcourse",
-    "getAnnouncements" : backend + "/getannouncements",
-    "createAnnouncement": backend + "/postannouncement"
+    "createUser"        : backend + "/createuser",
+    "login"             : backend + "/login",
+    "logout"            : backend + "/logout",
+    "verifylogin"       : backend + "/verifylogin",
+    "createAssign"      : backend + "/createassignment",
+    "getAssign"         : backend + "/getassignments",
+    "createCourse"      : backend + "/createcourse",
+    "getCourseIds"      : backend + "/getallcourseids",
+    "getCourse"         : backend + "/getcourse", 
+    "getAnnouncements"  : backend + "/getannouncements",
+    "createAnnouncement": backend + "/postannouncement",
 }
 
 # secret key
