@@ -466,7 +466,7 @@ class AllUsers(Resource):
     def get(self):
         users = json.loads(crud.search('user',
                                    ["TRUE"],
-                                   ["TRUE],
+                                   ["TRUE"],
                                    {"TRUE":"int"},
                                    None))
         return users
