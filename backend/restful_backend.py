@@ -405,13 +405,16 @@ class ActiveStudents(Resource):
                                            ["student"],
                                            {"accountType":"str"},
                                            ["userid",'active']))
-        return students+students2
+        s = students+students2
+        filtered = [1 for i in t if i[1]
+        return sum(filtered)
 
-api.add_resource(ActiveStudents, "/activestudents")
+api.add_resource(ActiveStudents, "/countactivestudents")
 
 
 def concat(l1, l2):
     return l1.extend(l2)
+
 class ActiveTeachers(Resource):
     def get(self):
         teachers = json.loads(crud.search('user',
@@ -429,10 +432,11 @@ class ActiveTeachers(Resource):
                                                    ["TA"],
                                                    {"accountType":"str"},
                                                    ["userid",'active']))
-        t = concat(concat(teachers,teachers2),teachers3)
-        return t
+        t = teachers = teachers2 + teachers3
+        filtered = [1 for i in t if i[1]
+        return sum(filtered)
 
-api.add_resource(ActiveTeachers, "/activeteachers")
+api.add_resource(ActiveTeachers, "/countactiveteachers")
 
 def getStudentsInCourseForAssignment(courseid):
     students = crud.search('assignments',
