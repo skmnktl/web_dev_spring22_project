@@ -48,10 +48,12 @@ def announcements():
     announcements = []
     announcementids = json.loads(response.text)
     # appedn all the courses
-    for announcementid in announcementids:
+    for announcement in announcementids:
         response = requests.get(apiUrls["getannouncement"],
                                 params={
-                                    "announcementid":int(announcementid)
+                                    "announcementid":announcement["announcementid"],
+                                    "message": announcement['messageid'],
+                                    "date": announcement['date']
                                 })
         announcements.append(json.loads(json.loads(response.text)))
 
