@@ -379,11 +379,8 @@ class GetAssignments(Resource):
             result = {}
             for line in data:
                 if line[0] not in result.keys():
-                    # not needed
-                    line.pop('courseid', None)
-                    line.pop('student', None)
-                    
-                    result[line[0]] = line
+                    # not needed                    
+                    result[line[0]] = line[:-2]
             return {
                     "response": True,
                     "data"    : result
