@@ -137,7 +137,9 @@ def createAnnounce():
     announcement = form.announcement.data
     courseID = request.args['courseid']
     if form.validate_on_submit():
-        requests.post(routeUrls['createAnnouncement'],params={"message":announcement,"courseid":courseID})
+        params={"message":announcement,"courseid":courseID}
+        print(params)
+        requests.post(routeUrls['createAnnouncement'],params=params)
         return "Created!"
 
     return render_template("createAnnouncement.html", announcement=announcement, form=form)
