@@ -34,7 +34,7 @@
 								<td>{{ course.coursecapacity }}</td>
 								<td>{{ course.professor }}</td>
 								<td>
-									<a href="{{ url_for('announcements', courseid=course.courseid, coursename=course.coursename) }}">Announcements</a><br>
+									<a href="{{ url_for(f'announcements/{course.courseid}') }}">Announcements</a><br>
 									<a href="{{ url_for('assignments', courseid=course.courseid, coursename=course.coursename) }}">Assignments</a><br>
 									<a href="{{ url_for('grades', coursedi=course.courseid, coursename=course.coursename) }}">Grades</a><br>
 								</td>
