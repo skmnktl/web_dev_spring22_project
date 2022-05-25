@@ -27,10 +27,12 @@ def login():
         resp = json.loads(resp)
         # check login and create user
         if resp["login"]:
-            user = User(int(resp["userid"]))
+            user = User(int(resp["userid"]), resp["accountType"])
             login_user(user)
             print(current_user.get_id())
             print(current_user.is_authenticated)
+            print(current_user.is_admin())
+            print(current_user.accountType())
             return redirect(url_for('tempDash'))
         
         flash(resp["reason"])
