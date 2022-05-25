@@ -178,6 +178,7 @@ def createCourse():
 @app.route(routeUrls["adminDash"],methods=["GET","POST"])
 @login_required
 def adminDash():
+    form = ActivateUserForm()
     countActiveTeachers = requests.get(backend+"/countactiveteachers")
     countActiveStudents = requests.get(backend+"/countactivestudents")
 
