@@ -32,8 +32,8 @@
 								<td>{{ cell }}</td>
 								{% endfor %}
 								<td>			
-									<a href="{{ url_for('submitAssign') }}">Submit Assignment (only visible for Students)</a><br>
-									<a href="{{ url_for('gradeAssign') }}">Grade Assignment (only visible for Teachers)</a><br>
+									<a href="{{ url_for('submitAssign', courseid=courseid) }}">Submit Assignment (only visible for Students)</a><br>
+									<a href="{{ url_for('gradeAssign', courseid=courseid) }}">Grade Assignment (only visible for Teachers)</a><br>
 								</td>
 							</tr>
 							{% endfor %}
@@ -43,7 +43,7 @@
 
 			<div>
 				<br>
-				<a href="{{ url_for('createAssign') }}">Create New Assignment (only visible for Teachers)</a><br>
+				<a href="{{ url_for('createAssign', courseid=courseid) }}">Create New Assignment (only visible for Teachers)</a><br>
 				<a href="{{ url_for('auth.logout') }}">Log Out</a><br>
 			</div>
 		</div>
