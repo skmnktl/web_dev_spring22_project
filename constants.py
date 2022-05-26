@@ -75,7 +75,7 @@ dataAssignments = (
     ("Final project4","Build a website","100","5/21/2021")
 )
 
-headingsDash = ("Assignment Name","Assignment Description","Number of Points","Due Date")
+headingsDash = ("ID", "Assignment Name","Assignment Description","Number of Points","Due Date")
 dataDashStudentToDo = (
     ("Final project","Build a website","100","5/12/2021"),
     ("Final project","Build a website","100","5/12/2021"),
