@@ -31,6 +31,19 @@ class ChangePasswordForm(FlaskForm):
     submit = SubmitField("Change Password")
 
 
+# change password information
+class GetEmailForm(FlaskForm):
+	email = StringField("Enter Email: ", validators=[DataRequired(), Email()])
+	submit = SubmitField("Sumbit Email")
+
+class ForgotPasswordForm(FlaskForm):
+	securityAnswer1 = StringField("Answer: ", 			validators=[DataRequired()])
+	securityAnswer2 = StringField("Answer: ", 			validators=[DataRequired()])
+	securityAnswer3 = StringField("Answer: ", 			validators=[DataRequired()])
+	newPassword     = StringField("New Password: ",     validators=[DataRequired()])
+	confNewPassword = StringField("Confirm Password: ", validators=[DataRequired()])
+	submit = SubmitField("Reset Password", render_kw={"onclick": "resetPassword()"})
+
 # edit questions
 class EditQuestionsForm(FlaskForm):
     currPassword    = StringField("Current Password: ", validators=[DataRequired()])

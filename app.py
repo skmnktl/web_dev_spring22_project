@@ -282,9 +282,77 @@ def tempDash():
 def editProfile():
     return render_template("editProfile.html")
 
+
 @app.route(routeUrls["forgotPassword"])
 def forgotPassword():
-    return render_template("forgotPassword.html")
+    if current_user.is_authenticated:
+        # user is already logged in
+        flash("User is already logged in!!")
+        return redirect(url_for('tempDash'))
+    
+    form = GetEmailForm()
+    email = form.email.data
+    params = {
+        "email": email
+    }
+
+    if form.validate_on_submit():
+        # verify user
+        response = json.loads(requests.get(apiUrls["verifyuser"], params=params).text)
+
+        if response["response"]:
+            return redirect(url_for('forgotPasswordForm', email = email))
+        else:
+            flash("User doesn't exist!!!")
+    else:
+        flash("Invalid Enteries!")
+
+    return render_template(
+        "forgotPassword.html",
+        form = form,
+        email = email
+    )
+
+
+@app.route(routeUrls["forgotPassForm"])
+def forgotPasswordForm():
+    if current_user.is_authenticated:
+        # user is already logged in
+        flash("User is already logged in!!")
+        return redirect(url_for('tempDash'))
+
+    form = ForgotPasswordForm()
+    try:
+        email = request.args["email"]
+        params = {
+            "email": email
+        }
+    except:
+        return redirect(url_for('forgotPassword'))
+    
+    securityAnswer1 = form.securityAnswer1.data
+    securityAnswer2 = form.securityAnswer2.data
+    securityAnswer3 = form.securityAnswer3.data
+    newPass         = form.newPassword.data
+    confNewPass     = form.confNewPassword.data
+
+    if form.validate_on_submit():
+        # get all the questions
+        securityQuestions = json.loads(requests.get(apiUrls["getQuestions"], params=params).text)
+        print(securityQuestions)
+    else:
+        flash("Invalid Enteries!")   
+
+    return render_template(
+            "forgotPasswordForm.html",
+            form = form,
+            securityAnswer1 = securityAnswer1,
+            securityAnswer1 = securityAnswer2,
+            securityAnswer1 = securityAnswer3,
+            newPassword     = newPass, 
+            confNewPassword = confNewPass,
+            securityQuestions = securityQuestions
+        )
 
 @app.route(routeUrls["submitAssign"],methods=["GET","POST"])
 @login_required
