@@ -39,17 +39,15 @@
 									<td>{{ cell }}</td>
 									{% endfor %}
 									<td>
+										<div id="addToCourseForm">
+											<form method="POST">
+												{{ form.hidden_tag() }}
+												{{ form.submit }}
+												<input type="hidden" id="rowCourseID" name="rowCourseID" value="{{ row}}">
+											</form>
+										</div>
 								{% endfor %}
 
-								{% for row in data %}
-									<div id="addToCourseForm">
-										<form method="POST">
-											{{ form.hidden_tag() }}
-											{{ form.submit }}
-											<input type="hidden" id="rowCourseID" name="rowCourseID" value="{{ row}}">
-										</form>
-									</div>
-								{% endfor %}	
 								</td>
 							</tr>
 							
