@@ -62,7 +62,7 @@
 											<input type="hidden" id="rowUserID" name="rowUserID" value="{{ row[0] }}">
 										</form>
 									</div>			
-									<a href="{{ url_for('addToCourse')}}">Add to Course</a><br>
+									<a href="{{ url_for('addToCourse', userid = row[0])}}">Add to Course</a><br>
 								</td>
 							</tr>
 							{% endfor %}
