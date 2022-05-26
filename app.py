@@ -427,7 +427,9 @@ def addToCourse():
     userid = request.args['userid']
     userData = json.loads(requests.get(backend+"/getuser",params={"userid":userid}).text)
     courseData = json.loads(requests.get(backend+"/getallcourseidswithcapacity").text)
-    print(courseData)
+    courses = []
+    for course in courseData:
+        courses.append(course.values())
     if form.validate_on_submit():
         userID = userid # passed in from url
         assignmentID = "55" # passed in from table
@@ -435,7 +437,7 @@ def addToCourse():
     return render_template(
                             "addToCourse.html", 
                             headings = headingsAddToCourse, 
-                            data = courseData,
+                            data = courses,
                             firstName = userData['firstname'],
                             lastName = userData['lastname'],
                             email = userData['email'],
