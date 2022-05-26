@@ -79,7 +79,7 @@ class UpdateUserData(Resource):
                     newValue = True
                 else:
                     newValue = False
-            User.changeUserData(username,property, newValue)
+            User.changeUserData(username, property, newValue)
 
 api.add_resource(UpdateUserData, "/updateuserdata")
 
@@ -87,11 +87,14 @@ class UpdateUserStatus(Resource):
     def post(self):
         print(f"[UPDATE] User Status")
         userid = request.args['userid']
-        oldValue = json.loads(crud.search('user',
+        oldValue = json.loads(crud.search(
+                                           'user',
                                            ["userid"],
                                            [userid],
                                            {"userid":"int"},
-                                           ["active"]))[0][0]
+                                           ["active"]
+                                        )
+                            )[0][0]
 
         newValue = not oldValue
         User.changeUserData(userid,"active", newValue)
@@ -536,11 +539,13 @@ api.add_resource(ActiveTeachers, "/countactiveteachers")
 
 class AllUsers(Resource):
     def get(self):
-        users = json.loads(crud.search('user',
-                                   ["TRUE"],
-                                   ["TRUE"],
-                                   {"TRUE":"int"},
-                                   None))
+        users = json.loads(crud.search(
+            'user',
+            ["TRUE"],
+            ["TRUE"],
+            {"TRUE":"int"},
+            None)
+        )
         allfields = ['userid','pass',"email","accountType","securityQuestions","firstname","lastname","active","username"]
         userDicts = []
         fields = ['userid',"email","accountType","firstname","lastname","active"]
@@ -715,7 +720,8 @@ class VerifyUser(Resource):
         user, resp = User.getUserInfo(request.args["email"]) #username
 
         return {
-            "response": resp
+            "response": resp,
+            "id": user["id"]
         }
 
 
