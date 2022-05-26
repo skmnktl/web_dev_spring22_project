@@ -280,6 +280,24 @@ class GetAllCourseIDs(Resource):
 
 api.add_resource(GetAllCourseIDs, "/getallcourseids")
 
+
+
+
+class GetAllCourseIDsWithSpace(Resource):
+    def get(self):
+        ids = json.loads(crud.search("course",["True"],["TRUE"],dict([("True","int")]), ["courseid"]))
+        enrolled = []
+        for id in ids:                                                 dict([("True","int")]), ["courseid"]))
+            enrolled.append(
+                json.loads(crud.search("course", ["courseid"], [id], dict([("courseid","int")]), ["students"]))
+            )
+        return enrolled
+        #ids = json.loads(crud.search("course",[""],["TRUE"],
+                                                     dict([("True","int")]), ["courseid"]))
+        #return json.dumps({"courseids": [courseid for lst in ids for courseid in lst]})
+
+api.add_resource(GetAllCourseIDsWithSpace, "/getallcourseidswithcapacity")
+
 class GetAllCourseIDsForStudent(Resource):
     def get(self):
         student = request.args["studentid"]
