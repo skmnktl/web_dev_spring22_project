@@ -33,8 +33,9 @@
 						</thead>
 						<tbody>
 							
-							<tr>
+
 								{% for row in data %}
+								<tr>
 									{% for cell in row %}
 									<td>{{ cell }}</td>
 									{% endfor %}
@@ -47,11 +48,11 @@
 											</form>
 										</div>
 										</td>
-
+								</tr>
 								{% endfor %}
 
 								</td>
-							</tr>
+
 							
 						</tbody>
 					</table>
