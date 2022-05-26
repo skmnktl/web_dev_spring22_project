@@ -434,8 +434,7 @@ def addToCourse():
     courseData = json.loads(requests.get(backend+"/getallcourseidswithcapacity").text)
     courses = []
     for course in courseData:
-        courses.append(course)
-        print(course)
+        courses.append(course.values()
     if form.validate_on_submit():
         userID = userid # passed in from url
         assignmentID = "55" # passed in from table
