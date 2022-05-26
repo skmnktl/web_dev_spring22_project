@@ -284,7 +284,7 @@ def editProfile():
     return render_template("editProfile.html")
 
 
-@app.route(routeUrls["forgotPassword"])
+@app.route(routeUrls["forgotPassword"], methods=["GET", "POST"])
 def forgotPassword():
     if current_user.is_authenticated:
         # user is already logged in
@@ -315,7 +315,7 @@ def forgotPassword():
     )
 
 
-@app.route(routeUrls["forgotPassForm"])
+@app.route(routeUrls["forgotPassForm"], methods=["GET", "POST"])
 def forgotPasswordForm():
     if current_user.is_authenticated:
         # user is already logged in
