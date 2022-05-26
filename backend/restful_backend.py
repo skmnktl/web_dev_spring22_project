@@ -95,7 +95,7 @@ class UpdateUserStatus(Resource):
 
         newValue = not oldValue
         User.changeUserData(userid,"active", newValue)
-        return json.loads(crud.search('user',["userid"],[userid],{"userid":"int"},["active"]))
+        return f"The new value for user {userid} is" +str(json.loads(crud.search('user',["userid"],[userid],{"userid":"int"},["active"]))) +"."
 
 api.add_resource(UpdateUserStatus, "/changeuserstatus")
 
