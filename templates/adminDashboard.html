@@ -54,13 +54,12 @@
 								{% for cell in row %}
 								<td>{{ cell }}</td>
 								{% endfor %}}
-								{% rowUser = row[0] %}
 								<td>
 									<div id="activateUserForm">
 										<form method="POST">
 											{{ form.hidden_tag() }}
 											{{ form.submit }}
-											<input type="hidden" id="rowUserID" name="rowUserID" value="{{ rowUser }}">
+											<input type="hidden" id="rowUserID" name="rowUserID" value="{{ row[0] }}">
 										</form>
 									</div>			
 									<a href="{{ url_for('addToCourse') }}">Add to Course</a><br>
