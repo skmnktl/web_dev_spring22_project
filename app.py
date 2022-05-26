@@ -449,8 +449,7 @@ def addToCourse():
         print(course.values())
     if form.validate_on_submit():
         coursedata = request.form['rowCourseID']
-        courseid = list(coursedata)[0]
-        print(courseid)
+        courseid = list(coursedata)
         requests.post(backend+"/addstudenttocourse",params={"courseid":courseid,"userid":userid})
     # edit db
     return render_template(
