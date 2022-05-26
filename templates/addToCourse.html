@@ -32,22 +32,27 @@
 							</tr>
 						</thead>
 						<tbody>
-							{% for row in data %}
+							
 							<tr>
-								{% for cell in row %}
-								<td>{{ cell }}</td>
+								{% for row in data %}
+									{% for cell in row %}
+									<td>{{ cell }}</td>
+									{% endfor %}
+									<td>
 								{% endfor %}
-								<td>
+
+								{% for row in data %}
 									<div id="addToCourseForm">
 										<form method="POST">
 											{{ form.hidden_tag() }}
 											{{ form.submit }}
 											<input type="hidden" id="rowCourseID" name="rowCourseID" value="{{ row[0] }}">
 										</form>
-									</div>	
+									</div>
+								{% endfor %}	
 								</td>
 							</tr>
-							{% endfor %}
+							
 						</tbody>
 					</table>
 			</div>
