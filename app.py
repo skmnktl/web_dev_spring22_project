@@ -453,6 +453,7 @@ def addToCourse():
     courses = []
     for course in courseData:
         courses.append(course.values())
+        print(course.values())
     if form.validate_on_submit():
         courseid = request.form["rowCourseID"]
         print(request.form)
