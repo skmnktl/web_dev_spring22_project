@@ -306,7 +306,8 @@ class GetAllCourseIDsWithSpace(Resource):
             fields = ["courseid",'coursename',"coursedescription", "coursecapacity","professor","students"]
             dta = dict(list(zip(fields, data)))
             dta['enrolled'] = enrollment
-            course_data.append(dta.pop("students",None))
+            dta = dta.pop("students",None)
+            course_data.append(dta)
         return course_data
 
 
