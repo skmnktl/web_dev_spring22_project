@@ -386,7 +386,7 @@ def forgotPasswordForm():
         securityAnswers = json.loads(requests.get(apiUrls["getQuestions"], params=params).text)
         if  securityAnswer1 == securityAnswers[0]\
         and securityAnswer2 == securityAnswers[1]\
-        and securityAnswer3 == securityAnswers[3]:
+        and securityAnswer3 == securityAnswers[2]:
             if confNewPass == newPass:
                 #updatepassword
                 params = {
@@ -395,7 +395,7 @@ def forgotPasswordForm():
                     "value"   : generate_password_hash(newPass, method='sha256')
                 }
 
-                resp = json.loads(request.post(apiUrls["updateUserData"], params = params))
+                resp = json.loads(requests.post(apiUrls["updateUserData"], params = params).text)
 
                 if resp["response"]:
                     flash("Password Updated!!")
