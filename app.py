@@ -202,16 +202,24 @@ def createCourse():
 @login_required
 def adminDash():
     form = ActivateUserForm()
-    countActiveTeachers = json.loads(requests.get(backend+"/countactiveteachers").text)
-    countActiveStudents = json.loads(requests.get(backend+"/countactivestudents").text)
-    countCourses = json.loads(requests.get(backend+"/countcourses").text)
+    countActiveTeachers = json.loads(requests.get(backend + "/countactiveteachers").text)
+    countActiveStudents = json.loads(requests.get(backend + "/countactivestudents").text)
+    countCourses        = json.loads(requests.get(backend + "/countcourses").text)
 
     userSummary = [countActiveStudents,countActiveTeachers,countCourses]
 
     allUsers = json.loads(requests.get(backend+"/allusers").text)
     userData = []
     for user in allUsers:
-        userData.append([user['userid'], user['firstname'], user['lastname'],user['email'],user['accountType'],user['active'])
+        userData.append(
+                [
+                    user['userid'], 
+                    user['firstname'], 
+                    user['lastname'],
+                    user['email'],
+                    user['accountType'],
+                    user['active']
+                ])
     if form.validate_on_submit():
         userid = requests.args['userid']
         requests.post(backend+"/changeuserstatus")
@@ -228,13 +236,36 @@ def teacherDash():
 @login_required
 def studentDash():
     # get all the student assignments
-    
+    userid = int(request.args['userid'])
+    params = {
+        "userid": userid
+    }
+
+    # get all assignments
+    response = json.loads(requests.get(apiUrls["getAllAssign"], params=params).text)
+    print(response)
+    dataDashStudentToDo = []
+    dataDashStudentUpcoming = [] 
+    dataDashStudentPastDue  = []
+    if response["response"]:
+        for d in response["data"].keys():
+            data = response["data"][d]
+            ass_date_type = datetime.strptime(data[-1], DATE_FORMAT).date() - datetime.today().date()
+            if ass_date_type.days > 3:
+                dataDashStudentToDo.append(data)
+            elif ass_date_type.days < 0:
+                dataDashStudentPastDue.append(data)
+            else:
+                dataDashStudentUpcoming.append(data)
+    else:
+        flash(response["error"])
+
     return render_template(
         "studentDashboard.html", 
         headings = headingsDash, 
-        dataToDo = dataDashStudentToDo, 
+        dataToDo     = dataDashStudentToDo, 
         dataUpcoming = dataDashStudentUpcoming, 
-        dataPastDue = dataDashStudentPastDue
+        dataPastDue  = dataDashStudentPastDue
     )
 
 @app.route(routeUrls["tempDash"])

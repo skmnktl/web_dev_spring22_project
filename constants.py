@@ -47,10 +47,12 @@ apiUrls = {
     "getCourse"         : backend + "/getcourse", 
     "getAnnouncements"  : backend + "/getannouncements",
     "createAnnouncement": backend + "/postannouncement",
+    "getAllAssign"      : backend + "/getallassignmentsstudent"
 }
 
 # secret key
-SECRET_KEY = "web_dev_team"
+SECRET_KEY  = "web_dev_team"
+DATE_FORMAT = "%Y-%m-%d"
 
 headingsCourses = ("Course ID","Course Name","Course Description","Course Capacity","Professor","Actions")
 dataCourses = (
@@ -73,7 +75,7 @@ dataAssignments = (
     ("Final project4","Build a website","100","5/21/2021")
 )
 
-headingsDash = ("Assignment Name","Assignment Description","Number of Points","Due Date")
+headingsDash = ("ID", "Assignment Name","Assignment Description","Number of Points","Due Date")
 dataDashStudentToDo = (
     ("Final project","Build a website","100","5/12/2021"),
     ("Final project","Build a website","100","5/12/2021"),

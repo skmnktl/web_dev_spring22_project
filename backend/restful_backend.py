@@ -414,7 +414,7 @@ api.add_resource(GetAssignments, "/getassignments")
 class GetAllAssignmentsStudent(Resource):
     def get(self):
         try:
-            studentid =  request.args["studentid"]
+            studentid =  request.args["userid"]
             types = dict([("name","str"),
                         ("description","str"),
                         ("points","int"),
