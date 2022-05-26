@@ -300,8 +300,7 @@ class GetAllCourseIDsWithSpace(Resource):
         course_data = []
         for id in enrolled:
             data = list(crud.read("course","courseid",id,None)[0])
-                    fields = ["courseid",'coursename',"coursedescription",
-                              "coursecapacity","professor","students"]
+                    fields = ["courseid",'coursename',"coursedescription", "coursecapacity","professor","students"]
                     course_data.append(dict(list(zip(fields, data)))
         return course_data
 
