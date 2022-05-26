@@ -80,30 +80,31 @@ def createAccount():
 
     if form.validate_on_submit():
         params = [
-                ("firstname",firstName),
-                ("lastname",lastName),
-                ("username",email),
-                ("accountType",accountType),
-                ("password", generate_password_hash(password, method='sha256')),
-                ("securityQuestions",f"{securityAnswer1}<|>{securityAnswer2}<|>{securityAnswer3}")
-            ]
+            ("firstname",firstName),
+            ("lastname",lastName),
+            ("username",email),
+            ("accountType",accountType),
+            ("password", generate_password_hash(password, method='sha256')),
+            ("securityQuestions",f"{securityAnswer1}<|>{securityAnswer2}<|>{securityAnswer3}")
+        ]
         params = dict(params)
         response = requests.post(apiUrls["createUser"], params=params)
         return redirect(url_for('auth.login'))
 
     # if not submit validated or new page
     return render_template(
-                        "createAccount.html",
-                        form=form,
-                        firstName=firstName,
-                        lastName=lastName,
-                        email=email,
-                        accountID = accountID,
-                        password=password,
-                        accountType=accountType,
-                        securityAnswer1=securityAnswer1,
-                        securityAnswer2=securityAnswer2,
-                        securityAnswer3=securityAnswer3)
+        "createAccount.html",
+        form=form,
+        firstName=firstName,
+        lastName=lastName,
+        email=email,
+        accountID = accountID,
+        password=password,
+        accountType=accountType,
+        securityAnswer1=securityAnswer1,
+        securityAnswer2=securityAnswer2,
+        securityAnswer3=securityAnswer3
+    )
 
 
 @app.route(routeUrls["createAssign"], methods=["GET", "POST"])
