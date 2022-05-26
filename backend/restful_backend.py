@@ -151,14 +151,8 @@ class User:
     
     @staticmethod
     def changeUserData(username, field, newValue):
-        if field == "securityQuestions":
-            return "wrong method called; edit failed"
-        else:
-            try:
-                crud.update("user",'username',username, field, newValue)
-                return "success"
-            except:
-                return "failure"
+        crud.update("user",'username',username, field, newValue)
+
 
     @staticmethod
     def parseQuestions(username):
