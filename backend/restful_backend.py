@@ -730,7 +730,7 @@ class VerifyUser(Resource):
 
         return {
             "response": resp,
-            "id":  user["userid"] if resp else -1
+            "userid":  user["userid"] if resp else -1
         }
 
 
