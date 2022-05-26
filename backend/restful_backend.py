@@ -292,8 +292,7 @@ class GetAllCourseIDsWithSpace(Resource):
         for id in ids:
             enrolled.append(json.loads(crud.search("course", ["courseid"], [id], dict([("courseid","int")]), ["students"])))
         return enrolled
-        #ids = json.loads(crud.search("course",[""],["TRUE"],
-                                                     dict([("True","int")]), ["courseid"]))
+        #ids = json.loads(crud.search("course",[""],["TRUE"],dict([("True","int")]), ["courseid"]))
         #return json.dumps({"courseids": [courseid for lst in ids for courseid in lst]})
 
 api.add_resource(GetAllCourseIDsWithSpace, "/getallcourseidswithcapacity")
