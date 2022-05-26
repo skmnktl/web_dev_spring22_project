@@ -91,7 +91,7 @@ class UpdateUserStatus(Resource):
                                            ["userid"],
                                            [userid],
                                            {"userid":"int"},
-                                           ["active"]))
+                                           ["active"]))[0][0]
 
         newValue = not oldValue
         User.changeUserData(userid,"active", newValue)
