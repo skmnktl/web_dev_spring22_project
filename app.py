@@ -347,8 +347,8 @@ def forgotPasswordForm():
             "forgotPasswordForm.html",
             form = form,
             securityAnswer1 = securityAnswer1,
-            securityAnswer1 = securityAnswer2,
-            securityAnswer1 = securityAnswer3,
+            securityAnswer2 = securityAnswer2,
+            securityAnswer3 = securityAnswer3,
             newPassword     = newPass, 
             confNewPassword = confNewPass,
             securityQuestions = securityQuestions
