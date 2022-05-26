@@ -222,7 +222,7 @@ def adminDash():
                 ])
     if form.validate_on_submit():
         userid = requests.args['userid']
-        requests.post(backend+"/changeuserstatus")
+        requests.post(backend+"/changeuserstatus",params={"userid":userid})
     # edit db
 
     return render_template("adminDashboard.html", headingsUserSummary=headingsUserSummary, headingsUsers=headingsUsers, dataUserSummary=userSummary, dataUsers=userData, form=form)
