@@ -202,9 +202,9 @@ def createCourse():
 @login_required
 def adminDash():
     form = ActivateUserForm()
-    countActiveTeachers = json.loads(requests.get(backend+"/countactiveteachers").text)
-    countActiveStudents = json.loads(requests.get(backend+"/countactivestudents").text)
-    countCourses = json.loads(requests.get(backend+"/countcourses").text)
+    countActiveTeachers = json.loads(requests.get(backend + "/countactiveteachers").text)
+    countActiveStudents = json.loads(requests.get(backend + "/countactivestudents").text)
+    countCourses        = json.loads(requests.get(backend + "/countcourses").text)
 
     userSummary = [countActiveStudents,countActiveTeachers,countCourses]
 
@@ -235,6 +235,21 @@ def teacherDash():
 @login_required
 def studentDash():
     # get all the student assignments
+    userid = int(request.args['userid'])
+    params = {
+        "userid": userid
+    }
+
+    # get all assignments
+    response = json.loads(requests.post(apiUrls["createAssign"], params=params).text)
+    print(response)
+    if response["response"]:
+        dataAssignments = []
+        for d in response["data"].keys():
+            dataAssignments.append(response["data"][d])
+    else:
+        dataAssignments = {}
+        flash(response["error"])
 
     return render_template(
         "studentDashboard.html", 
