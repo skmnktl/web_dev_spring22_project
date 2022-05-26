@@ -86,7 +86,7 @@ class ActivateUserForm(FlaskForm):
 	submit = SubmitField("Activate/Deactivate User")
 
 class AddToCourseForm(FlaskForm):
-	submit = SubmitField("Add to Course")
+	submit = SubmitField("Add or Remove Student From Course")
 
 
 class Login(FlaskForm):
