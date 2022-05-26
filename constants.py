@@ -27,6 +27,7 @@ routeUrls = {
     "tempDash"      : "/tempdash",
     "editProfile"   : "/editprofile",
     "forgotPassword": "/forgotpass",
+    "forgotPassForm": "/forgotpassform",
     "gradeAssign"   : "/gradeassign",
     "submitAssign"  : "/submitassign",
 }
@@ -40,6 +41,7 @@ apiUrls = {
     "login"             : backend + "/login",
     "logout"            : backend + "/logout",
     "verifylogin"       : backend + "/verifylogin",
+    "verifyuser"        : backend + "/verifyuser",
     "createAssign"      : backend + "/createassignment",
     "getAssign"         : backend + "/getassignments",
     "createCourse"      : backend + "/createcourse",
@@ -47,7 +49,8 @@ apiUrls = {
     "getCourse"         : backend + "/getcourse", 
     "getAnnouncements"  : backend + "/getannouncements",
     "createAnnouncement": backend + "/postannouncement",
-    "getAllAssign"      : backend + "/getallassignmentsstudent"
+    "getAllAssign"      : backend + "/getallassignmentsstudent",
+    "getQuestions"      : backend + "/getquestions"
 }
 
 # secret key

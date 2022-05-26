@@ -521,6 +521,15 @@ class AllUsers(Resource):
 
 api.add_resource(AllUsers, "/allusers")
 
+
+class GetQuestions(Resource):
+    def get(self):
+        return User.parseQuestions(request.args['email'])
+
+api.add_resource(GetQuestions, "/getquestions")
+
+
+
 def getStudentsInCourseForAssignment(courseid):
     students = crud.search('assignments',
                            ["courseid"],
@@ -651,6 +660,23 @@ class VerifyLoginUser(Resource):
             )
 
 api.add_resource(VerifyLoginUser, "/verifylogin")
+
+
+# verify user
+class VerifyUser(Resource):
+    def Get(self):
+        """
+            Gets a response if user exist or not
+        """
+        #1. check if user exists
+        user, resp = User.getUserInfo(request.args["email"]) #username
+
+        return {
+            "response": resp
+        }
+
+
+api.add_resource(VerifyUser, "/verifyuser")
 
 
 # logout user -> removes the user from login table

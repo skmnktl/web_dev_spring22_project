@@ -38,7 +38,9 @@ def login():
         flash(resp["reason"])
         return redirect(url_for('auth.login'))
 
-    flash("Invalid Entries!!")
+    else:
+        
+        flash("Invalid Entries!!")
     return render_template("login.html",
                             form = form,
                             email = email,
