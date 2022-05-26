@@ -379,10 +379,15 @@ def forgotPasswordForm():
     securityAnswer3 = form.securityAnswer3.data
     newPass         = form.newPassword.data
     confNewPass     = form.confNewPassword.data
-    securityAnswers  = json.loads(requests.get(apiUrls["getQuestions"], params=params).text)
+    
     if form.validate_on_submit():
-        # get all the questions
-        print(securityAnswers)
+        # get all the answers
+        securityAnswers = json.loads(requests.get(apiUrls["getQuestions"], params=params).text)
+        if  securityAnswer1 == securityAnswers[0]\
+        and securityAnswer2 == securityAnswers[1]\
+        and securityAnswer3 == securityAnswers[3]:
+            #updatepassword
+            pass    
     else:
         flash("Invalid Enteries!")   
 
