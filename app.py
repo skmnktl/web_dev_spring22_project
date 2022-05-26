@@ -221,7 +221,7 @@ def adminDash():
                     user['active']
                 ])
     if form.validate_on_submit():
-        userid = request.args['userid']
+        userid = int(request.form['rowUserID'])
         requests.post(backend+"/changeuserstatus",params={"userid":userid})
     # edit db
 
