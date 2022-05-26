@@ -285,7 +285,46 @@ def tempDash():
 @app.route(routeUrls["editProfile"])
 @login_required
 def editProfile():
-    return render_template("editProfile.html")
+    editUserForm = EditUserForm()
+    changePasswordForm = ChangePasswordForm()
+    editQuestionsForm = EditQuestionsForm()
+    firstName       = editUserForm.firstName.data
+    lastName        = editUserForm.lastName.data
+    email           = editUserForm.email.data
+    accountID       = feditUserForm.accountID.data
+    currPassword    = changePasswordForm.currPassword.data
+    newPassword     = changePasswordForm.newPassword.data
+    currPasswordQuestions = editQuestionsForm.currPasswordQuestions.data
+    securityQuest1 = editQuestionsForm.securityQuest1.data
+    securityQuest2 = editQuestionsForm.securityQuest2.data
+    securityQuest3 = editQuestionsForm.securityQuest3.data
+    securityAnswer1 = editQuestionsForm.securityAnswer1.data
+    securityAnswer2 = editQuestionsForm.securityAnswer2.data
+    securityAnswer3 = editQuestionsForm.securityAnswer3.data
+
+    if form.validate_on_submit():
+        # to be added
+        return 
+
+    # if not submit validated or new page
+    return render_template(
+        "editProfile.html",
+        editUserForm=editUserForm,
+        changePasswordForm = changePasswordForm,
+        editQuestionsForm = editQuestionsForm,
+        firstName=firstName,
+        lastName=lastName,
+        email=email,
+        accountID = accountID,
+        currPassword=currPassword,
+        newPassword=newPassword,
+        securityQuest1=securityQuest1,
+        securityQuest1=securityQuest2,
+        securityQuest1=securityQuest3,
+        securityAnswer1=securityAnswer1,
+        securityAnswer2=securityAnswer2,
+        securityAnswer3=securityAnswer3,
+    )
 
 
 @app.route(routeUrls["forgotPassword"], methods=["GET", "POST"])
