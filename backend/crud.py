@@ -35,6 +35,7 @@ def update(table, primary_key, key_value, column,
     WHERE 
         {primary_key} = {key_value};
     """
+    print(update)
     cursor = conn.cursor()
     cursor.execute(update)
     conn.commit()
