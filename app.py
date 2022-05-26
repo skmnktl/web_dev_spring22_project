@@ -136,8 +136,6 @@ def createAssign():
         else:
             flash("Couldn't add the assignment")
             flash(response["error"])
-    else:
-        flash("Invalid Enteries!")
 
     return render_template("createAssignment.html", 
                             form=form, 
@@ -192,8 +190,6 @@ def createCourse():
             flash("Course Added")
         else:
             flash("Couldn't add the course")
-    else:
-        flash("Invalid Enteries!")
 
     return render_template("createCourse.html", 
                     form=form, 
@@ -348,8 +344,7 @@ def forgotPassword():
             return redirect(url_for('forgotPasswordForm', userid = response["userid"], email = email))
         else:
             flash("User doesn't exist!!!")
-    else:
-        flash("Invalid Enteries!")
+
 
     return render_template(
         "forgotPassword.html",
@@ -405,9 +400,7 @@ def forgotPasswordForm():
             else:
                 flash("Passwords doesn't match")
         else:
-            flash("Incorrect Answers")    
-    else:
-        flash("Invalid Enteries!")   
+            flash("Incorrect Answers")      
 
     return render_template(
             "forgotPasswordForm.html",
