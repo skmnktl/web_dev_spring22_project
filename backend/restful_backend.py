@@ -357,7 +357,6 @@ class AddStudentToCourse(Resource):
                     "error"   : str(e)
                     }
 
-
 api.add_resource(AddStudentToCourse, "/addstudenttocourse")
 
 
