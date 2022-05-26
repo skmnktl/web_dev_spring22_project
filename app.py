@@ -381,19 +381,20 @@ def gradeAssign():
 @login_required
 def addToCourse():
     form = AddToCourseForm()
-    userData = request.get(backend+"")
+    userid = requests.args['userid']
+    userData = request.get(backend+"/getuser",params={"userid":userid})
 
     if form.validate_on_submit():
-        userID = "55" # passed in from url
+        userID = userid # passed in from url
         assignmentID = "55" # passed in from table
     # edit db
     return render_template(
                             "addToCourse.html", 
                             headings = headingsAddToCourse, 
                             data = dataAddToCourse, 
-                            firstName = firstNameAddToCourse, 
-                            lastName = lastNameAddToCourse, 
-                            email = emailAddToCourse, 
+                            firstName = userData['firstname'],
+                            lastName = userData['lastname'],
+                            email = userData['email'],
                             form = form
                         )
 
