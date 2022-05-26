@@ -103,7 +103,8 @@ def createAccount():
         accountType=accountType,
         securityAnswer1=securityAnswer1,
         securityAnswer2=securityAnswer2,
-        securityAnswer3=securityAnswer3
+        securityAnswer3=securityAnswer3,
+        securityQuestions = securityQuestions
     )
 
 
@@ -339,10 +340,10 @@ def forgotPasswordForm():
     securityAnswer3 = form.securityAnswer3.data
     newPass         = form.newPassword.data
     confNewPass     = form.confNewPassword.data
-    securityQuestions  = json.loads(requests.get(apiUrls["getQuestions"], params=params).text)
+    securityAnswers  = json.loads(requests.get(apiUrls["getQuestions"], params=params).text)
     if form.validate_on_submit():
         # get all the questions
-        print(securityQuestions)
+        print(securityAnswers)
     else:
         flash("Invalid Enteries!")   
 
