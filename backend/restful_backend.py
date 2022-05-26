@@ -86,7 +86,7 @@ api.add_resource(UpdateUserData, "/updateuserdata")
 class UpdateUserStatus(Resource):
     def post(self):
         print(f"[UPDATE] User Status")
-        username = request.args['userid']
+        userid = request.args['userid']
         oldValue = json.loads(crud.search('user',
                                            ["userid"],
                                            [userid],
