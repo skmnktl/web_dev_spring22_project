@@ -162,9 +162,9 @@ class User:
                                   username,
                                   ["securityQuestions"])
         print(raw_questions)
-        raw_questions = raw_questions.split("<|>")
-        questions = dict([i.split("<?>") for i in raw_questions])
-        return questions
+        # raw_questions = raw_questions.split("<|>")
+        # questions = dict([i.split("<?>") for i in raw_questions])
+        return raw_questions
     # question1<*>answer1<|>question2<*>answer2
     @staticmethod
     def chooseSecurityQuestionForPrompt(username):

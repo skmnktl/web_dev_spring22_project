@@ -336,10 +336,9 @@ def forgotPasswordForm():
     securityAnswer3 = form.securityAnswer3.data
     newPass         = form.newPassword.data
     confNewPass     = form.confNewPassword.data
-
+    securityQuestions  = json.loads(requests.get(apiUrls["getQuestions"], params=params).text)
     if form.validate_on_submit():
         # get all the questions
-        securityQuestions = json.loads(requests.get(apiUrls["getQuestions"], params=params).text)
         print(securityQuestions)
     else:
         flash("Invalid Enteries!")   
