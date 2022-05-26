@@ -93,7 +93,7 @@ class UpdateUserStatus(Resource):
                                            {"userid":"int"},
                                            ["active"]))
 
-        newValue = not oldvalue
+        newValue = not oldValue
         User.changeUserData(username,"active", newValue)
 
 api.add_resource(UpdateUserStatus, "/changeuserstatus")
