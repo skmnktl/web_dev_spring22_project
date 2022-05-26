@@ -130,7 +130,7 @@ assignmentDescription = ("Build a website")
 firstNameAddToCourse = ("Jeff")
 lastNameAddToCourse = ("Smith")
 emailAddToCourse = ("jsmith@gmail.com")
-headingsAddToCourse = ("ID","Course Name","Course Description","Course Capacity","Professor","Actions")
+headingsAddToCourse = ("ID","Course Name","Course Description","Course Capacity","Professor","Current Enrollment","Actions")
 dataAddToCourse = (
     ("145","Intro to Web Dev","An introductory web course","50","Prof. Jones"),
 	("146","Intro to Web Dev","An introductory web course","50","Prof. Jones"),
