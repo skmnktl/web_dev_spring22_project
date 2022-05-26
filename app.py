@@ -381,8 +381,8 @@ def gradeAssign():
 @login_required
 def addToCourse():
     form = AddToCourseForm()
-    userid = requests.args['userid']
-    userData = request.get(backend+"/getuser",params={"userid":userid})
+    userid = request.args['userid']
+    userData = requests.get(backend+"/getuser",params={"userid":userid})
 
     if form.validate_on_submit():
         userID = userid # passed in from url
