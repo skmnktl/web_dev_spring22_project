@@ -94,7 +94,7 @@ class UpdateUserStatus(Resource):
                                            ["active"]))
 
         newValue = not oldValue
-        User.changeUserData(username,"active", newValue)
+        User.changeUserData(userid,"active", newValue)
 
 api.add_resource(UpdateUserStatus, "/changeuserstatus")
 
@@ -150,8 +150,8 @@ class User:
             return {}, False
     
     @staticmethod
-    def changeUserData(username, field, newValue):
-        crud.update("user",'username',username, field, newValue)
+    def changeUserData(userid, field, newValue):
+        crud.update("user",'userid',userid, field, newValue)
 
 
     @staticmethod
