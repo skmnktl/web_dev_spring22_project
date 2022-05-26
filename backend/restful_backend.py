@@ -664,7 +664,7 @@ api.add_resource(VerifyLoginUser, "/verifylogin")
 
 # verify user
 class VerifyUser(Resource):
-    def Get(self):
+    def get(self):
         """
             Gets a response if user exist or not
         """
