@@ -368,7 +368,7 @@ def forgotPasswordForm():
     form = ForgotPasswordForm()
     try:
         email  = request.args["email"]
-        userid = int(request.args["email"])
+        userid = int(request.args["userid"])
         params = {
             "email": email
         }
