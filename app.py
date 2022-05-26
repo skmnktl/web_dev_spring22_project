@@ -68,23 +68,25 @@ def createAccount():
         return redirect(url_for('tempDash'))
     print("CREATING ACCOUNT")
     form = AccountForm()
-    firstName = form.firstName.data
-    lastName  = form.lastName.data
-    accountID  = form.accountID.data
-    email     = form.email.data
-    password  = form.password.data
-    accountType = form.accountType.data
-    securityAnswer1 = ""
-    securityAnswer2 = ""
-    securityAnswer3 = ""
+    firstName       = form.firstName.data
+    lastName        = form.lastName.data
+    accountID       = form.accountID.data
+    email           = form.email.data
+    password        = form.password.data
+    accountType     = form.accountType.data
+    securityAnswer1 = form.securityAnswer1.data
+    securityAnswer2 = form.securityAnswer2.data
+    securityAnswer3 = form.securityAnswer3.data
 
     if form.validate_on_submit():
-        params = [("firstname",firstName),
-                  ("lastname",lastName),
-                  ("username",email),
-                  ("accountType",accountType),
-                  ("password", generate_password_hash(password, method='sha256')),
-                  ("securityQuestions",f"Q1<|>{securityAnswer1}Q2<|>{securityAnswer2}Q3<|>{securityAnswer3}")]
+        params = [
+                ("firstname",firstName),
+                ("lastname",lastName),
+                ("username",email),
+                ("accountType",accountType),
+                ("password", generate_password_hash(password, method='sha256')),
+                ("securityQuestions",f"{securityAnswer1}<|>{securityAnswer2}<|>{securityAnswer3}")
+            ]
         params = dict(params)
         response = requests.post(apiUrls["createUser"], params=params)
         return redirect(url_for('auth.login'))

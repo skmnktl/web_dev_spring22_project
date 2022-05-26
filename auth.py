@@ -18,9 +18,9 @@ def login():
     if form.validate_on_submit():
         # send username password
         params = [
-                    ("username",email),
-                    ("password", password)
-                ]
+            ("username",email),
+            ("password", password)
+        ]
 
         response = requests.post(apiUrls["login"], params=params)
         resp = json.loads(response.text)
