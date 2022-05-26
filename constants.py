@@ -50,7 +50,8 @@ apiUrls = {
     "getAnnouncements"  : backend + "/getannouncements",
     "createAnnouncement": backend + "/postannouncement",
     "getAllAssign"      : backend + "/getallassignmentsstudent",
-    "getQuestions"      : backend + "/getquestions"
+    "getQuestions"      : backend + "/getquestions",
+    "updateUserData"    : backend + "/updateuserdata"
 }
 
 # secret key

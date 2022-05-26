@@ -79,7 +79,17 @@ class UpdateUserData(Resource):
                     newValue = True
                 else:
                     newValue = False
-            User.changeUserData(username, property, newValue)
+            try:
+                User.changeUserData(username, property, newValue)
+                return {
+                    "response": True
+                }
+            except Exception as e:
+                return {
+                    "response": False,
+                    "error": str(e)
+                }
+
 
 api.add_resource(UpdateUserData, "/updateuserdata")
 
@@ -719,7 +729,7 @@ class VerifyUser(Resource):
 
         return {
             "response": resp,
-            "id": user["id"]
+            "userid":  user["userid"] if resp else -1
         }
 
 

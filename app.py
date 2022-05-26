@@ -291,7 +291,7 @@ def editProfile():
     firstName       = editUserForm.firstName.data
     lastName        = editUserForm.lastName.data
     email           = editUserForm.email.data
-    accountID       = feditUserForm.accountID.data
+    accountID       = editUserForm.accountID.data
     currPassword    = changePasswordForm.currPassword.data
     newPassword     = changePasswordForm.newPassword.data
     currPasswordQuestions = editQuestionsForm.currPasswordQuestions.data
@@ -302,7 +302,7 @@ def editProfile():
     securityAnswer2 = editQuestionsForm.securityAnswer2.data
     securityAnswer3 = editQuestionsForm.securityAnswer3.data
 
-    if form.validate_on_submit():
+    if editUserForm.validate_on_submit():
         # to be added
         return 
 
@@ -345,7 +345,7 @@ def forgotPassword():
         response = json.loads(requests.get(apiUrls["verifyuser"], params=params).text)
 
         if response["response"]:
-            return redirect(url_for('forgotPasswordForm', email = email))
+            return redirect(url_for('forgotPasswordForm', userid = response["userid"], email = email))
         else:
             flash("User doesn't exist!!!")
     else:
@@ -367,7 +367,8 @@ def forgotPasswordForm():
 
     form = ForgotPasswordForm()
     try:
-        email = request.args["email"]
+        email  = request.args["email"]
+        userid = int(request.args["email"])
         params = {
             "email": email
         }
@@ -386,8 +387,25 @@ def forgotPasswordForm():
         if  securityAnswer1 == securityAnswers[0]\
         and securityAnswer2 == securityAnswers[1]\
         and securityAnswer3 == securityAnswers[3]:
-            #updatepassword
-            pass    
+            if confNewPass == newPass:
+                #updatepassword
+                params = {
+                    "userid"  : userid,
+                    "property": "password",
+                    "value"   : generate_password_hash(newPass, method='sha256')
+                }
+
+                resp = json.loads(request.post(apiUrls["updateUserData"], params = params))
+
+                if resp["response"]:
+                    flash("Password Updated!!")
+                    return redirect(url_for("auth.login"))
+                else:
+                    flash(resp["error"])
+            else:
+                flash("Passwords doesn't match")
+        else:
+            flash("Incorrect Answers")    
     else:
         flash("Invalid Enteries!")   
 
