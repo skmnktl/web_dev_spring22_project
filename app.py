@@ -213,7 +213,8 @@ def adminDash():
     for user in allUsers:
         userData.append([user['userid'], user['firstname'], user['lastname'],user['email'],user['accountType'],user['active'])
     if form.validate_on_submit():
-        userID = "55" # passed in from table
+        userid = requests.args['userid']
+        requests.post(backend+"/changeuserstatus")
     # edit db
 
     return render_template("adminDashboard.html", headingsUserSummary=headingsUserSummary, headingsUsers=headingsUsers, dataUserSummary=userSummary, dataUsers=userData, form=form)

@@ -67,7 +67,7 @@ class UpdateUserDataSchema:
 
 class UpdateUserData(Resource):
     def post(self):
-        username = request.args['username']
+        username = request.args['userid']
         property = request.args['property']
         newValue = request.args['value']
 
@@ -82,6 +82,21 @@ class UpdateUserData(Resource):
             User.changeUserData(username,property, newValue)
 
 api.add_resource(UpdateUserData, "/updateuserdata")
+
+class UpdateUserStatus(Resource):
+    def post(self):
+        username = request.args['userid']
+        newValue = request.args['value']
+        oldValue = json.loads(crud.search('user',
+                                           ["userid"],
+                                           [userid],
+                                           {"userid":"int"},
+                                           ["active"]))
+
+        newValue = not oldvalue
+        User.changeUserData(username,"active", newValue)
+
+api.add_resource(UpdateUserStatus, "/changeuserstatus")
 
 
 class AuthenticateUser(Resource):
