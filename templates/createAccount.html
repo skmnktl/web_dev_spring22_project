@@ -40,15 +40,15 @@
 					{{ form.accountType }}<br>
 
 					<h3>Security Questions</h3>
-					<p>What is your mother's maiden name?</p>
+					<p>{{ securityQuestions[0] }}</p>
 					{{ form.securityAnswer1.label }}
 					{{ form.securityAnswer1 }}<br>
 
-					<p>What was the make and model of the first car you purchased?</p>
+					<p>{{ securityQuestions[1] }}</p>
 					{{ form.securityAnswer2.label }}
 					{{ form.securityAnswer2 }}<br>
 
-					<p>What is the name of the street you grew up on?</p>
+					<p>{{ securityQuestions[2] }}</p>
 					{{ form.securityAnswer3.label }}
 					{{ form.securityAnswer3 }}<br>
 

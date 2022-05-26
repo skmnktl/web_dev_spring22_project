@@ -137,6 +137,12 @@ dataAddToCourse = (
 	("147","Intro to Web Dev","An introductory web course","50","Prof. Jones")
 )
 
+securityQuestions = [
+    "What is your mother's maiden name?",
+    "What is you best friend's name?",
+    "In which city you were born?"
+]
+
 assignmentGradeName = ("Midterm project")
 announcementCourseName = ("Web Dev")
 

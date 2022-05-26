@@ -68,40 +68,44 @@ def createAccount():
         return redirect(url_for('tempDash'))
     print("CREATING ACCOUNT")
     form = AccountForm()
-    firstName = form.firstName.data
-    lastName  = form.lastName.data
-    accountID  = form.accountID.data
-    email     = form.email.data
-    password  = form.password.data
-    accountType = form.accountType.data
-    securityAnswer1 = ""
-    securityAnswer2 = ""
-    securityAnswer3 = ""
+    firstName       = form.firstName.data
+    lastName        = form.lastName.data
+    accountID       = form.accountID.data
+    email           = form.email.data
+    password        = form.password.data
+    accountType     = form.accountType.data
+    securityAnswer1 = form.securityAnswer1.data
+    securityAnswer2 = form.securityAnswer2.data
+    securityAnswer3 = form.securityAnswer3.data
 
     if form.validate_on_submit():
-        params = [("firstname",firstName),
-                  ("lastname",lastName),
-                  ("username",email),
-                  ("accountType",accountType),
-                  ("password", generate_password_hash(password, method='sha256')),
-                  ("securityQuestions",f"Q1<|>{securityAnswer1}Q2<|>{securityAnswer2}Q3<|>{securityAnswer3}")]
+        params = [
+            ("firstname",firstName),
+            ("lastname",lastName),
+            ("username",email),
+            ("accountType",accountType),
+            ("password", generate_password_hash(password, method='sha256')),
+            ("securityQuestions",f"{securityAnswer1}<|>{securityAnswer2}<|>{securityAnswer3}")
+        ]
         params = dict(params)
         response = requests.post(apiUrls["createUser"], params=params)
         return redirect(url_for('auth.login'))
 
     # if not submit validated or new page
     return render_template(
-                        "createAccount.html",
-                        form=form,
-                        firstName=firstName,
-                        lastName=lastName,
-                        email=email,
-                        accountID = accountID,
-                        password=password,
-                        accountType=accountType,
-                        securityAnswer1=securityAnswer1,
-                        securityAnswer2=securityAnswer2,
-                        securityAnswer3=securityAnswer3)
+        "createAccount.html",
+        form=form,
+        firstName=firstName,
+        lastName=lastName,
+        email=email,
+        accountID = accountID,
+        password=password,
+        accountType=accountType,
+        securityAnswer1=securityAnswer1,
+        securityAnswer2=securityAnswer2,
+        securityAnswer3=securityAnswer3,
+        securityQuestions = securityQuestions
+    )
 
 
 @app.route(routeUrls["createAssign"], methods=["GET", "POST"])
@@ -281,7 +285,46 @@ def tempDash():
 @app.route(routeUrls["editProfile"])
 @login_required
 def editProfile():
-    return render_template("editProfile.html")
+    editUserForm = EditUserForm()
+    changePasswordForm = ChangePasswordForm()
+    editQuestionsForm = EditQuestionsForm()
+    firstName       = editUserForm.firstName.data
+    lastName        = editUserForm.lastName.data
+    email           = editUserForm.email.data
+    accountID       = feditUserForm.accountID.data
+    currPassword    = changePasswordForm.currPassword.data
+    newPassword     = changePasswordForm.newPassword.data
+    currPasswordQuestions = editQuestionsForm.currPasswordQuestions.data
+    securityQuest1 = editQuestionsForm.securityQuest1.data
+    securityQuest2 = editQuestionsForm.securityQuest2.data
+    securityQuest3 = editQuestionsForm.securityQuest3.data
+    securityAnswer1 = editQuestionsForm.securityAnswer1.data
+    securityAnswer2 = editQuestionsForm.securityAnswer2.data
+    securityAnswer3 = editQuestionsForm.securityAnswer3.data
+
+    if form.validate_on_submit():
+        # to be added
+        return 
+
+    # if not submit validated or new page
+    return render_template(
+        "editProfile.html",
+        editUserForm=editUserForm,
+        changePasswordForm = changePasswordForm,
+        editQuestionsForm = editQuestionsForm,
+        firstName=firstName,
+        lastName=lastName,
+        email=email,
+        accountID = accountID,
+        currPassword=currPassword,
+        newPassword=newPassword,
+        securityQuest1=securityQuest1,
+        securityQuest2=securityQuest2,
+        securityQuest3=securityQuest3,
+        securityAnswer1=securityAnswer1,
+        securityAnswer2=securityAnswer2,
+        securityAnswer3=securityAnswer3,
+    )
 
 
 @app.route(routeUrls["forgotPassword"], methods=["GET", "POST"])
@@ -336,10 +379,10 @@ def forgotPasswordForm():
     securityAnswer3 = form.securityAnswer3.data
     newPass         = form.newPassword.data
     confNewPass     = form.confNewPassword.data
-    securityQuestions  = json.loads(requests.get(apiUrls["getQuestions"], params=params).text)
+    securityAnswers  = json.loads(requests.get(apiUrls["getQuestions"], params=params).text)
     if form.validate_on_submit():
         # get all the questions
-        print(securityQuestions)
+        print(securityAnswers)
     else:
         flash("Invalid Enteries!")   
 

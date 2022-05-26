@@ -16,69 +16,91 @@
 
 		<div class="flex-container">
 			<div id="editProfileForm">
-				<form action="http://uchicago.edu" method="GET">
-					<h3>Edit User Information</h3>
-					<label for="firstName"><b>First Name:</b></label>
-					<input type="text" id="firstName" name="firstName"><br>
+				<form method="POST">
 
-					<label for="lastName"><b>Last Name:</b></label>
-					<input type="text" id="lastName" name="lastName"><br>
+					<h3>Edit Account Details</h3>
 
-					<label for="accountID"><b>Account ID:</b></label>
-					<input type="text" id="accountID" name="accountID"><br>
+					{{ editUserForm.firstName.label }}
+					{{ editUserForm.firstName }}<br>
+
+					{{ editUserForm.lastName.label }}
+					{{ editUserForm.lastName }}<br>
+
+					{{ editUserForm.email.label }}
+					{{ editUserForm.email }}<br>
+
+					{{ editUserForm.accountID.label }}
+					{{ editUserForm.accountID }}<br>
+
+					<br><button onclick="editProfile()">Validate Entries</button><br>
+
+					<p id="editUserWarningID" style="display:none">Please review fields. Account ID must be an integer.</p>
+
+					<div id="editUserSubmitButton" style="display:none">
+						{{ editUserForm.hidden_tag() }}
+						{{ editUserForm.submit() }}
+					</div>
 				</form>
-
-				<br><button onclick="editProfile()">Submit Changes</button><br>
-
 			</div>
 
 			<div id="changePassword">
-				<form action="http://uchicago.edu" method="GET">
+				<form method="POST">
 
 					<h3>Change Password</h3>
+					
+					{{ changePasswordForm.currPassword.label }}
+					{{ changePasswordForm.currPassword }}<br>
 
-					<label for="currentPassword"><b>Current Password:</b></label>
-					<input type="text" id="currentPassword" name="currentPassword"><br>
+					{{ changePasswordForm.newPassword.label }}
+					{{ changePasswordForm.newPassword }}<br>
 
-					<label for="password"><b>New Password:</b></label>
-					<input type="text" id="password" name="password"><br>
-
-					<label for="confirmPassword"><b>Confirm New Password:</b></label>
+					<label for="confirmPassword"><b>Confirm Password:</b></label>
 					<input type="text" id="confirmPassword" name="confirmPassword"><br><br>
-				</form>
 
 					<br><button onclick="changePassword()">Change Password</button><br>
 
+					<p id="changePasswordWarningID" style="display:none">Please review fields. Passwords must be >5 characters and contain a letter and symbol</p>
+
+					<div id="changePasswordSubmitButton" style="display:none">
+						{{ changePasswordForm.hidden_tag() }}
+						{{ changePasswordForm.submit() }}
+					</div>
+
+				</form>
 			</div>
 
 			<div id="securityQuestions">
-				<form action="http://uchicago.edu" method="GET">
+				<form method="POST">
 					<h3>Change Answers to Security Questions</h3>
 
-					<label for="passwordSec"><b>Current Password:</b></label>
-					<input type="text" id="passwordSec" name="passwordSec"><br><br>
+					<h3>Security Questions</h3>
 
-					<label for="securityQuestion1"><b>New Question 1:</b></label>
-					<input type="text" id="securityQuestion1" name="securityQuestion1"><br>
-
-					<label for="securityAnswer1"><b>Your Answer:</b></label>
-					<input type="text" id="securityAnswer1" name="securityAnswer1"><br><br>
+					{{ editQuestionsForm.currPasswordQuestions.label }}
+					{{ editQuestionsForm.currPasswordQuestions }}<br>
 					
-					<label for="securityQuestion2"><b>New Question 2:</b></label>
-					<input type="text" id="securityQuestion2" name="securityQuestion2"><br>
-					
-					<label for="securityAnswer2"><b>Your Answer:</b></label>
-					<input type="text" id="securityAnswer2" name="securityAnswer2"><br><br>
+					{{ editQuestionsForm.securityQuest1.label }}
+					{{ editQuestionsForm.securityQuest1 }}<br>
 
-					<label for="securityQuestion3"><b>New Question 3:</b></label>
-					<input type="text" id="securityQuestion3" name="securityQuestion3"><br>
+					{{ editQuestionsForm.securityAnswer1.label }}
+					{{ editQuestionsForm.securityAnswer1 }}<br>
 
-					<label for="securityAnswer3"><b>Your Answer:</b></label>
-					<input type="text" id="securityAnswer3" name="securityAnswer3"><br><br>
+					{{ editQuestionsForm.securityQuest2.label }}
+					{{ editQuestionsForm.securityQuest2 }}<br>
+
+					{{ editQuestionsForm.securityAnswer2.label }}
+					{{ editQuestionsForm.securityAnswer2 }}<br>
+
+					{{ editQuestionsForm.securityQuest3.label }}
+					{{ editQuestionsForm.securityQuest3 }}<br>
+
+					{{ editQuestionsForm.securityAnswer3.label }}
+					{{ editQuestionsForm.securityAnswer3 }}<br>
+
+					{{ editQuestionsForm.hidden_tag() }}
+					{{ editQuestionsForm.submit() }}
 
 				</form>
 
-				<br><button onclick="changeSecurity()">Change Security Questions</button><br>
 			</div>
 
 			<a href="{{ url_for('auth.logout') }}">Log Out</a><br>
@@ -97,25 +119,30 @@
 
 				if (
 					idValidate(idInput)
-					) {
-					console.log("TRUE")
+				) {
+					editUserSubmitButton.style.display="block"
+					editUserWarningID.style.display="none"
+				} else {
+					console.log("FALSE")
+					editUserWarningID.style.display="block"
 				}
-
-				return
 			}
 
 			function changePassword() {
-				var passwordInput = document.getElementById("password").value;
+				var passwordInput = document.getElementById("newPassword").value;
 				var passwordConfirm = document.getElementById("confirmPassword").value;
 				
 				// need to add: current password must be entered and be correct
 
 				if (
 					passwordValidate(passwordInput, passwordConfirm)
-					) {
-					console.log("TRUE")
+				) {
+					changePasswordSubmitButton.style.display="block"
+					changePasswordWarningID.style.display="none"
+				} else {
+					console.log("FALSE")
+					changePasswordWarningID.style.display="block"
 				}
-
 			}
 
 			function changeSecurity() {
