@@ -521,6 +521,20 @@ class AllUsers(Resource):
 
 api.add_resource(AllUsers, "/allusers")
 
+class GetUser(Resource):
+    def get(self):
+        userid = request.args['userid']
+        user = json.loads(crud.search('user',
+                                   ["userid"],
+                                   [userid],
+                                   {"userid":"int"},
+                                   None))[0]
+        allfields = ['userid','pass',"email","accountType","securityQuestions","firstname","lastname","active","username"]
+        fields = ['userid',"email","accountType","firstname","lastname","active"]
+        return dict([i for i in list(zip(allfields,user)) if i[0] in fields])
+
+api.add_resource(GetUser, "/getuser")
+
 
 class GetQuestions(Resource):
     def get(self):
