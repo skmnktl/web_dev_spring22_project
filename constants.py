@@ -51,7 +51,8 @@ apiUrls = {
 }
 
 # secret key
-SECRET_KEY = "web_dev_team"
+SECRET_KEY  = "web_dev_team"
+DATE_FORMAT = "%Y-%m-%d"
 
 headingsCourses = ("Course ID","Course Name","Course Description","Course Capacity","Professor","Actions")
 dataCourses = (

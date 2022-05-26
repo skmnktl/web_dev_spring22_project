@@ -243,20 +243,29 @@ def studentDash():
     # get all assignments
     response = json.loads(requests.post(apiUrls["createAssign"], params=params).text)
     print(response)
+    dataDashStudentToDo = []
+    dataDashStudentUpcoming = [] 
+    dataDashStudentPastDue  = []
     if response["response"]:
-        dataAssignments = []
         for d in response["data"].keys():
-            dataAssignments.append(response["data"][d])
+            data = response["data"][d]
+            ass_date_type = datetime.strptime(data[-1], DATE_FORMAT).date() - datetime.today()
+            if ass_date_type > 3:
+                dataDashStudentToDo.append(data)
+            elif ass_date_type < 0:
+                dataDashStudentPastDue.append(data)
+            else:
+                dataDashStudentUpcoming.append(data)
+            dataAssignments.append()
     else:
-        dataAssignments = {}
         flash(response["error"])
 
     return render_template(
         "studentDashboard.html", 
         headings = headingsDash, 
-        dataToDo = dataDashStudentToDo, 
+        dataToDo     = dataDashStudentToDo, 
         dataUpcoming = dataDashStudentUpcoming, 
-        dataPastDue = dataDashStudentPastDue
+        dataPastDue  = dataDashStudentPastDue
     )
 
 @app.route(routeUrls["tempDash"])
