@@ -296,7 +296,7 @@ class GetAllCourseIDsWithSpace(Resource):
         return enrolled
         #ids = json.loads(crud.search("course",[""],["TRUE"],dict([("True","int")]), ["courseid"]))
         #return json.dumps({"courseids": [courseid for lst in ids for courseid in lst]})
-
+        """
 api.add_resource(GetAllCourseIDsWithSpace, "/getallcourseidswithcapacity")
 
 class GetAllCourseIDsForStudent(Resource):
@@ -304,7 +304,7 @@ class GetAllCourseIDsForStudent(Resource):
         student = request.args["studentid"]
         search = \
         f"""
-        SELECT courseidfla
+        SELECT courseid
         FROM course
         WHERE
             `students` LIKE \"%<|>{student}<|>%\"
