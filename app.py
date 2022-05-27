@@ -243,6 +243,8 @@ def adminDash():
         else:
             flash(response["error"])
 
+        form.submit.data = False
+
         return render_template(
             "adminDashboard.html", 
             headingsUserSummary=headingsUserSummary,
