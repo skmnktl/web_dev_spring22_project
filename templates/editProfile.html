@@ -14,8 +14,18 @@
 			<hr>
 		</div>
 
-		<div class="flex-container">
+		<div class="flex-container">			
 			<div id="editProfileForm">
+				<div class="messages">
+					{% with messages = get_flashed_messages() %}
+					{% if messages %}
+						<div class="notification is-danger">
+							{{ messages[0] }}
+						</div>
+					{% endif %}
+					{% endwith %}
+				</div>
+
 				<form method="POST">
 
 					<h3>Edit Account Details</h3>
@@ -54,17 +64,18 @@
 					{{ changePasswordForm.newPassword.label }}
 					{{ changePasswordForm.newPassword }}<br>
 
-					<label for="confirmPassword"><b>Confirm Password:</b></label>
-					<input type="text" id="confirmPassword" name="confirmPassword"><br><br>
+					<label for="confirmPassword"><b>{{ changePasswordForm.confPassword.label }} </b></label>
+					{{ changePasswordForm.confPassword }}<br><br>
 
-					<br><button onclick="changePassword()">Change Password</button><br>
-
-					<p id="changePasswordWarningID" style="display:none">Please review fields. Passwords must be >5 characters and contain a letter and symbol</p>
-
-					<div id="changePasswordSubmitButton" style="display:none">
+					<!-- <br><button onclick="changePassword()">Change Password</button><br> -->
+					<div style="display: block" id="submit button">
 						{{ changePasswordForm.hidden_tag() }}
 						{{ changePasswordForm.submit() }}
 					</div>
+
+					<p id="changePasswordWarningID" style="display:none">Please review fields. Passwords must be >5 characters and contain a letter and symbol</p>
+
+					
 
 				</form>
 			</div>
@@ -78,26 +89,25 @@
 					{{ editQuestionsForm.currPasswordQuestions.label }}
 					{{ editQuestionsForm.currPasswordQuestions }}<br>
 					
-					{{ editQuestionsForm.securityQuest1.label }}
-					{{ editQuestionsForm.securityQuest1 }}<br>
+					<i> {{ securityQuestions[0] }} </i> <br>
 
 					{{ editQuestionsForm.securityAnswer1.label }}
 					{{ editQuestionsForm.securityAnswer1 }}<br>
-
-					{{ editQuestionsForm.securityQuest2.label }}
-					{{ editQuestionsForm.securityQuest2 }}<br>
+					
+					<i> {{ securityQuestions[1] }} </i> <br>
 
 					{{ editQuestionsForm.securityAnswer2.label }}
 					{{ editQuestionsForm.securityAnswer2 }}<br>
-
-					{{ editQuestionsForm.securityQuest3.label }}
-					{{ editQuestionsForm.securityQuest3 }}<br>
+					
+					<i> {{ securityQuestions[2] }} </i> <br>
 
 					{{ editQuestionsForm.securityAnswer3.label }}
 					{{ editQuestionsForm.securityAnswer3 }}<br>
 
-					{{ editQuestionsForm.hidden_tag() }}
-					{{ editQuestionsForm.submit() }}
+					<div style="display: block" id="submit button">
+						{{ editQuestionsForm.hidden_tag() }}
+						{{ editQuestionsForm.submit() }}
+					</div>
 
 				</form>
 

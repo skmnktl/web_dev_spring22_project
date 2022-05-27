@@ -281,29 +281,144 @@ def tempDash():
         userid = userid
     )
 
-@app.route(routeUrls["editProfile"])
+@app.route(routeUrls["editProfile"], methods=["GET", "POST"])
 @login_required
 def editProfile():
     editUserForm   = EditUserForm()
     changePassForm = ChangePasswordForm()
     editQuestForm  = EditQuestionsForm()
+
     firstName       = editUserForm.firstName.data
     lastName        = editUserForm.lastName.data
     email           = editUserForm.email.data
     accountID       = editUserForm.accountID.data
-    currPassword    = changePassForm.currPassword.data
-    newPassword     = changePassForm.newPassword.data
+
+    currPassword = changePassForm.currPassword.data
+    newPassword  = changePassForm.newPassword.data
+    confPassword = changePassForm.confPassword.data
+
     currPasswordQuestions = editQuestForm.currPasswordQuestions.data
-    securityQuest1 = editQuestForm.securityQuest1.data
-    securityQuest2 = editQuestForm.securityQuest2.data
-    securityQuest3 = editQuestForm.securityQuest3.data
+    # securityQuest1  = editQuestForm.securityQuest1.data
+    # securityQuest2  = editQuestForm.securityQuest2.data
+    # securityQuest3  = editQuestForm.securityQuest3.data
     securityAnswer1 = editQuestForm.securityAnswer1.data
     securityAnswer2 = editQuestForm.securityAnswer2.data
     securityAnswer3 = editQuestForm.securityAnswer3.data
 
+    # edit user details
     if editUserForm.validate_on_submit():
-        # to be added
-        return 
+        """
+            userid INT unsigned NOT NULL AUTO_INCREMENT,
+            password TEXT(256),
+            email TEXT(256),
+            accountType TEXT(3),
+            securityQuestions VARCHAR(2000),
+            firstname TEXT(256),
+            lastname TEXT(256),
+            active BOOLEAN,
+            username CHAR(140), 
+        """
+        params = {
+            "userid"  : current_user.get_id(),
+            "property": "email",
+            "value"   : email
+        }
+
+        resp = json.loads(requests.post(apiUrls["updateUserData"], params = params).text)
+
+        params = {
+            "userid"  : current_user.get_id(),
+            "property": "username",
+            "value"   : email
+        }
+
+        resp2 = json.loads(requests.post(apiUrls["updateUserData"], params = params).text)
+
+        if resp["response"] and resp2["response"]:
+            params = {
+                "userid"  : current_user.get_id(),
+                "property": "firstname",
+                "value"   : firstName
+            }
+
+            resp = json.loads(requests.post(apiUrls["updateUserData"], params = params).text)
+
+            if resp["response"]:
+                params = {
+                    "userid"  : current_user.get_id(),
+                    "property": "lastname",
+                    "value"   : lastName
+                }
+
+                resp = json.loads(requests.post(apiUrls["updateUserData"], params = params).text)
+
+                if resp["response"]:
+                    flash("Details Updated")
+                else:
+                    flash(resp["error"])
+            else:
+                flash(resp["error"])
+        else:
+            flash(resp["error"])
+
+    # edit password details
+    if changePassForm.validate_on_submit():
+        # verify pass
+        params = {
+            "userid"  : current_user.get_id(),
+            "password": currPassword
+        }
+        resp = json.loads(requests.get(apiUrls["verifyPass"], params = params).text)
+
+        if resp["response"]:
+            if newPassword == confPassword:
+                # updatepassword
+                params = {
+                    "userid"  : current_user.get_id(),
+                    "property": "password",
+                    "value"   : generate_password_hash(newPassword, method='sha256')
+                }
+
+                resp = json.loads(requests.post(apiUrls["updateUserData"], params = params).text)
+
+                if resp["response"]:
+                    flash("Password Updated!!")
+                else:
+                    flash(resp["error"])
+            else:
+                flash("New Passwords don't Match")
+        else:
+            flash("Incorrect Password")
+
+    # edit questions details
+    if editQuestForm.validate_on_submit():
+        # verify pass
+        params = {
+            "userid"  : current_user.get_id(),
+            "password": currPasswordQuestions
+        }
+        resp = json.loads(requests.get(apiUrls["verifyPass"], params = params).text)
+
+        if resp["response"]:
+            params = {
+                "userid"  : current_user.get_id(),
+                "property": "securityQuestions",
+                "value"   : "<|>".join([
+                                securityAnswer1, 
+                                securityAnswer2, 
+                                securityAnswer3
+                            ])
+            }
+
+            resp = json.loads(requests.post(apiUrls["updateUserData"], params = params).text)
+
+            if resp["response"]:
+                flash("Details Updated")
+            else:
+                flash(resp["error"])
+        else:
+            flash("Incorrect Password")
+
 
     # if not submit validated or new page
     return render_template(
@@ -317,9 +432,12 @@ def editProfile():
         accountID = accountID,
         currPassword=currPassword,
         newPassword=newPassword,
-        securityQuest1=securityQuest1,
-        securityQuest2=securityQuest2,
-        securityQuest3=securityQuest3,
+        confPassword = confPassword,
+        currPasswordQuestions = currPasswordQuestions,
+        # securityQuest1=securityQuest1,
+        # securityQuest2=securityQuest2,
+        # securityQuest3=securityQuest3,
+        securityQuestions = securityQuestions,
         securityAnswer1=securityAnswer1,
         securityAnswer2=securityAnswer2,
         securityAnswer3=securityAnswer3,

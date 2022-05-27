@@ -26,9 +26,10 @@ class EditUserForm(FlaskForm):
 
 # change password information
 class ChangePasswordForm(FlaskForm):
-    currPassword    = StringField("Current Password: ", validators=[DataRequired()])
-    newPassword     = StringField("New Password: ",     validators=[DataRequired()])
-    submit = SubmitField("Change Password")
+	currPassword  = StringField("Current Password: ", validators=[DataRequired()])
+	newPassword   = StringField("New Password: ",     validators=[DataRequired()])
+	confPassword  = StringField("Confirm Password: ", validators=[DataRequired()])
+	submit = SubmitField("Change Password", render_kw={"onclick": "changePassword()"})
 
 
 # change password information
@@ -47,11 +48,11 @@ class ForgotPasswordForm(FlaskForm):
 # edit questions
 class EditQuestionsForm(FlaskForm):
     currPasswordQuestions    = StringField("Current Password: ", validators=[DataRequired()])
-    securityQuest1  = StringField("New Question 1: ", validators=[DataRequired()])
+    # securityQuest1  = StringField("New Question 1: ", validators=[DataRequired()])
+    # securityQuest2  = StringField("New Question 2: ", validators=[DataRequired()])
+    # securityQuest3  = StringField("New Question 3: ", validators=[DataRequired()])
     securityAnswer1 = StringField("Your Answer: ", validators=[DataRequired()])
-    securityQuest2  = StringField("New Question 2: ", validators=[DataRequired()])
     securityAnswer2 = StringField("Your Answer: ", validators=[DataRequired()])
-    securityQuest3  = StringField("New Question 3: ", validators=[DataRequired()])
     securityAnswer3 = StringField("Your Answer: ", validators=[DataRequired()])
     submit = SubmitField("Change Questions")
 
