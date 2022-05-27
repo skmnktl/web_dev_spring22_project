@@ -470,7 +470,7 @@ def myAccount():
     user = requests.get(backend+"/getuser",params={"userid":userid})
     return render_template(
                                 "myAccount.html",
-                                userData = userdata
+                                userData = user,
                                 firstname = user['firstName'],
                                 lastname = user['firstname'],
                                 email = user['email'],
