@@ -229,10 +229,12 @@ def adminDash():
 
     # only if button is clicked
     if form.submit.data:
+        userid = int(request.form['rowUserID'])
+        
         params = {
             "userid":userid
         }
-        userid = int(request.form['rowUserID'])
+
         response = json.loads(requests.post(backend + "/changeuserstatus", params=params).text)
 
         if response["response"]:
