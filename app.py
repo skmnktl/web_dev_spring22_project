@@ -467,9 +467,14 @@ def addToCourse():
 def myAccount():
     form = MyAccountForm()
     userid = request.args
-    print(userid)
+    user = requests.get(backend+"/getuser",params={"userid":userid})
     return render_template(
-                                "myAccount.html"
+                                "myAccount.html",
+                                userData = userdata
+                                firstname = user['firstName'],
+                                lastname = user['firstname'],
+                                email = user['email'],
+                                headings = ["User ID","First Name", "Last Name", "Email"]
                             )
 # Internal Server Error
 @app.errorhandler(500)
