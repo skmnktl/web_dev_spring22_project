@@ -67,7 +67,7 @@ class UpdateUserDataSchema:
 
 class UpdateUserData(Resource):
     def post(self):
-        username = request.args['userid']
+        userid   = request.args['userid']
         property = request.args['property']
         newValue = request.args['value']
 
@@ -80,7 +80,12 @@ class UpdateUserData(Resource):
                 else:
                     newValue = False
             try:
-                User.changeUserData(username, property, newValue)
+                User.changeUserData(userid, property, newValue)
+
+                #update loggedIn table too with email
+                if property == "username" or property == "email":
+                    crud.update("loggedIn",'email', userid, "email", newValue)
+                    
                 return {
                     "response": True
                 }
