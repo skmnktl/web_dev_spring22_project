@@ -39,7 +39,12 @@
 			<div id="allUsers">
 
 				<h3>All Users</h3>			
-
+					<label for="userFilter">Filter Users</label>
+					<select id="status" name="status">
+						<option value="inactive">inactive</option>
+						<option value="active">active</option>
+						<option value="all">all</option>
+					</select>
 					<table id="tblAssignments" border =solid>
 						<thead>
 							<tr>
@@ -50,21 +55,23 @@
 						</thead>
 						<tbody>
 							{% for row in dataUsers %}
-							<tr>
-								{% for cell in row %}
-								<td>{{ cell }}</td>
-								{% endfor %}
-								<td>
-									<div id="activateUserForm">
-										<form method="POST">
-											{{ form.hidden_tag() }}
-											{{ form.submit }}
-											<input type="hidden" id="rowUserID" name="rowUserID" value="{{ row[0] }}">
-										</form>
-									</div>			
-									<a href="{{ url_for('addToCourse', userid = row[0])}}">Add to Course</a><br>
-								</td>
-							</tr>
+								{% if row[5] == status or status=="all" %}
+									<tr>
+										{% for cell in row %}
+											<td>{{ cell }}</td>
+										{% endfor %}
+										<td>
+											<div id="activateUserForm">
+												<form method="POST">
+													{{ form.hidden_tag() }}
+													{{ form.submit }}
+													<input type="hidden" id="rowUserID" name="rowUserID" value="{{ row[0] }}">
+												</form>
+											</div>
+											<a href="{{ url_for('addToCourse', userid = row[0])}}">Add to Course</a><br>
+										</td>
+									</tr>
+								{% endif %}
 							{% endfor %}
 						</tbody>
 					</table>

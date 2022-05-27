@@ -211,6 +211,10 @@ def adminDash():
     allUsers = json.loads(requests.get(backend+"/allusers").text)
     userData = []
     for user in allUsers:
+        if user['active'] = "1":
+            user['active'] = "active"
+        else:
+            user['active'] = "inactive"
         userData.append(
                 [
                     user['userid'], 
@@ -223,8 +227,9 @@ def adminDash():
     if form.validate_on_submit():
         userid = int(request.form['rowUserID'])
         requests.post(backend+"/changeuserstatus",params={"userid":userid})
+        selection = request.form['status']
 
-    return render_template("adminDashboard.html", headingsUserSummary=headingsUserSummary, headingsUsers=headingsUsers, dataUserSummary=userSummary, dataUsers=userData, form=form)
+    return render_template("adminDashboard.html", headingsUserSummary=headingsUserSummary, headingsUsers=headingsUsers, dataUserSummary=userSummary, dataUsers=userData, status= status, form=form)
 
 @app.route(routeUrls["teacherDash"])
 @login_required
