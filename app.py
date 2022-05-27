@@ -236,6 +236,23 @@ def adminDash():
         print(f"processing form change")
         selection = request.selectionForm.get('status').value
         print(f"selection changed to {selection}")
+        userData = []
+        for user in allUsers:
+
+                if user['active'] == 1:
+                    user['active'] = "active"
+                else:
+                    user['active'] = "inactive"
+                if user['active'] == selection or selection == "all":
+                    userData.append(
+                            [
+                                user['userid'],
+                                user['firstname'],
+                                user['lastname'],
+                                user['email'],
+                                user['accountType'],
+                                user['active']
+                            ])
         return render_template(
                     "adminDashboard.html", 
                     headingsUserSummary=headingsUserSummary,
