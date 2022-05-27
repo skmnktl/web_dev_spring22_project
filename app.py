@@ -211,48 +211,13 @@ def adminDash():
     allUsers = json.loads(requests.get(backend+"/allusers").text)
     userData = []
 
-    selectionForm = FilterUserForm()
-    selection = "all"
+    selection = 'all'
     for user in allUsers:
-        if user['active'] == 1:
-            user['active'] = "active"
-        else:
-            user['active'] = "inactive"
-        userData.append(
-                [
-                    user['userid'], 
-                    user['firstname'], 
-                    user['lastname'],
-                    user['email'],
-                    user['accountType'],
-                    user['active']
-                ])
-
-    # only if button is clicked
-    if form.validate_on_submit():
-        userid = int(request.form['rowUserID'])
-        
-        params = {
-            "userid":userid
-        }
-
-        response = json.loads(requests.post(backend + "/changeuserstatus", params=params).text)
-
-        if response["response"]:
-            flash("User status changed")
-
-        else:
-            flash(response["error"])
-
-        form.submit.data = False
-        for user in allUsers:
                 if user['active'] == 1:
                     user['active'] = "active"
                 else:
                     user['active'] = "inactive"
-                if user['active'] == selection or selection == "all":
-                    userData.append(
-                            [
+                userData.append(            [
                                 user['userid'],
                                 user['firstname'],
                                 user['lastname'],
@@ -261,12 +226,22 @@ def adminDash():
                                 user['active']
                             ])
 
+
+
+    # only if button is clicked
+    if form.validate_on_submit():
+        userid = request.form['rowUserID']
+        params = {
+            "userid":userid
+        }
+
+        response = json.loads(requests.post(backend + "/changeuserstatus", params=params).text)
         return render_template(
                     "adminDashboard.html",
                     headingsUserSummary=headingsUserSummary,
                     headingsUsers=headingsUsers,
                     dataUserSummary=userSummary,
-                    status = selection,
+                    status = "all",
                     dataUsers=userData,
                     form=form
                 )
