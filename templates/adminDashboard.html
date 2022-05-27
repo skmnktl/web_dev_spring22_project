@@ -55,7 +55,7 @@
 						</thead>
 						<tbody>
 							{% for row in dataUsers %}
-								{% if row[5] == status or status=="all" %}
+								{% if status in [row[5], "all"] %}
 									<tr>
 										{% for cell in row %}
 											<td>{{ cell }}</td>
