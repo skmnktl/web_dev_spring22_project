@@ -643,7 +643,7 @@ def addToCourse():
 def myAccount():
     form = MyAccountForm()
     userid = request.args
-    user = json.loads(requests.get(backend+"/getuser",params={"userid":userid}).text)
+    user = json.loads(requests.get(backend+"/getuser",params={"userid":current_user.get_id()}).text)
     return render_template(
                                 "myAccount.html",
                                 userData = user,
