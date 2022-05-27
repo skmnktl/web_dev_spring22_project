@@ -462,6 +462,13 @@ def addToCourse():
                             form = form
                         )
 
+@app.route(routeUrls["myAccount"],methods=["GET","POST"])
+@login_required
+def myAccount():
+
+    return render_template(
+                                "myAccount.html"
+                            )
 # Internal Server Error
 @app.errorhandler(500)
 def page_not_found(e):
