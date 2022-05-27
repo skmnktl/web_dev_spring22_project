@@ -358,7 +358,7 @@ def editProfile():
         resp = json.loads(requests.get(apiUrls["verifyPass"], params = params).text)
 
         if resp["response"]:
-
+            print(newPassword, " ", confPassword)
             if newPassword == confPassword:
                 # updatepassword
                 params = {

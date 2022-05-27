@@ -14,18 +14,18 @@
 			<hr>
 		</div>
 
-		<div class="flex-container">
-			<div class="messages">
-				{% with messages = get_flashed_messages() %}
-				{% if messages %}
-					<div class="notification is-danger">
-						{{ messages[0] }}
-					</div>
-				{% endif %}
-				{% endwith %}
-			</div>
-			
+		<div class="flex-container">			
 			<div id="editProfileForm">
+				<div class="messages">
+					{% with messages = get_flashed_messages() %}
+					{% if messages %}
+						<div class="notification is-danger">
+							{{ messages[0] }}
+						</div>
+					{% endif %}
+					{% endwith %}
+				</div>
+				
 				<form method="POST">
 
 					<h3>Edit Account Details</h3>
