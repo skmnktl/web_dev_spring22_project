@@ -225,9 +225,11 @@ def adminDash():
                     user['active']
                 ])
     if form.validate_on_submit():
+        print(f"processing form change")
         userid = int(request.form['rowUserID'])
         requests.post(backend+"/changeuserstatus",params={"userid":userid})
         selection = request.form['status']
+        print(f"selection changed to {selection}")
         return render_template(
                     "adminDashboard.html", 
                     headingsUserSummary=headingsUserSummary,
