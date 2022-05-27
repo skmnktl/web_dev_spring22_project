@@ -245,27 +245,6 @@ def adminDash():
             flash(response["error"])
 
         form.submit.data = False
-        return render_template(
-            "adminDashboard.html", 
-            headingsUserSummary=headingsUserSummary,
-            headingsUsers=headingsUsers, 
-            dataUserSummary=userSummary,
-            status=selection,
-            dataUsers=userData, 
-            form=form
-        )
-    """
-    if selectionForm.validate_on_submit():
-        selection = request.selectionForm.get('status').value
-        userData = []
-       <div id="activateUserForm">
-       												<form method="POST">
-       													{{ form.hidden_tag() }}
-       													{{ form.submit }}
-       													<input type="hidden" id="rowUserID" name="rowUserID" value="{{ row[0] }}">
-       												</form>
-       											</div>
-       """
         for user in allUsers:
                 if user['active'] == 1:
                     user['active'] = "active"
