@@ -89,7 +89,7 @@ class UpdateUserData(Resource):
             return {
                 "response": True
             }
-            
+
         except Exception as e:
             return {
                 "response": False,
@@ -665,14 +665,28 @@ class LoginUser(Resource):
 
         #1. check if user exists
         user, resp = User.getUserInfo(props["username"])
-        
+
         # if user doesnt exist or incorrect password
-        if not (resp and\
-        User.authentication(props["username"], props["password"])):
+        if not (resp):
             return json.dumps({
                                 "login": False,
-                                "reason": "User Not Found or Incorrect Pass"
-                            })
+                                "reason": "User Not Found"
+                    })
+        
+
+        # check if user is acitve 
+        if user["active"] != 1:
+            return json.dumps({
+                        "login": False,
+                        "reason": "User Not Activated. Contact Admin!"
+                    })
+        
+
+        if not User.authentication(props["username"], props["password"]):
+            return json.dumps({
+                        "login": False,
+                        "reason": "Incorrect Pass"
+                    })
         
         try:
             crud.create("loggedIn", {
