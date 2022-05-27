@@ -211,7 +211,7 @@ def adminDash():
     allUsers = json.loads(requests.get(backend+"/allusers").text)
     userData = []
     for user in allUsers:
-        if user['active'] = 1:
+        if user['active'] == 1:
             user['active'] = "active"
         else:
             user['active'] = "inactive"
