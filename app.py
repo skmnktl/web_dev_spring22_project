@@ -233,7 +233,7 @@ def adminDash():
         return render_template("adminDashboard.html", headingsUserSummary=headingsUserSummary,
                 headingsUsers=headingsUsers, dataUserSummary=userSummary,status="all", dataUsers=userData, form=form)
 
-    if selectionForm.validate_on_submit()
+    if selectionForm.validate_on_submit():
         selection = request.form['status']
         print(f"selection changed to {selection}")
         return render_template(
