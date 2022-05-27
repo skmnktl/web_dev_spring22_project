@@ -351,6 +351,10 @@ def editProfile():
     # edit password details
     if changePassForm.validate_on_submit():
         # verify pass
+        params = {
+            "userid"  : current_user.get_id(),
+            "password": currPassword
+        }
         resp = json.loads(requests.get(apiUrls["verifyPass"], params = params).text)
 
         if resp["response"]:
