@@ -80,11 +80,15 @@ class UpdateUserData(Resource):
             else:
                 newValue = False
         try:
-            User.changeUserData(userid, property, newValue)
 
             #update loggedIn table too with email
             if property == "username" or property == "email":
                 crud.update("loggedIn",'email', userid, "email", newValue)
+
+            
+            User.changeUserData(userid, property, newValue)
+
+            
 
             return {
                 "response": True

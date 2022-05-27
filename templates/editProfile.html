@@ -44,12 +44,14 @@
 
 					<!-- <br><button onclick="editProfile()">Validate Entries</button><br> -->
 
-					<p id="editUserWarningID" style="display:none">Please review fields. Account ID must be an integer.</p>
-
 					<div id="editUserSubmitButton" style="display: block">
 						{{ editUserForm.hidden_tag() }}
 						{{ editUserForm.submit() }}
 					</div>
+					
+					<p id="editUserWarningID" style="display:none">Please review fields. Account ID must be an integer.</p>
+
+					
 				</form>
 			</div>
 
