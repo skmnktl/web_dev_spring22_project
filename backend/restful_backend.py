@@ -102,19 +102,32 @@ api.add_resource(UpdateUserData, "/updateuserdata")
 class UpdateUserStatus(Resource):
     def post(self):
         print(f"[UPDATE] User Status")
-        userid = request.args['userid']
-        oldValue = json.loads(crud.search(
-                                           'user',
-                                           ["userid"],
-                                           [userid],
-                                           {"userid":"int"},
-                                           ["active"]
-                                        )
-                            )[0][0]
+        try:
+            userid = request.args['userid']
+            oldValue = json.loads(crud.search(
+                                            'user',
+                                            ["userid"],
+                                            [userid],
+                                            {"userid":"int"},
+                                            ["active"]
+                                            )
+                                )[0][0]
 
-        newValue = not oldValue
-        User.changeUserData(userid,"active", newValue)
-        return f"The new value for user {userid} was {oldValue}, but it is now" +str(json.loads(crud.search('user',["userid"],[userid],{"userid":"int"},["active"]))) +"."
+            newValue = not oldValue
+            User.changeUserData(userid,"active", newValue)
+            # return f"The new value for user {userid} was {oldValue}, but it is now" +str(json.loads(crud.search('user',["userid"],[userid],{"userid":"int"},["active"]))) +"."
+
+            return {
+                "response": True,
+                "newValue": newValue,
+                "oldValue": oldValue
+            }
+            
+        except Exception as e:
+            return {
+                "response": False,
+                "error": str(e)
+            }
 
 api.add_resource(UpdateUserStatus, "/changeuserstatus")
 
