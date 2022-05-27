@@ -263,6 +263,7 @@ class Course:
 
 class CreateCourse(Resource):
     def post(self):
+        
         params = request.args
 
         if Course.create(params['coursename'],
