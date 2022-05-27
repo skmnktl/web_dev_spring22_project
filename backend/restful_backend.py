@@ -113,7 +113,7 @@ class UpdateUserStatus(Resource):
                                             )
                                 )[0][0]
 
-            newValue = not oldValue
+            newValue = 1 if oldValue == 0 else 0
             User.changeUserData(userid,"active", newValue)
             # return f"The new value for user {userid} was {oldValue}, but it is now" +str(json.loads(crud.search('user',["userid"],[userid],{"userid":"int"},["active"]))) +"."
 
@@ -122,7 +122,7 @@ class UpdateUserStatus(Resource):
                 "newValue": newValue,
                 "oldValue": oldValue
             }
-            
+
         except Exception as e:
             return {
                 "response": False,
