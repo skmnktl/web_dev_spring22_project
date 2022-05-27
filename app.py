@@ -469,8 +469,8 @@ def myAccount():
     return render_template(
                                 "myAccount.html",
                                 userData = user,
-                                firstname = user['firstName'],
-                                lastname = user['firstname'],
+                                firstname = user['firstname'],
+                                lastname = user['lastname'],
                                 email = user['email'],
                                 headings = ["User ID","First Name", "Last Name", "Email"]
                             )
