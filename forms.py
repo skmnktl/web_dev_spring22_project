@@ -88,7 +88,7 @@ class ActivateUserForm(FlaskForm):
 
 class FilterUserForm(FlaskForm):
     status = StringField("Submission: ", validators=[DataRequired()])
-	submit = SubmitField("Filter Users")
+    submit = SubmitField("Filter Users")
 
 class AddToCourseForm(FlaskForm):
 	submit = SubmitField("Add or Remove Student From Course")
