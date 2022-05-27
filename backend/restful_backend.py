@@ -89,7 +89,7 @@ class UpdateUserData(Resource):
             return {
                 "response": True
             }
-            
+
         except Exception as e:
             return {
                 "response": False,
@@ -102,19 +102,32 @@ api.add_resource(UpdateUserData, "/updateuserdata")
 class UpdateUserStatus(Resource):
     def post(self):
         print(f"[UPDATE] User Status")
-        userid = request.args['userid']
-        oldValue = json.loads(crud.search(
-                                           'user',
-                                           ["userid"],
-                                           [userid],
-                                           {"userid":"int"},
-                                           ["active"]
-                                        )
-                            )[0][0]
+        try:
+            userid = request.args['userid']
+            oldValue = json.loads(crud.search(
+                                            'user',
+                                            ["userid"],
+                                            [userid],
+                                            {"userid":"int"},
+                                            ["active"]
+                                            )
+                                )[0][0]
 
-        newValue = not oldValue
-        User.changeUserData(userid,"active", newValue)
-        return f"The new value for user {userid} was {oldValue}, but it is now" +str(json.loads(crud.search('user',["userid"],[userid],{"userid":"int"},["active"]))) +"."
+            newValue = 1 if oldValue == 0 else 0
+            User.changeUserData(userid,"active", newValue)
+            # return f"The new value for user {userid} was {oldValue}, but it is now" +str(json.loads(crud.search('user',["userid"],[userid],{"userid":"int"},["active"]))) +"."
+
+            return {
+                "response": True,
+                "newValue": newValue,
+                "oldValue": oldValue
+            }
+
+        except Exception as e:
+            return {
+                "response": False,
+                "error": str(e)
+            }
 
 api.add_resource(UpdateUserStatus, "/changeuserstatus")
 
@@ -665,14 +678,28 @@ class LoginUser(Resource):
 
         #1. check if user exists
         user, resp = User.getUserInfo(props["username"])
-        
+
         # if user doesnt exist or incorrect password
-        if not (resp and\
-        User.authentication(props["username"], props["password"])):
+        if not (resp):
             return json.dumps({
                                 "login": False,
-                                "reason": "User Not Found or Incorrect Pass"
-                            })
+                                "reason": "User Not Found"
+                    })
+        
+
+        # check if user is acitve 
+        if user["active"] != 1:
+            return json.dumps({
+                        "login": False,
+                        "reason": "User Not Activated. Contact Admin!"
+                    })
+        
+
+        if not User.authentication(props["username"], props["password"]):
+            return json.dumps({
+                        "login": False,
+                        "reason": "Incorrect Pass"
+                    })
         
         try:
             crud.create("loggedIn", {

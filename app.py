@@ -226,11 +226,34 @@ def adminDash():
                     user['accountType'],
                     user['active']
                 ])
-    if form.validate_on_submit():
+
+    # only if button is clicked
+    if form.submit.data:
         userid = int(request.form['rowUserID'])
-        requests.post(backend+"/changeuserstatus",params={"userid":userid})
-        return render_template("adminDashboard.html", headingsUserSummary=headingsUserSummary,
-                headingsUsers=headingsUsers, dataUserSummary=userSummary,status="all", dataUsers=userData, form=form)
+        
+        params = {
+            "userid":userid
+        }
+
+        response = json.loads(requests.post(backend + "/changeuserstatus", params=params).text)
+
+        if response["response"]:
+            flash("User status changed")
+
+        else:
+            flash(response["error"])
+
+        form.submit.data = False
+
+        return render_template(
+            "adminDashboard.html", 
+            headingsUserSummary=headingsUserSummary,
+            headingsUsers=headingsUsers, 
+            dataUserSummary=userSummary,
+            status="all", 
+            dataUsers=userData, 
+            form=form
+        )
 
     if selectionForm.validate_on_submit():
         print(f"processing form change")
