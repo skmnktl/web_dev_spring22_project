@@ -39,9 +39,9 @@
 			<div id="allUsers">
 
 				<h3>All Users</h3>
-					<form method='post' action='' id='selectionForm'>
+					<form method='post' autocomplete="off" action="#" id="selectionForm">
 					<label for="userFilter">Filter Users</label>
-					<select id="status" name="status" onchange="form.submit()">
+					<select id="status" name="status" onchange="this.form.submit()">
 						<option value="all">all</option>
 						<option value="inactive">inactive</option>
 						<option value="active">active</option>
