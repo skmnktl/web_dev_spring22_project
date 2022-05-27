@@ -71,29 +71,30 @@ class UpdateUserData(Resource):
         property = request.args['property']
         newValue = request.args['value']
 
-        if property=="securityQuestions":
-            return "failure"
-        else:
-            if property == "active":
-                if newValue == "true":
-                    newValue = True
-                else:
-                    newValue = False
-            try:
-                User.changeUserData(userid, property, newValue)
+        # if property=="securityQuestions":
+        #     return "failure"
+        # else:
+        if property == "active":
+            if newValue == "true":
+                newValue = True
+            else:
+                newValue = False
+        try:
+            User.changeUserData(userid, property, newValue)
 
-                #update loggedIn table too with email
-                if property == "username" or property == "email":
-                    crud.update("loggedIn",'email', userid, "email", newValue)
-                    
-                return {
-                    "response": True
-                }
-            except Exception as e:
-                return {
-                    "response": False,
-                    "error": str(e)
-                }
+            #update loggedIn table too with email
+            if property == "username" or property == "email":
+                crud.update("loggedIn",'email', userid, "email", newValue)
+
+            return {
+                "response": True
+            }
+            
+        except Exception as e:
+            return {
+                "response": False,
+                "error": str(e)
+            }
 
 
 api.add_resource(UpdateUserData, "/updateuserdata")
