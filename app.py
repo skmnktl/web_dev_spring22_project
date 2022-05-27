@@ -467,7 +467,7 @@ def addToCourse():
 def myAccount():
     form = MyAccountForm()
     userid = request.args
-    user = requests.get(backend+"/getuser",params={"userid":userid})
+    user = requests.get(backend+"/getuser",params={"userid":userid}).text
     return render_template(
                                 "myAccount.html",
                                 userData = user,
