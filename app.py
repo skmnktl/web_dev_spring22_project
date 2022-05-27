@@ -293,9 +293,9 @@ def editProfile():
     confPassword = changePassForm.confPassword.data
 
     currPasswordQuestions = editQuestForm.currPasswordQuestions.data
-    securityQuest1  = editQuestForm.securityQuest1.data
-    securityQuest2  = editQuestForm.securityQuest2.data
-    securityQuest3  = editQuestForm.securityQuest3.data
+    # securityQuest1  = editQuestForm.securityQuest1.data
+    # securityQuest2  = editQuestForm.securityQuest2.data
+    # securityQuest3  = editQuestForm.securityQuest3.data
     securityAnswer1 = editQuestForm.securityAnswer1.data
     securityAnswer2 = editQuestForm.securityAnswer2.data
     securityAnswer3 = editQuestForm.securityAnswer3.data
@@ -366,7 +366,6 @@ def editProfile():
         resp = json.loads(requests.get(apiUrls["verifyPass"], params = params).text)
 
         if resp["response"]:
-            print(newPassword, " ", confPassword)
             if newPassword == confPassword:
                 # updatepassword
                 params = {
@@ -388,8 +387,32 @@ def editProfile():
 
     # edit questions details
     if editQuestForm.validate_on_submit():
-        # to be added
-        return
+        # verify pass
+        params = {
+            "userid"  : current_user.get_id(),
+            "password": currPasswordQuestions
+        }
+        resp = json.loads(requests.get(apiUrls["verifyPass"], params = params).text)
+
+        if resp["response"]:
+            params = {
+                "userid"  : current_user.get_id(),
+                "property": "securityQuestions",
+                "value"   : "<|>".join([
+                                securityAnswer1, 
+                                securityAnswer2, 
+                                securityAnswer3
+                            ])
+            }
+
+            resp = json.loads(requests.post(apiUrls["updateUserData"], params = params).text)
+
+            if resp["response"]:
+                flash("Details Updated")
+            else:
+                flash(resp["error"])
+        else:
+            flash("Incorrect Password")
 
 
     # if not submit validated or new page
@@ -406,9 +429,10 @@ def editProfile():
         newPassword=newPassword,
         confPassword = confPassword,
         currPasswordQuestions = currPasswordQuestions,
-        securityQuest1=securityQuest1,
-        securityQuest2=securityQuest2,
-        securityQuest3=securityQuest3,
+        # securityQuest1=securityQuest1,
+        # securityQuest2=securityQuest2,
+        # securityQuest3=securityQuest3,
+        securityQuestions = securityQuestions,
         securityAnswer1=securityAnswer1,
         securityAnswer2=securityAnswer2,
         securityAnswer3=securityAnswer3,

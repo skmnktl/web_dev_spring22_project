@@ -25,7 +25,7 @@
 					{% endif %}
 					{% endwith %}
 				</div>
-				
+
 				<form method="POST">
 
 					<h3>Edit Account Details</h3>
@@ -89,26 +89,34 @@
 					{{ editQuestionsForm.currPasswordQuestions.label }}
 					{{ editQuestionsForm.currPasswordQuestions }}<br>
 					
-					{{ editQuestionsForm.securityQuest1.label }}
-					{{ editQuestionsForm.securityQuest1 }}<br>
+					<!-- {{ editQuestionsForm.securityQuest1.label }}
+					{{ editQuestionsForm.securityQuest1 }}<br> -->
+					
+					<i> {{ securityQuestions[0] }} </i> <br>
 
 					{{ editQuestionsForm.securityAnswer1.label }}
 					{{ editQuestionsForm.securityAnswer1 }}<br>
 
-					{{ editQuestionsForm.securityQuest2.label }}
-					{{ editQuestionsForm.securityQuest2 }}<br>
+					<!-- {{ editQuestionsForm.securityQuest2.label }}
+					{{ editQuestionsForm.securityQuest2 }}<br> -->
+					
+					<i> {{ securityQuestions[1] }} </i> <br>
 
 					{{ editQuestionsForm.securityAnswer2.label }}
 					{{ editQuestionsForm.securityAnswer2 }}<br>
 
-					{{ editQuestionsForm.securityQuest3.label }}
-					{{ editQuestionsForm.securityQuest3 }}<br>
+					<!-- {{ editQuestionsForm.securityQuest3.label }}
+					{{ editQuestionsForm.securityQuest3 }}<br> -->
+					
+					<i> {{ securityQuestions[2] }} </i> <br>
 
 					{{ editQuestionsForm.securityAnswer3.label }}
 					{{ editQuestionsForm.securityAnswer3 }}<br>
 
-					{{ editQuestionsForm.hidden_tag() }}
-					{{ editQuestionsForm.submit() }}
+					<div style="display: block" id="submit button">
+						{{ editQuestionsForm.hidden_tag() }}
+						{{ editQuestionsForm.submit() }}
+					</div>
 
 				</form>
 
