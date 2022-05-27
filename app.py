@@ -212,6 +212,7 @@ def adminDash():
     userData = []
 
     selectionForm = FilterUserForm()
+    selection = "all"
     for user in allUsers:
         if user['active'] == 1:
             user['active'] = "active"
@@ -275,10 +276,18 @@ def adminDash():
                                 user['accountType'],
                                 user['active']
                             ])
-
+        return render_template(
+                    "adminDashboard.html",
+                    headingsUserSummary=headingsUserSummary,
+                    headingsUsers=headingsUsers,
+                    dataUserSummary=userSummary,
+                    status = selection,
+                    dataUsers=userData,
+                    form=form
+                )
 
     return render_template("adminDashboard.html", headingsUserSummary=headingsUserSummary,
-        headingsUsers=headingsUsers, dataUserSummary=userSummary,status="all", dataUsers=userData, form=form)
+        headingsUsers=headingsUsers, dataUserSummary=userSummary,status=selection, dataUsers=userData, form=form)
 
 @app.route(routeUrls["teacherDash"])
 @login_required
