@@ -224,8 +224,6 @@ def adminDash():
         userid = int(request.form['rowUserID'])
         requests.post(backend+"/changeuserstatus",params={"userid":userid})
 
-    # edit db
-
     return render_template("adminDashboard.html", headingsUserSummary=headingsUserSummary, headingsUsers=headingsUsers, dataUserSummary=userSummary, dataUsers=userData, form=form)
 
 @app.route(routeUrls["teacherDash"])
@@ -281,22 +279,22 @@ def tempDash():
 @app.route(routeUrls["editProfile"])
 @login_required
 def editProfile():
-    editUserForm = EditUserForm()
-    changePasswordForm = ChangePasswordForm()
-    editQuestionsForm = EditQuestionsForm()
+    editUserForm   = EditUserForm()
+    changePassForm = ChangePasswordForm()
+    editQuestForm  = EditQuestionsForm()
     firstName       = editUserForm.firstName.data
     lastName        = editUserForm.lastName.data
     email           = editUserForm.email.data
     accountID       = editUserForm.accountID.data
-    currPassword    = changePasswordForm.currPassword.data
-    newPassword     = changePasswordForm.newPassword.data
-    currPasswordQuestions = editQuestionsForm.currPasswordQuestions.data
-    securityQuest1 = editQuestionsForm.securityQuest1.data
-    securityQuest2 = editQuestionsForm.securityQuest2.data
-    securityQuest3 = editQuestionsForm.securityQuest3.data
-    securityAnswer1 = editQuestionsForm.securityAnswer1.data
-    securityAnswer2 = editQuestionsForm.securityAnswer2.data
-    securityAnswer3 = editQuestionsForm.securityAnswer3.data
+    currPassword    = changePassForm.currPassword.data
+    newPassword     = changePassForm.newPassword.data
+    currPasswordQuestions = editQuestForm.currPasswordQuestions.data
+    securityQuest1 = editQuestForm.securityQuest1.data
+    securityQuest2 = editQuestForm.securityQuest2.data
+    securityQuest3 = editQuestForm.securityQuest3.data
+    securityAnswer1 = editQuestForm.securityAnswer1.data
+    securityAnswer2 = editQuestForm.securityAnswer2.data
+    securityAnswer3 = editQuestForm.securityAnswer3.data
 
     if editUserForm.validate_on_submit():
         # to be added
@@ -306,8 +304,8 @@ def editProfile():
     return render_template(
         "editProfile.html",
         editUserForm=editUserForm,
-        changePasswordForm = changePasswordForm,
-        editQuestionsForm = editQuestionsForm,
+        changePasswordForm = changePassForm,
+        editQuestionsForm = editQuestForm,
         firstName=firstName,
         lastName=lastName,
         email=email,

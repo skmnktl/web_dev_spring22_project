@@ -51,7 +51,7 @@ class EditQuestionsForm(FlaskForm):
     securityAnswer1 = StringField("Your Answer: ", validators=[DataRequired()])
     securityQuest2  = StringField("New Question 2: ", validators=[DataRequired()])
     securityAnswer2 = StringField("Your Answer: ", validators=[DataRequired()])
-    securityQuest2  = StringField("New Question 3: ", validators=[DataRequired()])
+    securityQuest3  = StringField("New Question 3: ", validators=[DataRequired()])
     securityAnswer3 = StringField("Your Answer: ", validators=[DataRequired()])
     submit = SubmitField("Change Questions")
 
