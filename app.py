@@ -276,7 +276,7 @@ def tempDash():
         userid = userid
     )
 
-@app.route(routeUrls["editProfile"])
+@app.route(routeUrls["editProfile"], methods=["GET", "POST"])
 @login_required
 def editProfile():
     editUserForm   = EditUserForm()

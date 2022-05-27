@@ -15,6 +15,16 @@
 		</div>
 
 		<div class="flex-container">
+			<div class="messages">
+				{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					<div class="notification is-danger">
+						{{ messages[0] }}
+					</div>
+				{% endif %}
+				{% endwith %}
+			</div>
+			
 			<div id="editProfileForm">
 				<form method="POST">
 
@@ -54,17 +64,18 @@
 					{{ changePasswordForm.newPassword.label }}
 					{{ changePasswordForm.newPassword }}<br>
 
-					<label for="confirmPassword"><b>{{ changePasswordForm.confPassword.label }}<br></b></label>
+					<label for="confirmPassword"><b>{{ changePasswordForm.confPassword.label }} </b></label>
 					{{ changePasswordForm.confPassword }}<br><br>
 
 					<!-- <br><button onclick="changePassword()">Change Password</button><br> -->
-
-					<p id="changePasswordWarningID" style="display:none">Please review fields. Passwords must be >5 characters and contain a letter and symbol</p>
-
-					<div id="changePasswordSubmitButton" style="display:none">
+					<div style="display: block" id="submit button">
 						{{ changePasswordForm.hidden_tag() }}
 						{{ changePasswordForm.submit() }}
 					</div>
+
+					<p id="changePasswordWarningID" style="display:none">Please review fields. Passwords must be >5 characters and contain a letter and symbol</p>
+
+					
 
 				</form>
 			</div>
