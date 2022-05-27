@@ -24,6 +24,7 @@ routeUrls = {
     "adminDash"     : "/admindash",
     "teacherDash"   : "/teacherdash",
     "studentDash"   : "/studentdash",
+    "myAccount"   : "/myaccount",
     "tempDash"      : "/tempdash",
     "editProfile"   : "/editprofile",
     "forgotPassword": "/forgotpass",
