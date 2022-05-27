@@ -86,6 +86,9 @@ class GradeAssignmentForm(FlaskForm):
 class ActivateUserForm(FlaskForm):
 	submit = SubmitField("Activate/Deactivate User")
 
+class FilterUserForm(FlaskForm):
+	submit = SubmitField("Filter Users")
+
 class AddToCourseForm(FlaskForm):
 	submit = SubmitField("Add or Remove Student From Course")
 

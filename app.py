@@ -210,6 +210,8 @@ def adminDash():
 
     allUsers = json.loads(requests.get(backend+"/allusers").text)
     userData = []
+
+    selectionForm = FilterUserForm()
     for user in allUsers:
         if user['active'] == 1:
             user['active'] = "active"
@@ -228,6 +230,10 @@ def adminDash():
         print(f"processing form change")
         userid = int(request.form['rowUserID'])
         requests.post(backend+"/changeuserstatus",params={"userid":userid})
+        return render_template("adminDashboard.html", headingsUserSummary=headingsUserSummary,
+                headingsUsers=headingsUsers, dataUserSummary=userSummary,status="all", dataUsers=userData, form=form)
+
+    if selectionForm.validate_on_submit()
         selection = request.form['status']
         print(f"selection changed to {selection}")
         return render_template(
@@ -239,6 +245,7 @@ def adminDash():
                     dataUsers=userData, 
                     form=form
                 )
+
     return render_template("adminDashboard.html", headingsUserSummary=headingsUserSummary,
         headingsUsers=headingsUsers, dataUserSummary=userSummary,status="all", dataUsers=userData, form=form)
 
