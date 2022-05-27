@@ -321,7 +321,15 @@ def editProfile():
 
         resp = json.loads(requests.post(apiUrls["updateUserData"], params = params).text)
 
-        if resp["response"]:
+        params = {
+            "userid"  : current_user.get_id(),
+            "property": "username",
+            "value"   : email
+        }
+
+        resp2 = json.loads(requests.post(apiUrls["updateUserData"], params = params).text)
+
+        if resp["response"] and resp2["response"]:
             params = {
                 "userid"  : current_user.get_id(),
                 "property": "firstname",
