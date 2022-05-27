@@ -54,10 +54,10 @@
 					{{ changePasswordForm.newPassword.label }}
 					{{ changePasswordForm.newPassword }}<br>
 
-					<label for="confirmPassword"><b>Confirm Password:</b></label>
-					<input type="text" id="confirmPassword" name="confirmPassword"><br><br>
+					<label for="confirmPassword"><b>{{ changePasswordForm.confPassword.label }}<br></b></label>
+					{{ changePasswordForm.confPassword }}<br><br>
 
-					<br><button onclick="changePassword()">Change Password</button><br>
+					<!-- <br><button onclick="changePassword()">Change Password</button><br> -->
 
 					<p id="changePasswordWarningID" style="display:none">Please review fields. Passwords must be >5 characters and contain a letter and symbol</p>
 

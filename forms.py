@@ -26,9 +26,10 @@ class EditUserForm(FlaskForm):
 
 # change password information
 class ChangePasswordForm(FlaskForm):
-    currPassword    = StringField("Current Password: ", validators=[DataRequired()])
-    newPassword     = StringField("New Password: ",     validators=[DataRequired()])
-    submit = SubmitField("Change Password")
+	currPassword  = StringField("Current Password: ", validators=[DataRequired()])
+	newPassword   = StringField("New Password: ",     validators=[DataRequired()])
+	confPassword  = StringField("Confirm Password: ", validators=[DataRequired()])
+	submit = SubmitField("Change Password", render_kw={"onclick": "changePassword()"})
 
 
 # change password information

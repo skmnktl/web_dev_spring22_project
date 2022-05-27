@@ -735,6 +735,27 @@ class VerifyUser(Resource):
 api.add_resource(VerifyUser, "/verifyuser")
 
 
+class VerifyPassword(Resource):
+    def get(self):
+        """
+            Gets a response if user exist or not
+        """
+        row = crud.read("user","userid", request.args["userid"])
+        if len(row) > 0:
+            #1. validate pass
+            resp = User.authentication(row[0][2], request.args["password"]) #username
+            return {
+                "response": resp
+            }
+
+        return {
+                "response": False,
+                "error": "User doesnot exist"
+            }
+        
+api.add_resource(VerifyPassword, "/verifypass")
+
+
 # logout user -> removes the user from login table
 class LogoutUser(Resource):
     def post(self):
