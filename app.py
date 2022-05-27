@@ -238,7 +238,6 @@ def adminDash():
         print(f"selection changed to {selection}")
         userData = []
         for user in allUsers:
-
                 if user['active'] == 1:
                     user['active'] = "active"
                 else:
