@@ -465,7 +465,9 @@ def addToCourse():
 @app.route(routeUrls["myAccount"],methods=["GET","POST"])
 @login_required
 def myAccount():
-
+    form = MyAccountForm()
+    userid = request.args
+    print(userid)
     return render_template(
                                 "myAccount.html"
                             )

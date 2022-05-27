@@ -88,6 +88,8 @@ class ActivateUserForm(FlaskForm):
 class AddToCourseForm(FlaskForm):
 	submit = SubmitField("Add or Remove Student From Course")
 
+class MyAccountForm(FlaskForm):
+    userid = IntegerField("Assignment ID: ", validators=[DataRequired()])
 
 class Login(FlaskForm):
 	email     = StringField("Email: ",   validators=[DataRequired(), Email()])
