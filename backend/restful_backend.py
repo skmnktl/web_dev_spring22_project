@@ -246,14 +246,14 @@ class User:
 
 class Course:
     @staticmethod
-    def create(coursename, coursedescription, coursecapacity, professor, students) -> bool:
+    def create(coursename, coursedescription, coursecapacity, professor) -> bool:
         try:
             inputs = dict()
             inputs['coursename'] = coursename
             inputs['coursedescription'] = coursedescription
             inputs['coursecapacity'] = coursecapacity
             inputs['professor'] = professor
-            inputs['students'] = students
+            inputs['students'] = ""
             inputs['announcementInbox'] = ""
             crud.create("course", inputs)
             return True
@@ -267,7 +267,7 @@ class CreateCourse(Resource):
         Course.create(params['coursename'],
                       params['coursedescription'],
                       params['coursecapacity'],
-                      params['courseprofessor'], "")
+                      params['courseprofessor'])
 
 api.add_resource(CreateCourse, "/createcourse")
 
