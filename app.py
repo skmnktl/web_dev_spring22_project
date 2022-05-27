@@ -234,7 +234,7 @@ def adminDash():
 
     if selectionForm.validate_on_submit():
         print(f"processing form change")
-        selection = request.selectionForm.get('status')
+        selection = request.selectionForm.get('status').value
         print(f"selection changed to {selection}")
         return render_template(
                     "adminDashboard.html", 
