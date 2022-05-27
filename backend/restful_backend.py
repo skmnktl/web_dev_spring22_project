@@ -263,7 +263,7 @@ class Course:
 
 class CreateCourse(Resource):
     def post(self):
-        
+
         params = request.args
 
         if Course.create(params['coursename'],
@@ -735,10 +735,17 @@ class VerifyLoginUser(Resource):
         if len(row) > 0:
              #1. check if user exists
             user, resp = User.getUserInfo(row[0][2]) #username
-            return json.dumps(
+            if resp:
+                return json.dumps(
+                    {
+                        "status": True,
+                        "accountType": user["accountType"] 
+                    }
+                )
+            else:
+                return json.dumps(
                 {
-                    "status": True,
-                    "accountType": user["accountType"] 
+                    "status": False
                 }
             )
         else:
