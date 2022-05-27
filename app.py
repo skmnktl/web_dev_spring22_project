@@ -228,9 +228,10 @@ def adminDash():
         userid = int(request.form['rowUserID'])
         requests.post(backend+"/changeuserstatus",params={"userid":userid})
         selection = request.form['status']
-
+        return render_template("adminDashboard.html", headingsUserSummary=headingsUserSummary,
+                headingsUsers=headingsUsers, dataUserSummary=userSummary, status = selection, dataUsers=userData, form=form)
     return render_template("adminDashboard.html", headingsUserSummary=headingsUserSummary,
-        headingsUsers=headingsUsers, dataUserSummary=userSummary, status = selection, dataUsers=userData, form=form)
+        headingsUsers=headingsUsers, dataUserSummary=userSummary,status="all" dataUsers=userData, form=form)
 
 @app.route(routeUrls["teacherDash"])
 @login_required
