@@ -57,19 +57,13 @@
 						</thead>
 						<tbody>
 							{{ status }}
-							{% for row in dataUsers if status in [row[5], "all"] %}
+							{% for row in dataUsers %}
 									<tr>
 										{% for cell in row %}
 											<td>{{ cell }}</td>
 										{% endfor %}
 										<td>
-											<div id="activateUserForm">
-												<form method="POST">
-													{{ form.hidden_tag() }}
-													{{ form.submit }}
-													<input type="hidden" id="rowUserID" name="rowUserID" value="{{ row[0] }}">
-												</form>
-											</div>
+
 											<a href="{{ url_for('addToCourse', userid = row[0])}}">Add to Course</a><br>
 										</td>
 									</tr>
