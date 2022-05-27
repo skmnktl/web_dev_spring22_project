@@ -21,7 +21,7 @@ class EditUserForm(FlaskForm):
 	lastName       = StringField("Last Name: ",   validators=[DataRequired()])
 	email          = StringField("Email: ",       validators=[DataRequired()])
 	accountID      = IntegerField("Account ID: ", validators=[DataRequired()])
-	submit = SubmitField("Edit User")
+	submit         = SubmitField("Edit User" , render_kw={"onclick": "editProfile()"})
 
 
 # change password information
