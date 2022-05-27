@@ -17,6 +17,15 @@
 
 		<div class="flex-container">
 			<div id="createAccountForm">
+				<div class="messages">
+					{% with messages = get_flashed_messages() %}
+					{% if messages %}
+						<div class="notification is-danger">
+							{{ messages[0] }}
+						</div>
+					{% endif %}
+					{% endwith %}
+				</div>
 				<form method="POST">
 					{{ form.courseName.label }}
 					{{ form.courseName }}<br>

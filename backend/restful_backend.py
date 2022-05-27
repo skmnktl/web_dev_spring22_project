@@ -263,11 +263,16 @@ class Course:
 
 class CreateCourse(Resource):
     def post(self):
+        
         params = request.args
-        Course.create(params['coursename'],
+
+        if Course.create(params['coursename'],
                       params['coursedescription'],
                       params['coursecapacity'],
-                      params['courseprofessor'])
+                      params['courseprofessor']):
+            return True
+        else:
+            return False
 
 api.add_resource(CreateCourse, "/createcourse")
 
