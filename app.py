@@ -244,13 +244,13 @@ def adminDash():
             flash(response["error"])
 
         form.submit.data = False
-
+        selection = request.selectionForm.get('status').value
         return render_template(
             "adminDashboard.html", 
             headingsUserSummary=headingsUserSummary,
             headingsUsers=headingsUsers, 
             dataUserSummary=userSummary,
-            status="all", 
+            status=selection,
             dataUsers=userData, 
             form=form
         )
