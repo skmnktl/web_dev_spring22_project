@@ -16,10 +16,27 @@
 			
 		<div class="flex-container">
 			<div id="dashboardLinks">
-
+				<table id="tblUser" border =solid>
+					<thead>
+					<tr>
+						{% for header in headings %}
+						<th>{{ header }}</th>
+						{% endfor %}
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>{{ userid }}</td>
+						<td>{{ firstname }}</td>
+						<td>{{ lastname }}</td>
+						<td>{{ email }}</td>
+					</tbody>
+				</table>
 			</div>
-			<div>
+			<div id="accountLinks">
 				<br>
+				<a href="{{ url_for('editProfile') }}">Edit Profile</a><br>
+				<a href="{{ url_for('courses') }}">Courses</a><br>
 				<a href="{{ url_for('auth.logout') }}">Log Out</a><br>
 			</div>
 		</div>
