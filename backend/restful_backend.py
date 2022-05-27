@@ -369,26 +369,17 @@ api.add_resource(GetAllCourseIDsForStudent,"/getallcourseidsforstudent")
 class AddRemoveStudentCourse(Resource):
 
     def post(self):
-        try:
             courseid = request.args['courseid']
             newValue = request.args['student']
             students = crud.read("course","courseid",courseid,["students"])
             students = students[0][0]
             if str(newValue) in students:
                 s = students.split("<|>")
-                s = s.remove(str(newValue))
+                s.remove(str(newValue))
                 students = "<|>".join(s)
             newValue += "<|>" + students
             newValue = newValue.strip("<|>")
             crud.update('course','courseid',courseid,"students",newValue)
-            return  {
-                        "response": True
-                    }
-        except Exception as e:
-            return  {
-                    "response": False,
-                    "error"   : str(e)
-                    }
 
 api.add_resource(AddRemoveStudentCourse, "/addremovestudentcourse")
 
