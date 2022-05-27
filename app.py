@@ -229,7 +229,7 @@ def adminDash():
                 ])
 
     # only if button is clicked
-    if form.submit.data:
+    if form.validate_on_submit():
         userid = int(request.form['rowUserID'])
         
         params = {
