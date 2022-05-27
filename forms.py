@@ -87,6 +87,7 @@ class ActivateUserForm(FlaskForm):
 	submit = SubmitField("Activate/Deactivate User")
 
 class FilterUserForm(FlaskForm):
+    status = StringField("Submission: ", validators=[DataRequired()])
 	submit = SubmitField("Filter Users")
 
 class AddToCourseForm(FlaskForm):
