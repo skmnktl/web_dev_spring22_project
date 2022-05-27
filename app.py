@@ -245,7 +245,6 @@ def adminDash():
             flash(response["error"])
 
         form.submit.data = False
-        selection = request.selectionForm.get('status').value
         return render_template(
             "adminDashboard.html", 
             headingsUserSummary=headingsUserSummary,
@@ -257,9 +256,7 @@ def adminDash():
         )
 
     if selectionForm.validate_on_submit():
-        print(f"processing form change")
         selection = request.selectionForm.get('status').value
-        print(f"selection changed to {selection}")
         userData = []
         for user in allUsers:
                 if user['active'] == 1:

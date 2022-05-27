@@ -265,10 +265,10 @@ class CreateCourse(Resource):
     def post(self):
         params = request.args
 
-        if Course.create(params['courseName'],
-                      params['courseDescription'],
-                      params['courseCapacity'],
-                      params['courseProfessor'], ""):
+        if Course.create(params['coursename'],
+                      params['coursedescription'],
+                      params['coursecapacity'],
+                      params['courseprofessor'], ""):
             return True
         else:
             return False
