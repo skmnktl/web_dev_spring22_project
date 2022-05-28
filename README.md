@@ -1,15 +1,9 @@
-# web_dev_spring22_project
+To run:
 
-### steps to install `flask`
+1. First install and run Docker GUI on your local system. 
+2. Go to /web_dev_spring22_project/dockersetup.
+3. Run `docker compose up --build`.
 
-    -   # macOS (inside project dir)
-        python3 -m venv .venv
-        source .venv/bin/activate
+You should see three containers spin up: frontend, backend, and database. 
 
-    -   python3 -m pip install --upgrade pip
-
-    -   python3 -m pip install flask
-
-    -   python3 -m flask run
-
-*ref:* [Link](https://code.visualstudio.com/docs/python/tutorial-flask)
+You can now go to `http://localhost:3330/login` in your browser to run visit the site. 

@@ -28,6 +28,7 @@ services:
     build: 
       context: ./
       dockerfile: Dockerfile_Backend
+    working_dir: /web_dev_spring22_project/backend
     container_name: backend
     networks:
       - sharedNetwork
@@ -35,7 +36,7 @@ services:
       - 3310:3310
     links:
       - database   
-    command: "tail -f /dev/null"
+    command: "flask run" #"tail -f /dev/null"
     environment:
       FLASK_APP : restful_backend.py
       FLASK_RUN_PORT: 3310
@@ -48,12 +49,13 @@ services:
     build: 
       context: ./
       dockerfile: Dockerfile_Frontend
+    working_dir: /web_dev_spring22_project
     container_name: frontend
     networks:
       - sharedNetwork
     ports:
       - 3330:3330
-    command: "tail -f /dev/null"
+    command: "flask run" #"tail -f /dev/null"
     environment:
       FLASK_APP : app.py
       FLASK_RUN_PORT: 3330
