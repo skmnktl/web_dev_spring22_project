@@ -1,5 +1,8 @@
-
 [Github](https://github.com/skmnktl/web_dev_spring22_project)
+
+[Video Part 1](https://www.youtube.com/watch?v=9xndmsIfKF4)
+[Video Part 2 - Additional Features](https://youtu.be/U1GhVCBSsPs)
+
 
 To run:
 
